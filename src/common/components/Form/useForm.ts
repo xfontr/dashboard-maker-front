@@ -1,11 +1,7 @@
 import Joi from "joi";
 import { ChangeEvent, FormEventHandler, useState } from "react";
-import { FormSchema } from "../../common/components/Form/Form.types";
-import {
-  getSchemaValues,
-  validateForm,
-  valueSetter,
-} from "../../common/components/Form/Form.utils";
+import { FormSchema } from "./Form.types";
+import { getSchemaValues, validateForm, valueSetter } from "./Form.utils";
 
 const useForm = (schema: FormSchema, action?: Function) => {
   const [values, setValues] = useState(getSchemaValues(schema));

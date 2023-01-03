@@ -1,5 +1,5 @@
 import { FormSchema } from "./Form.types";
-import Joi, { ObjectSchema, ValidationResult } from "joi";
+import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
 
 export const getSchemaValues = (schema: FormSchema): Record<string, string> =>

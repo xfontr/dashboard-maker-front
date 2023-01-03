@@ -16,7 +16,7 @@ describe("Given a FormGroup component", () => {
       const inputField = screen.getByTestId("form__group");
 
       expect(input).toBeInTheDocument();
-      expect(inputField).toHaveClass(schema[0].fieldProps.className!);
+      expect(inputField).toHaveClass(schema[0].fieldProps!.className!);
     });
 
     test("Then it should display said input field as a textare if specified as such", () => {
