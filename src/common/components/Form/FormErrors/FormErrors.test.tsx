@@ -6,13 +6,13 @@ import FormErrors from "./FormErrors";
 describe("Given a FormErrors component", () => {
   describe("When instantiated with a list of errors", () => {
     test("Then it should display every error", () => {
-      const { error } = validateForm({
+      const errors = validateForm({
         [mockFormSchema[0].inputProps.id]: "",
       });
 
-      render(<FormErrors errors={error?.details} />);
+      render(<FormErrors {...{ errors }} />);
 
-      error?.details.forEach(({ message }) => {
+      errors!.forEach(({ message }) => {
         const error = screen.getByText(message);
         expect(error).toBeInTheDocument();
       });

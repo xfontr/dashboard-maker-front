@@ -19,14 +19,14 @@ export const valueSetter =
 
 export const validateForm = (
   <T = unknown>(schema: ObjectSchema<T>) =>
-  (values: Record<string, string>): ValidationResult<unknown> => {
+  (values: Record<string, string>): Joi.ValidationErrorItem[] | undefined => {
     const schemaWithOnlyPassedValues = Joi.object(
       Object.keys(values).reduce(
         (extractedSchema, key) => ({
           ...extractedSchema,
           [key]: Object(schema)._ids._byKey.get(key)
             ? schema.extract(key)
-            : Joi.string().min(0),
+            : Joi.any(),
         }),
         {}
       )
@@ -34,6 +34,6 @@ export const validateForm = (
 
     return schemaWithOnlyPassedValues.validate(values, {
       abortEarly: false,
-    });
+    }).error?.details;
   }
 )<typeof formSchema>(formSchema);

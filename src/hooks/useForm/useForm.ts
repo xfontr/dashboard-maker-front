@@ -24,9 +24,9 @@ const useForm = (schema: FormSchema, action?: Function) => {
 
     const validatedForm = validateForm(values);
 
-    setErrors(validatedForm.error?.details);
+    setErrors(validatedForm);
 
-    if (validatedForm.error?.details.length) return;
+    if (validatedForm?.length) return;
 
     action && action();
   };
