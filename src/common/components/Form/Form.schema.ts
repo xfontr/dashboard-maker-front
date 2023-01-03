@@ -5,7 +5,7 @@ const { email, password } = INPUT_RULES;
 
 const formSchema = Joi.object({
   password: Joi.string()
-    .pattern(new RegExp("^[a-zA-Z0-9]"))
+    .pattern(RegExp("^[a-zA-Z0-9]"))
     .min(password.min)
     .max(password.max)
     .required(),
