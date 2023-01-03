@@ -7,7 +7,7 @@ type FormErrorsProps = {
 const FormErrors = ({ errors }: FormErrorsProps) => (
   <>
     {errors && errors.length && (
-      <ul className="errors">
+      <ul className="errors" data-testid="errors">
         {errors.map((error, index) => (
           <li key={index} className="errors__message">
             {error.message}
