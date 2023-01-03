@@ -3,7 +3,7 @@ import { HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 export interface InputProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   id: string;
-  renderAs?: "textarea";
+  renderas?: "textarea";
 }
 
 export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}

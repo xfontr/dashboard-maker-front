@@ -8,7 +8,7 @@ const mockFormSchema: FormSchema = [
     },
     inputProps: {
       id: "Pedro",
-      placeholder: "Hello dawg",
+      placeholder: "Placeholder test",
     },
   },
 ];
