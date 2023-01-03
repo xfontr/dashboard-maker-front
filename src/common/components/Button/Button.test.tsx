@@ -12,7 +12,7 @@ describe("Given a button component", () => {
 
       render(<Button {...{ className }}>{text}</Button>);
 
-      const button = screen.getByText(text);
+      const button = screen.getByRole("button", { name: text });
 
       expect(button).toBeInTheDocument();
       expect(button).toHaveClass(defaultClassName, className);
@@ -26,15 +26,13 @@ describe("Given a AnimatedButton component", () => {
       const text = "Test";
       const onClick = jest.fn();
 
-      const timesThatTheButtonTextWillBeRendered = 2;
-
       render(<AnimatedButton {...{ onClick }}>{text}</AnimatedButton>);
 
-      const button = screen.getAllByText(text);
+      const button = screen.getByRole("button", { name: `${text} ${text}` });
 
-      await userEvent.click(button[0]);
+      await userEvent.click(button);
 
-      expect(button).toHaveLength(timesThatTheButtonTextWillBeRendered);
+      expect(button).toBeInTheDocument();
       expect(onClick).toHaveBeenCalled();
     });
   });

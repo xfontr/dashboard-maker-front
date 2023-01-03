@@ -16,7 +16,7 @@ const Form = ({ children, schema }: FormProps): JSX.Element => {
             onChange,
           }}
           {...fieldProps}
-          key={inputProps.name}
+          key={inputProps.id}
         />
       ))}
       {children}
