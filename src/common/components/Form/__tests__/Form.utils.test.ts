@@ -1,12 +1,11 @@
-import schema from "../../test-utils/mocks/mockFormSchema";
-import { getSchemaValues, valueSetter } from "../formUtils";
+import schema from "../../../test-utils/mocks/mockFormSchema";
+import simplifySchema from "../../../test-utils/simplifySchema";
+import { getSchemaValues, valueSetter } from "../Form.utils";
 
 describe("Given a getSchemaValues function", () => {
   describe("When called with a schema with a input", () => {
     test("Then it should return a simple list with the input and its value", () => {
-      const expectedResult = {
-        [schema[0].inputProps.id]: "",
-      };
+      const expectedResult = simplifySchema(schema);
 
       const result = getSchemaValues(schema);
 

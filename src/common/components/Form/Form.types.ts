@@ -16,7 +16,7 @@ export interface FormGroupProps extends FieldProps {
 export type FormSchema = {
   label: string;
   inputProps: InputProps;
-  fieldProps: FieldProps;
+  fieldProps?: FieldProps;
 }[];
 
 export type FormProps = {

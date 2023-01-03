@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import schema from "../../test-utils/mocks/mockFormSchema";
-import Button from "../Button/Button";
-import Form from "./Form";
+import schema from "../../../test-utils/mocks/mockFormSchema";
+import Button from "../../Button/Button";
+import Form from "../Form";
 import userEvent from "@testing-library/user-event";
 
 describe("Given a Form component", () => {
