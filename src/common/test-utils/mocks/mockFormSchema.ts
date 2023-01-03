@@ -2,13 +2,19 @@ import { FormSchema } from "../../components/Form/Form.types";
 
 const mockFormSchema: FormSchema = [
   {
-    label: "Hello",
+    label: "Email",
     fieldProps: {
       className: "experiment",
     },
     inputProps: {
-      id: "Pedro",
+      id: "email",
       placeholder: "Placeholder test",
+    },
+  },
+  {
+    label: "Unvalidated input",
+    inputProps: {
+      id: "unvalidated",
     },
   },
 ];

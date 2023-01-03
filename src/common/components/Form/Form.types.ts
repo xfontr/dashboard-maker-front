@@ -1,4 +1,9 @@
-import { HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import {
+  FormHTMLAttributes,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
 
 export interface InputProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
@@ -16,10 +21,10 @@ export interface FormGroupProps extends FieldProps {
 export type FormSchema = {
   label: string;
   inputProps: InputProps;
-  fieldProps: FieldProps;
+  fieldProps?: FieldProps;
 }[];
 
-export type FormProps = {
+export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children?: ReactNode;
   schema: FormSchema;
-};
+}
