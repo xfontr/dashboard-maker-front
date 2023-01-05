@@ -27,4 +27,5 @@ export type FormSchema = {
 export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children?: ReactNode;
   schema: FormSchema;
+  errorDisplay?: "individual" | "global" | "none";
 }

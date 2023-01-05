@@ -74,12 +74,13 @@ describe("Given a Form component", () => {
         expect(onSubmit).not.toHaveBeenCalled();
       });
 
-      test("Then it should display the errors", async () => {
+      test("Then it should display a list of errors", async () => {
         const typedText = ".";
         const buttonText = "Submit";
+        const errorDisplay = "global";
 
         render(
-          <Form {...{ schema }}>
+          <Form {...{ schema, errorDisplay }}>
             <Button>{buttonText}</Button>
           </Form>
         );
@@ -93,6 +94,28 @@ describe("Given a Form component", () => {
 
         const errors = screen.getByTestId("errors");
         expect(errors).toBeInTheDocument();
+      });
+
+      test("Then it should display errors for each field, if set as 'individual'", async () => {
+        const typedText = ".";
+        const buttonText = "Submit";
+        const errorDisplay = "individual";
+
+        render(
+          <Form {...{ schema, errorDisplay }}>
+            <Button>{buttonText}</Button>
+          </Form>
+        );
+
+        const form = schema.map(({ label }) => screen.getByLabelText(label));
+        const button = screen.getByRole("button", { name: buttonText });
+
+        await userEvent.type(form[0], typedText);
+
+        await userEvent.click(button);
+
+        const errors = screen.getAllByTestId("errors");
+        expect(errors.length).toBe(2);
       });
     });
   });

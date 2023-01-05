@@ -3,8 +3,14 @@ import { FormProps } from "./Form.types";
 import FormGroup from "./FormGroup/FormGroup";
 import "./Form.scss";
 import PathErrors from "./PathErrors/PathErrors";
+import FormErrors from "./FormErrors/FormErrors";
 
-const Form = ({ children, schema, ...rest }: FormProps): JSX.Element => {
+const Form = ({
+  children,
+  schema,
+  errorDisplay = "individual",
+  ...rest
+}: FormProps): JSX.Element => {
   const { values, errors, onChange, onSubmit } = useForm(schema, rest.onSubmit);
 
   return (
@@ -22,11 +28,14 @@ const Form = ({ children, schema, ...rest }: FormProps): JSX.Element => {
               {...fieldProps}
               key={inputProps.id}
             />
-            <PathErrors {...{ errors }} path={inputProps.id} />
+            {errorDisplay === "individual" && (
+              <PathErrors {...{ errors }} path={inputProps.id} />
+            )}
           </>
         ))}
         {children}
       </form>
+      {errorDisplay === "global" && <FormErrors {...{ errors }} />}
     </>
   );
 };
