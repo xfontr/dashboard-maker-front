@@ -1,7 +1,8 @@
 import useForm from "./useForm";
 import { FormProps } from "./Form.types";
-import FormErrors from "./FormErrors/FormErrors";
 import FormGroup from "./FormGroup/FormGroup";
+import "./Form.scss";
+import PathErrors from "./PathErrors/PathErrors";
 
 const Form = ({ children, schema, ...rest }: FormProps): JSX.Element => {
   const { values, errors, onChange, onSubmit } = useForm(schema, rest.onSubmit);
@@ -10,21 +11,22 @@ const Form = ({ children, schema, ...rest }: FormProps): JSX.Element => {
     <>
       <form className="form" {...{ onSubmit }}>
         {schema.map(({ label, inputProps, fieldProps }) => (
-          <FormGroup
-            {...{
-              label,
-              inputProps,
-              value: values[inputProps.id],
-              onChange,
-            }}
-            {...fieldProps}
-            key={inputProps.id}
-          />
+          <>
+            <FormGroup
+              {...{
+                label,
+                inputProps,
+                value: values[inputProps.id],
+                onChange,
+              }}
+              {...fieldProps}
+              key={inputProps.id}
+            />
+            <PathErrors {...{ errors }} path={inputProps.id} />
+          </>
         ))}
         {children}
       </form>
-
-      {errors?.length && <FormErrors {...{ errors }} />}
     </>
   );
 };
