@@ -16,22 +16,21 @@ const Form = ({
   return (
     <>
       <form className="form" {...{ onSubmit }}>
-        {schema.map(({ label, inputProps, fieldProps }) => (
-          <>
-            <FormGroup
-              {...{
-                label,
-                inputProps,
-                value: values[inputProps.id],
-                onChange,
-              }}
-              {...fieldProps}
-              key={inputProps.id}
-            />
+        {schema.map(({ label, inputProps, fieldProps }, index) => (
+          <FormGroup
+            {...{
+              label,
+              inputProps,
+              value: values[inputProps.id],
+              onChange,
+            }}
+            {...fieldProps}
+            key={inputProps.id}
+          >
             {errorDisplay === "individual" && (
               <PathErrors {...{ errors }} path={inputProps.id} />
             )}
-          </>
+          </FormGroup>
         ))}
         {children}
       </form>

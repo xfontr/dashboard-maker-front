@@ -8,8 +8,8 @@ const FormErrors = ({ errors }: FormErrorsProps) => (
   <>
     {errors?.length!! && (
       <ul className="errors" data-testid="errors">
-        {errors.map((error) => (
-          <li key={error.path[0]} className="errors__message">
+        {errors.map((error, index) => (
+          <li key={`${error.path[0]}${index}`} className="errors__message">
             {error.message}
           </li>
         ))}

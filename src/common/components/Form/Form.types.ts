@@ -16,6 +16,7 @@ export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}
 export interface FormGroupProps extends FieldProps {
   label: string | number;
   inputProps: InputProps;
+  children: ReactNode;
 }
 
 export type FormSchema = {
