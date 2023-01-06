@@ -86,7 +86,7 @@ describe("Given a validateForm function", () => {
 
 describe("Given a setErrorClass function", () => {
   describe("When called with a display style other than 'none' and an error that matches an input", () => {
-    test("Then it should return 'form--error' if there are errors", () => {
+    test("Then it should return the default class and 'form--error' if there are errors", () => {
       const errorDisplay = "individual";
       const errors = validateForm(simplifySchema(schema));
       const errorClass = {
@@ -97,6 +97,23 @@ describe("Given a setErrorClass function", () => {
         errorDisplay,
         schema[0].inputProps.id,
         schema[0].fieldProps,
+        errors
+      );
+
+      expect(result).toStrictEqual(errorClass);
+    });
+
+    test("Then it should return only ' form-error' if there are errors", () => {
+      const errorDisplay = "individual";
+      const errors = validateForm(simplifySchema(schema));
+      const errorClass = {
+        className: " form--error",
+      };
+
+      const result = setErrorClass(
+        errorDisplay,
+        schema[0].inputProps.id,
+        {},
         errors
       );
 
