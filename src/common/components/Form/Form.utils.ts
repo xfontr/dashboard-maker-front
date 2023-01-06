@@ -1,4 +1,4 @@
-import { FieldProps, FormSchema, InputProps } from "./Form.types";
+import { FieldProps, FormSchema } from "./Form.types";
 import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
 import capitalize from "../../utils/capitalize";
@@ -21,8 +21,12 @@ export const valueSetter =
 /**
  * Exported automatically with the global and generic form validation fields.
  *
- * @param values An object with the input ids and respective values. It will compare them with the validation schema
- * @returns First, it creates a completely new joi schema that contains solely the input ids selected. If an id is not in the generic schema, it will allow any sort of value. After that, it validates the passed values and returns a list of errors
+ * @param values An object with the input ids and respective values. It will
+ *   compare them with the validation schema
+ * @returns First, it creates a completely new joi schema that contains solely
+ *   the input ids selected. If an id is not in the generic schema, it will
+ *   allow any sort of value. After that, it validates the passed values and
+ *   returns a list of errors
  */
 
 export const validateForm = (
