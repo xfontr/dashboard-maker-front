@@ -1,0 +1,39 @@
+@use "../../../../common/styles/spacings";
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/transitions";
+
+.form {
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: spacings.$small;
+  }
+
+  &__label {
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: colors.$typography--lighter;
+  }
+
+  &__input {
+    border-radius: spacings.$rad-small;
+    padding: 0.9rem 1.2rem;
+    background-color: colors.$secondary--very-light;
+    color: colors.$typography--lighter;
+    border: none;
+    transition: transitions.$fast;
+
+    &:hover {
+      background-color: colors.$secondary--lighter;
+    }
+
+    &:active,
+    &:focus {
+      color: colors.$typography;
+      background-color: colors.$secondary--light;
+      box-shadow: inset 1px 1px 3px 1px rgba(0, 59, 56, 0.1);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@use "../../../common/styles/spacings";
+@use "../../../common/styles/colors";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$medium;
+
+  &--error {
+    input {
+      border-bottom: 1px solid red;
+
+      &:focus, &:active {
+        border-bottom: 1px solid transparent;
+      }
+    }
+
+    label {
+      color: colors.$error
+    }
+  }
+}
+
+.errors {
+  &__message {
+    font-size: 0.9rem;
+    color: colors.$error
+  }
+}
