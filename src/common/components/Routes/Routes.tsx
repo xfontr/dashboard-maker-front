@@ -9,7 +9,7 @@ type RoutesProps = {
   role: UserRoles;
 };
 
-const baseRoutes =
+export const baseRoutes =
   (routes: RouteConfig[]) =>
   ({ role }: RoutesProps): JSX.Element =>
     (
@@ -27,7 +27,7 @@ const baseRoutes =
           >
             <Route
               {...{ path }}
-              element={Element ? <Element /> : <Navigate {...{ to: to! }} />}
+              element={Element ? <Element /> : <Navigate to={to!} />}
             />
           </Route>
         ))}
