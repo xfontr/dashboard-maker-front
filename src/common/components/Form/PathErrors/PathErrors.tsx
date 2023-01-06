@@ -12,7 +12,9 @@ const PathErrors = ({ errors, path }: FormErrorsProps) => (
         {errors
           .filter((error) => error.path[0] === path)
           .map((error, index) => (
-            <li key={`${path}${index}`}>{error.message}</li>
+            <li key={`${path}${index}`} className="errors__message">
+              {error.message}
+            </li>
           ))}
       </ul>
     )}

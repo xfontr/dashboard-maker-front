@@ -21,7 +21,7 @@
     border-radius: spacings.$rad-small;
     padding: 0.9rem 1.2rem;
     background-color: colors.$secondary--very-light;
-    color: colors.$primary;
+    color: colors.$typography--lighter;
     border: none;
     transition: transitions.$fast;
 
@@ -31,6 +31,7 @@
 
     &:active,
     &:focus {
+      color: colors.$typography;
       background-color: colors.$secondary--light;
       box-shadow: inset 1px 1px 3px 1px rgba(0, 59, 56, 0.1);
     }
