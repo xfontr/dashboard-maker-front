@@ -1,0 +1,7 @@
+@use "../../../common/styles/spacings";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$medium;
+}
