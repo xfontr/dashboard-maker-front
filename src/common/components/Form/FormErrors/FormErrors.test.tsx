@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import mockFormSchema from "../../../test-utils/mocks/mockFormSchema";
-import { validateForm } from "../Form.utils";
+import { curateErrorMessage, validateForm } from "../Form.utils";
 import FormErrors from "./FormErrors";
 
 describe("Given a FormErrors component", () => {
@@ -13,7 +13,7 @@ describe("Given a FormErrors component", () => {
       render(<FormErrors {...{ errors }} />);
 
       errors!.forEach(({ message }) => {
-        const error = screen.getByText(message);
+        const error = screen.getByText(curateErrorMessage(message));
         expect(error).toBeInTheDocument();
       });
     });

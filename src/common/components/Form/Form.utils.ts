@@ -1,6 +1,7 @@
 import { FieldProps, FormSchema, InputProps } from "./Form.types";
 import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
+import capitalize from "../../utils/capitalize";
 
 export const getSchemaValues = (schema: FormSchema): Record<string, string> =>
   schema.reduce(
@@ -56,3 +57,12 @@ export const setErrorClass = (
       ? `${fieldProps?.className ?? ""} form--error`
       : fieldProps?.className,
 });
+
+export const curateErrorMessage = (message: string) => {
+  const firstWord = message.split(" ")[0];
+
+  return `${capitalize(firstWord.replace(/['"]+/g, ""))}${message.replace(
+    firstWord,
+    ""
+  )}`;
+};

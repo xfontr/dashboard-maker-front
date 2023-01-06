@@ -1,6 +1,7 @@
 import schema from "../../../test-utils/mocks/mockFormSchema";
 import simplifySchema from "../../../test-utils/simplifySchema";
 import {
+  curateErrorMessage,
   getSchemaValues,
   setErrorClass,
   validateForm,
@@ -156,6 +157,19 @@ describe("Given a setErrorClass function", () => {
       );
 
       expect(result).toStrictEqual(errorClass);
+    });
+  });
+});
+
+describe("Given a curateErrorMessage function", () => {
+  describe("When called with a error message of 'email' invalid", () => {
+    test("Then it should return 'Email invalid'", () => {
+      const initialErrorMessage = '"email" invalid';
+      const expectedErrorMessage = "Email invalid";
+
+      const result = curateErrorMessage(initialErrorMessage);
+
+      expect(result).toBe(expectedErrorMessage);
     });
   });
 });
