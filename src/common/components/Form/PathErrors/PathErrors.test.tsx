@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import schema from "../../../test-utils/mocks/mockFormSchema";
 import simplifySchema from "../../../test-utils/simplifySchema";
-import { validateForm } from "../Form.utils";
+import { curateErrorMessage, validateForm } from "../Form.utils";
 import PathErrors from "./PathErrors";
 
 describe("Given a PathErrors component", () => {
@@ -14,7 +14,7 @@ describe("Given a PathErrors component", () => {
       render(<PathErrors {...{ errors, path }} />);
 
       errors?.forEach(({ message }) => {
-        const shownError = screen.getByText(message);
+        const shownError = screen.getByText(curateErrorMessage(message));
         expect(shownError).toBeInTheDocument();
       });
     });

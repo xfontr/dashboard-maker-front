@@ -1,6 +1,12 @@
 import schema from "../../../test-utils/mocks/mockFormSchema";
 import simplifySchema from "../../../test-utils/simplifySchema";
-import { getSchemaValues, validateForm, valueSetter } from "../Form.utils";
+import {
+  curateErrorMessage,
+  getSchemaValues,
+  setErrorClass,
+  validateForm,
+  valueSetter,
+} from "../Form.utils";
 
 describe("Given a getSchemaValues function", () => {
   describe("When called with a schema with a input", () => {
@@ -75,6 +81,95 @@ describe("Given a validateForm function", () => {
       const validatedForm = validateForm(values);
 
       expect(validatedForm).toBeUndefined();
+    });
+  });
+});
+
+describe("Given a setErrorClass function", () => {
+  describe("When called with a display style other than 'none' and an error that matches an input", () => {
+    test("Then it should return the default class and 'form--error' if there are errors", () => {
+      const errorDisplay = "individual";
+      const errors = validateForm(simplifySchema(schema));
+      const errorClass = {
+        className: `${schema[0].fieldProps?.className} form--error`,
+      };
+
+      const result = setErrorClass(
+        errorDisplay,
+        schema[0].inputProps.id,
+        schema[0].fieldProps,
+        errors
+      );
+
+      expect(result).toStrictEqual(errorClass);
+    });
+
+    test("Then it should return only ' form-error' if there are errors", () => {
+      const errorDisplay = "individual";
+      const errors = validateForm(simplifySchema(schema));
+      const errorClass = {
+        className: " form--error",
+      };
+
+      const result = setErrorClass(
+        errorDisplay,
+        schema[0].inputProps.id,
+        {},
+        errors
+      );
+
+      expect(result).toStrictEqual(errorClass);
+    });
+
+    test("Then it should return the default class if there are no errors", () => {
+      const errorDisplay = "individual";
+      const errors = validateForm({
+        [schema[0].inputProps.id]: "valid@valid.com",
+      });
+      const errorClass = {
+        className: schema[0].fieldProps?.className,
+      };
+
+      const result = setErrorClass(
+        errorDisplay,
+        schema[0].inputProps.id,
+        schema[0].fieldProps,
+        errors
+      );
+
+      expect(result).toStrictEqual(errorClass);
+    });
+  });
+
+  describe("When called with a display style 'none'", () => {
+    test("Then it should load the passed default class", () => {
+      const errorDisplay = "none";
+      const errors = validateForm(simplifySchema(schema));
+      const errorClass = {
+        className: schema[0].fieldProps?.className,
+      };
+
+      const result = setErrorClass(
+        errorDisplay,
+        schema[0].inputProps.id,
+        schema[0].fieldProps,
+        errors
+      );
+
+      expect(result).toStrictEqual(errorClass);
+    });
+  });
+});
+
+describe("Given a curateErrorMessage function", () => {
+  describe("When called with a error message of 'email' invalid", () => {
+    test("Then it should return 'Email invalid'", () => {
+      const initialErrorMessage = '"email" invalid';
+      const expectedErrorMessage = "Email invalid";
+
+      const result = curateErrorMessage(initialErrorMessage);
+
+      expect(result).toBe(expectedErrorMessage);
     });
   });
 });

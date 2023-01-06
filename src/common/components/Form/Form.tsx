@@ -4,6 +4,7 @@ import FormGroup from "./FormGroup/FormGroup";
 import "./Form.scss";
 import PathErrors from "./PathErrors/PathErrors";
 import FormErrors from "./FormErrors/FormErrors";
+import { setErrorClass } from "./Form.utils";
 
 const Form = ({
   children,
@@ -16,7 +17,7 @@ const Form = ({
   return (
     <>
       <form className="form" {...{ onSubmit }}>
-        {schema.map(({ label, inputProps, fieldProps }, index) => (
+        {schema.map(({ label, inputProps, fieldProps }) => (
           <FormGroup
             {...{
               label,
@@ -25,6 +26,7 @@ const Form = ({
               onChange,
             }}
             {...fieldProps}
+            {...setErrorClass(errorDisplay, inputProps.id, fieldProps, errors)}
             key={inputProps.id}
           >
             {errorDisplay === "individual" && (
