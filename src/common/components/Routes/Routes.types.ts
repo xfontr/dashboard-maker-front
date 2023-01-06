@@ -7,7 +7,7 @@ type RouteConfig = {
   roles: RoutesUserRoles;
   name?: string;
   to?: string;
-  Element?: React.LazyExoticComponent<() => JSX.Element>;
+  Element?: React.LazyExoticComponent<() => JSX.Element> | (() => JSX.Element);
   rejectPath?: string;
 };
 
