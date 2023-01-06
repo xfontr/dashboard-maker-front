@@ -1,3 +1,3 @@
-type UserRoles = "user" | "admin" | "superAdmin";
+type UserRoles = "notLogged" | "user" | "admin" | "superAdmin";
 
 export default UserRoles;
