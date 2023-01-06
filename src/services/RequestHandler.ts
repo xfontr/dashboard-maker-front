@@ -5,17 +5,22 @@ import REQUEST_RULES from "../config/requestRules";
 const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
   const Get = () => ({
     get: async <T>(
+      endpoint: string,
       config: AxiosRequestConfig = {},
-      url: string = baseUrl
+      url = baseUrl
     ): Promise<AxiosResponse<T>> =>
-      await handler.get<T>(url, { ...REQUEST_RULES, ...config }),
+      await handler.get<T>(`${url}/${endpoint}`, {
+        ...REQUEST_RULES,
+        ...config,
+      }),
 
     getWithAuth: async <T>(
+      endpoint: string,
       token: string,
       config: AxiosRequestConfig = {},
-      url: string = baseUrl
+      url = baseUrl
     ) =>
-      await handler.get<T>(url, {
+      await handler.get<T>(`${url}/${endpoint}`, {
         ...REQUEST_RULES,
         ...config,
         headers: { Authentication: token },
@@ -24,10 +29,15 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
 
   const Post = () => ({
     post: async <T, R>(
+      endpoint: string,
       body: R,
       config: AxiosRequestConfig = {},
-      url: string = baseUrl
-    ) => await handler.post<T>(url, body, { ...REQUEST_RULES, ...config }),
+      url = baseUrl
+    ) =>
+      await handler.post<T>(`${url}/${endpoint}`, body, {
+        ...REQUEST_RULES,
+        ...config,
+      }),
   });
 
   return {
