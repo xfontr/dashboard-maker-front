@@ -1,7 +1,7 @@
 import Joi from "joi";
 import INPUT_RULES from "../../../config/inputRules";
 
-const { email, password } = INPUT_RULES;
+const { email, password, name } = INPUT_RULES;
 
 const formSchema = Joi.object({
   password: Joi.string()
@@ -15,6 +15,10 @@ const formSchema = Joi.object({
     .min(email.min)
     .max(email.max)
     .required(),
+
+  name: Joi.string().min(name.min).max(name.max).required(),
+  surname: Joi.string().min(name.min).max(name.max).required(),
+  token: Joi.string().min(password.min).max(password.max).required(),
 });
 
 export default formSchema;

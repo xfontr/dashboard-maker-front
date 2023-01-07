@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
-import mockUser from "../../common/test-utils/mocks/mockUser";
-import ENVIRONMENT from "../../config/environment";
-import REQUEST_RULES from "../../config/requestRules";
+import mockUser from "../../test-utils/mocks/mockUser";
+import ENVIRONMENT from "../../../config/environment";
+import REQUEST_RULES from "../../../config/requestRules";
 import { api } from "../RequestHandler";
 
 const mockGet = jest.fn();

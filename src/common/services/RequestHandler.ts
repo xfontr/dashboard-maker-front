@@ -1,6 +1,6 @@
 import axios, { Axios, AxiosRequestConfig, AxiosResponse } from "axios";
-import ENVIRONMENT from "../config/environment";
-import REQUEST_RULES from "../config/requestRules";
+import ENVIRONMENT from "../../config/environment";
+import REQUEST_RULES from "../../config/requestRules";
 
 const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
   const Get = () => ({
