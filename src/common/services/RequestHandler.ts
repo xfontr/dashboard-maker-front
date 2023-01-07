@@ -1,6 +1,7 @@
-import axios, { Axios, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { Axios, AxiosRequestConfig } from "axios";
 import ENVIRONMENT from "../../config/environment";
 import REQUEST_RULES from "../../config/requestRules";
+import tryThis from "../utils/tryThis";
 
 const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
   const Get = () => ({
@@ -8,8 +9,8 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       endpoint: string,
       config: AxiosRequestConfig = {},
       url = baseUrl
-    ): Promise<AxiosResponse<T>> =>
-      await handler.get<T>(`${url}/${endpoint}`, {
+    ) =>
+      await tryThis<T>(handler.get, `${url}/${endpoint}`, {
         ...REQUEST_RULES,
         ...config,
       }),
@@ -20,7 +21,7 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       config: AxiosRequestConfig = {},
       url = baseUrl
     ) =>
-      await handler.get<T>(`${url}/${endpoint}`, {
+      await tryThis<T>(handler.get, `${url}/${endpoint}`, {
         ...REQUEST_RULES,
         ...config,
         headers: { authorization: `Bearer ${token}` },
@@ -34,7 +35,7 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       config: AxiosRequestConfig = {},
       url = baseUrl
     ) =>
-      await handler.post<T>(`${url}/${endpoint}`, body, {
+      await tryThis<T>(handler.post, `${url}/${endpoint}`, body, {
         ...REQUEST_RULES,
         ...config,
       }),
@@ -47,7 +48,7 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       config: AxiosRequestConfig = {},
       url = baseUrl
     ) =>
-      await handler.post<T>(`${url}/${endpoint}`, body, {
+      await tryThis<T>(handler.post, `${url}/${endpoint}`, body, {
         ...REQUEST_RULES,
         ...config,
         headers: { authorization: `Bearer ${token}` },

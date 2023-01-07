@@ -5,16 +5,15 @@ import { api } from "../../../common/services/RequestHandler";
 import ENDPOINTS from "../../../config/endpoints";
 import { useState } from "react";
 
-// type IToken = {
-//   email: string;
-//   token: string;
-// };
+type IToken = {
+  email: string;
+};
 
 const SignUpPage = (): JSX.Element => {
   const [isTokenOk, setTokenStatus] = useState<boolean>(false);
 
   const handleSubmit = async (values: Record<string, string>) => {
-    const response = await api.postWithAuth(
+    const response = await api.postWithAuth<unknown, IToken>(
       ENDPOINTS.tokens.verify,
       {
         email: values.email,
@@ -30,7 +29,7 @@ const SignUpPage = (): JSX.Element => {
       <Form schema={tokenSchema} actionWithValues={handleSubmit}>
         <Button>Verify token</Button>
       </Form>
-      {isTokenOk && <>Valid token</>}
+      {isTokenOk ? <>Valid token</> : <>Invalid token</>}
     </>
   );
 };
