@@ -1,7 +1,7 @@
 import IResponse from "../types/IResponse";
 import { AxiosResponse, AxiosError } from "axios";
 
-const CustomResponse = <T>(data: AxiosResponse<T>): IResponse<T> => ({
+export const CustomResponse = <T>(data: AxiosResponse<T>): IResponse<T> => ({
   body: data.data,
   status: data.status,
 });

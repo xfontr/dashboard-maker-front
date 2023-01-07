@@ -24,7 +24,7 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       await tryThis<T>(handler.get, `${url}/${endpoint}`, {
         ...REQUEST_RULES,
         ...config,
-        headers: { authorization: `Bearer ${token}` },
+        headers: { ...config?.headers, authorization: `Bearer ${token}` },
       }),
   });
 
@@ -40,7 +40,6 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
         ...config,
       }),
 
-    // TODO: Unit test this
     postWithAuth: async <T, R>(
       endpoint: string,
       body: R,
@@ -51,7 +50,7 @@ const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
       await tryThis<T>(handler.post, `${url}/${endpoint}`, body, {
         ...REQUEST_RULES,
         ...config,
-        headers: { authorization: `Bearer ${token}` },
+        headers: { ...config?.headers, authorization: `Bearer ${token}` },
       }),
   });
 

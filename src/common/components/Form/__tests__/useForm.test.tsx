@@ -64,13 +64,13 @@ describe("Given a useForm component", () => {
 
         const {
           result: {
-            current: { onChange, onSubmit },
+            current: { onChange, handleSubmit },
           },
         } = renderHook(() => useForm(schema, mockAction));
 
         act(() => {
           onChange(mockEvent);
-          onSubmit(mockSubmitEvent);
+          handleSubmit(mockSubmitEvent);
         });
 
         expect(mockAction).not.toHaveBeenCalled();
