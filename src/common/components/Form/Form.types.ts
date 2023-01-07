@@ -44,4 +44,5 @@ export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children?: ReactNode;
   schema: FormSchema;
   errorDisplay?: "individual" | "global" | "none";
+  actionWithValues?: (values: Record<string, string>) => void;
 }

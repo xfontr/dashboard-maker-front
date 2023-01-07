@@ -30,7 +30,7 @@ describe("Given a get method from the api service", () => {
         const endpoint = "users";
         const config = {
           headers: {
-            Authentication: "bearer",
+            authorization: "bearer",
           },
         };
         const baseUrl = "base";
@@ -56,7 +56,7 @@ describe("Given a getWithAuth method from the api service", () => {
 
       expect(mockGet).toHaveBeenCalledWith(
         `${ENVIRONMENT.apiUrl}/${endpoint}`,
-        { ...REQUEST_RULES, headers: { Authentication: auth } }
+        { ...REQUEST_RULES, headers: { authorization: auth } }
       );
     });
   });

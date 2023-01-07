@@ -1,4 +1,7 @@
 const ENDPOINTS = {
+  tokens: {
+    verify: "tokens/verify",
+  },
   users: {
     getAll: "users/",
     register: "users/",

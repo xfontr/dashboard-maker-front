@@ -10,13 +10,17 @@ const Form = ({
   children,
   schema,
   errorDisplay = "individual",
+  actionWithValues,
   ...rest
 }: FormProps): JSX.Element => {
-  const { values, errors, onChange, onSubmit } = useForm(schema, rest.onSubmit);
+  const { values, errors, onChange, handleSubmit } = useForm(
+    schema,
+    actionWithValues
+  );
 
   return (
     <>
-      <form className="form" {...{ onSubmit }}>
+      <form className="form" onSubmit={handleSubmit} {...rest}>
         {schema.map(({ label, inputProps, fieldProps }) => (
           <FormGroup
             {...{
