@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
+import NotFoundPage from "../../pages/NotFound.page";
 
 type RoutesRenderProps = {
   to?: string;
@@ -11,19 +12,25 @@ const RoutesRender = ({
   to,
   Element,
   Layout,
-}: RoutesRenderProps): JSX.Element => (
-  <>
-    {Element && Layout ? (
-      <Layout>
-        <Element />
-      </Layout>
-    ) : (
-      <>
-        {Element && <Element />}
-        {!Element && <Navigate to={to!} />}
-      </>
-    )}
-  </>
-);
+}: RoutesRenderProps): JSX.Element => {
+  if (!Element && !to) {
+    return <NotFoundPage />;
+  }
+
+  return (
+    <>
+      {Element && Layout ? (
+        <Layout>
+          <Element />
+        </Layout>
+      ) : (
+        <>
+          {Element && <Element />}
+          {!Element && <Navigate to={to!} />}
+        </>
+      )}
+    </>
+  );
+};
 
 export default RoutesRender;
