@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import Routes from "./common/components/Routes/Routes";
+import Routes from "../Routes/Routes";
+import "./App.scss";
 
 const App = (): JSX.Element => (
   <div className="app">
