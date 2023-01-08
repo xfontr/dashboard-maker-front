@@ -1,0 +1,31 @@
+import useSteps from "../../../../common/hooks/useSteps";
+import { IS_TOKEN_REQUIRED } from "../../../../config/database";
+import useRegistration from "../../hooks/useRegistration";
+import Steps from "../Steps/Steps";
+import SignUpPasswordForm from "./formSteps/SignUpPassword.form";
+import SignUpSubmitForm from "./formSteps/SignUpSubmit.form";
+import SignUpTokenForm from "./formSteps/SignUpToken.form";
+
+const SignUpForm = (): JSX.Element => {
+  const { step, next, previous } = useSteps([!IS_TOKEN_REQUIRED, 1]);
+  const { handleSignUpSubmit, handlePasswordSubmit, handleTokenSubmit, user } =
+    useRegistration(next, previous);
+
+  return (
+    <section className="form-parent">
+      <Steps currentStep={step} totalSteps={3} />
+      {step === 0 && <SignUpTokenForm handleSubmit={handleTokenSubmit} />}
+      {step === 1 && (
+        <SignUpPasswordForm
+          values={user!}
+          handleSubmit={handlePasswordSubmit}
+        />
+      )}
+      {step === 2 && (
+        <SignUpSubmitForm values={user!} handleSubmit={handleSignUpSubmit} />
+      )}
+    </section>
+  );
+};
+
+export default SignUpForm;
