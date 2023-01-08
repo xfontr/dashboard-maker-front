@@ -38,6 +38,7 @@ export type FormSchema = {
   inputProps: InputProps;
   /** Allows any normal div attributes. Used to style input groups individually */
   fieldProps?: FieldProps;
+  initialValue?: string;
 }[];
 
 export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {

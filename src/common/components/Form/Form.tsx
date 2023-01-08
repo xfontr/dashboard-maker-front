@@ -23,12 +23,12 @@ const Form = ({
       <form className="form" onSubmit={handleSubmit} {...rest}>
         {schema.map(({ label, inputProps, fieldProps }) => (
           <FormGroup
-            {...{
-              label,
-              inputProps,
-              value: values[inputProps.id],
+            inputProps={{
+              ...inputProps,
               onChange,
+              value: values[inputProps.id],
             }}
+            {...{ label }}
             {...fieldProps}
             {...setErrorClass(errorDisplay, inputProps.id, fieldProps, errors)}
             key={inputProps.id}
