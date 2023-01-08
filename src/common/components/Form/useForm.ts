@@ -13,7 +13,7 @@ const useForm = (schema: FormSchema, action?: Function) => {
     setValues(valueSetter(id, value));
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -24,10 +24,10 @@ const useForm = (schema: FormSchema, action?: Function) => {
 
     if (validatedForm?.length) return;
 
-    action && action();
+    action && action(values);
   };
 
-  return { values, errors, onChange, onSubmit };
+  return { values, errors, onChange, handleSubmit };
 };
 
 export default useForm;

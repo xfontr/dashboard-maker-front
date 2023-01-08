@@ -10,6 +10,12 @@ const formSchema = Joi.object({
     .max(password.max)
     .required(),
 
+  repeatPassword: Joi.string()
+    .valid(Joi.ref("password"))
+    .required()
+    .label("Repeat password")
+    .messages({ "any.only": "Passwords don't match" }),
+
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: false } })
     .min(email.min)
@@ -18,7 +24,7 @@ const formSchema = Joi.object({
 
   name: Joi.string().min(name.min).max(name.max).required(),
   surname: Joi.string().min(name.min).max(name.max).required(),
-  token: Joi.string().min(password.min).max(password.max).required(),
+  code: Joi.string().min(password.min).max(password.max).required(),
 });
 
 export default formSchema;

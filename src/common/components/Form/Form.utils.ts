@@ -3,11 +3,12 @@ import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
 import capitalize from "../../utils/capitalize";
 
+//TODO: Test implementation of initial value
 export const getSchemaValues = (schema: FormSchema): Record<string, string> =>
   schema.reduce(
     (allInputs, current) => ({
       ...allInputs,
-      [current.inputProps.id]: "",
+      [current.inputProps.id]: current.initialValue || "",
     }),
     {}
   );

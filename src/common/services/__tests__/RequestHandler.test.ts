@@ -4,13 +4,20 @@ import ENVIRONMENT from "../../../config/environment";
 import REQUEST_RULES from "../../../config/requestRules";
 import { api } from "../RequestHandler";
 
+// TODO: Replace mocks and use Mock Service Worker instead
+
 const mockGet = jest.fn();
+const mockPost = jest.fn();
 
 jest.mock("axios", () => ({
   get: (url: string, config: AxiosRequestConfig<{}>) => mockGet(url, config),
   post: (url: string, body: unknown, config: AxiosRequestConfig<{}>) =>
-    mockGet(url, body, config),
+    mockPost(url, body, config),
 }));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 describe("Given a get method from the api service", () => {
   describe("When called with an endpoint 'users'", () => {
@@ -29,18 +36,16 @@ describe("Given a get method from the api service", () => {
       test("Then it should do a request with all the passed params", async () => {
         const endpoint = "users";
         const config = {
+          ...REQUEST_RULES,
           headers: {
-            Authentication: "bearer",
+            authorization: "bearer",
           },
         };
         const baseUrl = "base";
 
         await api.get(endpoint, config, baseUrl);
 
-        expect(mockGet).toHaveBeenCalledWith(`${baseUrl}/${endpoint}`, {
-          ...REQUEST_RULES,
-          ...config,
-        });
+        expect(mockGet).toHaveBeenCalledWith(`${baseUrl}/${endpoint}`, config);
       });
     });
   });
@@ -50,29 +55,59 @@ describe("Given a getWithAuth method from the api service", () => {
   describe("When called with an endpoint 'users' and an auth token 'auth'", () => {
     test("Then it should do a request with the api base url, the default configuration and the token", async () => {
       const endpoint = "users";
-      const auth = "token";
+      const token = "token";
+      const config = {
+        ...REQUEST_RULES,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      };
 
-      await api.getWithAuth(endpoint, auth);
+      await api.getWithAuth(endpoint, token);
 
       expect(mockGet).toHaveBeenCalledWith(
         `${ENVIRONMENT.apiUrl}/${endpoint}`,
-        { ...REQUEST_RULES, headers: { Authentication: auth } }
+        config
       );
     });
   });
 });
 
-describe("Given a pot method from the api service", () => {
+describe("Given a post method from the api service", () => {
   describe("When called with an endpoint 'users' and a user as body", () => {
     test("Then it should do a request with the api base url, the default configuration and the body", async () => {
       const endpoint = "users";
 
       await api.post(endpoint, mockUser);
 
-      expect(mockGet).toHaveBeenCalledWith(
+      expect(mockPost).toHaveBeenCalledWith(
         `${ENVIRONMENT.apiUrl}/${endpoint}`,
         mockUser,
         REQUEST_RULES
+      );
+    });
+  });
+});
+
+describe("Given a postWithAuth method from the api service", () => {
+  describe("When called with an endpoint 'users', a user as body and a token 'auth'", () => {
+    test("Then it should do a request with the api base url, the default configuration and the token", async () => {
+      const endpoint = "users";
+      const token = "auth";
+
+      const config = {
+        ...REQUEST_RULES,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      };
+
+      await api.postWithAuth(endpoint, mockUser, token);
+
+      expect(mockPost).toHaveBeenCalledWith(
+        `${ENVIRONMENT.apiUrl}/${endpoint}`,
+        mockUser,
+        config
       );
     });
   });

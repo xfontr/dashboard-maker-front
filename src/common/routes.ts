@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import PATHS from "../config/paths";
-import userRoutes from "../features/registration/users.routes";
+import userRoutes from "../features/users/users.routes";
 import RouteConfig from "./components/Routes/Routes.types";
 
 const routes: RouteConfig[] = [

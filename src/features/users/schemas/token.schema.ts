@@ -1,17 +1,19 @@
 import { FormSchema } from "../../../common/components/Form/Form.types";
+import capitalize from "../../../common/utils/capitalize";
+import { MAIN_IDENTIFIER } from "../../../config/database";
 
 const tokenSchema: FormSchema = [
   {
-    label: "Email",
+    label: capitalize(MAIN_IDENTIFIER),
     inputProps: {
-      id: "email",
+      id: MAIN_IDENTIFIER,
       placeholder: "email@email.com",
     },
   },
   {
-    label: "Token",
+    label: "Token code",
     inputProps: {
-      id: "token",
+      id: "code",
       type: "password",
     },
   },

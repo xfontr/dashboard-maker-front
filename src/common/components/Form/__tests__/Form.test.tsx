@@ -33,7 +33,7 @@ describe("Given a Form component", () => {
         const buttonText = "Submit";
 
         render(
-          <Form {...{ schema, onSubmit }}>
+          <Form {...{ schema }} actionWithValues={onSubmit}>
             <Button>{buttonText}</Button>
           </Form>
         );
@@ -58,7 +58,7 @@ describe("Given a Form component", () => {
         const buttonText = "Submit";
 
         render(
-          <Form {...{ schema, onSubmit }}>
+          <Form {...{ schema }} actionWithValues={onSubmit}>
             <Button>{buttonText}</Button>
           </Form>
         );
