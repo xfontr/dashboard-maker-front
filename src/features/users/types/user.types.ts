@@ -24,4 +24,8 @@ export type UserAddress = Partial<{
 
 interface IUser extends UserRequiredData, UserName, UserAddress {}
 
+export interface ProtoUser extends IUser {
+  repeatPassword?: string;
+}
+
 export default IUser;
