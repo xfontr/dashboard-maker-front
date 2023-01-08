@@ -24,7 +24,7 @@ export interface FormGroupProps extends FieldProps {
   children?: ReactNode;
 }
 
-export type FormSchema = {
+export type FormField = {
   /**
    * The label attached to the input. As of now, it is mandatory, since it is a
    * better practice to always use labels. Rule: always write the first letter
@@ -38,8 +38,10 @@ export type FormSchema = {
   inputProps: InputProps;
   /** Allows any normal div attributes. Used to style input groups individually */
   fieldProps?: FieldProps;
-  initialValue?: string;
-}[];
+  initialValue?: string | number;
+};
+
+export type FormSchema = FormField[];
 
 export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children?: ReactNode;
