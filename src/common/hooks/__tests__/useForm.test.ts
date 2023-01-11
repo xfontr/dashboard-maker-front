@@ -1,14 +1,14 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent } from "react";
 import { act } from "react-dom/test-utils";
-import schema from "../../../test-utils/mocks/mockFormSchema";
-import simplifySchema from "../../../test-utils/simplifySchema";
+import schema from "../../test-utils/mocks/mockFormSchema";
+import simplifySchema from "../../test-utils/simplifySchema";
 import useForm from "../useForm";
 
 let mockValueSetter = jest.fn().mockReturnValue(() => {});
 
-jest.mock("../Form.utils", () => ({
-  ...jest.requireActual("../Form.utils"),
+jest.mock("../../components/Form/Form.utils", () => ({
+  ...jest.requireActual("../../components/Form/Form.utils"),
   valueSetter: () => mockValueSetter,
 }));
 

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useSteps = (initialStep: [boolean, number] = [false, 0]) => {
+const useSteps = (initialStep: number = 0) => {
   const [step, setStep] = useState<number>(0);
 
   const next = () => setStep((currentStep) => currentStep + 1);
 
-  const previous = () => setStep((currentStep) => currentStep - 1);
+  const previous = () =>
+    setStep((currentStep) => (currentStep - 1 < 0 ? 0 : currentStep - 1));
 
-  const restart = () => setStep(0);
+  const restart = () => setStep(initialStep);
 
   useEffect(() => {
-    if (!initialStep[0]) return;
-    setStep(initialStep[1]);
+    if (!initialStep) return;
+    setStep(initialStep);
   }, [initialStep]);
 
   return {

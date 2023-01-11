@@ -3,7 +3,11 @@ import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
 import capitalize from "../../utils/capitalize";
 
-//TODO: Test implementation of initial value
+/**
+ * Converts a form schema into a simpler object with only each ID and each
+ * initial value
+ */
+
 export const getSchemaValues = <T>(schema: FormSchema): T =>
   schema.reduce(
     (allInputs, current) => ({
@@ -12,6 +16,11 @@ export const getSchemaValues = <T>(schema: FormSchema): T =>
     }),
     {} as T
   );
+
+/**
+ * Used to handle the state setter function. It takes the current values and
+ * replaces the one with the passed id and value
+ */
 
 export const valueSetter =
   <T>(id: string, value?: string) =>

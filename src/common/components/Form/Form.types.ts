@@ -4,7 +4,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
 } from "react";
-import useForm from "./useForm";
+import useForm from "../../hooks/useForm";
 
 export interface InputProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {

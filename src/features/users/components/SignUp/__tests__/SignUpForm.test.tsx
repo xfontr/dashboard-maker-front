@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import signUpLocationSchema from "./schemas/location.schema";
-import SignUpPasswordSchema from "./schemas/password.schema";
-import signUpTokenSchema from "./schemas/token.schema";
-import SignUpForm from "./SignUpForm";
+import signUpLocationSchema from "../schemas/location.schema";
+import SignUpPasswordSchema from "../schemas/password.schema";
+import signUpTokenSchema from "../schemas/token.schema";
+import SignUpForm from "../SignUpForm";
 
 describe("Given a SignUpForm component", () => {
   describe("When instantiated", () => {

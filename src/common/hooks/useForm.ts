@@ -1,7 +1,11 @@
 import Joi from "joi";
 import { ChangeEvent, FormEventHandler, useState } from "react";
-import { FormSchema } from "./Form.types";
-import { getSchemaValues, validateForm, valueSetter } from "./Form.utils";
+import { FormSchema } from "../components/Form/Form.types";
+import {
+  getSchemaValues,
+  validateForm,
+  valueSetter,
+} from "../components/Form/Form.utils";
 
 const useForm = <T = Record<string, string>>(
   schema: FormSchema,

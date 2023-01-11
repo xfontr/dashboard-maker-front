@@ -3,7 +3,7 @@ import schema from "../../../test-utils/mocks/mockFormSchema";
 import Button from "../../Button/Button";
 import Form from "../Form";
 import userEvent from "@testing-library/user-event";
-import useForm from "../useForm";
+import useForm from "../../../hooks/useForm";
 
 const buttonText = "Button";
 

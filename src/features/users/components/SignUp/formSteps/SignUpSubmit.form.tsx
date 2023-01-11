@@ -2,7 +2,7 @@ import Button from "../../../../../common/components/Button/Button";
 import Form from "../../../../../common/components/Form/Form";
 import signUpLocationSchema from "../schemas/location.schema";
 import { ProtoUser } from "../../../types/user.types";
-import useForm from "../../../../../common/components/Form/useForm";
+import useForm from "../../../../../common/hooks/useForm";
 
 type SignUpSubmitProps = {
   values: Partial<ProtoUser>;

@@ -1,6 +1,6 @@
 import Button from "../../../../../common/components/Button/Button";
 import Form from "../../../../../common/components/Form/Form";
-import useForm from "../../../../../common/components/Form/useForm";
+import useForm from "../../../../../common/hooks/useForm";
 import { ProtoUser } from "../../../types/user.types";
 import SignUpPasswordSchema from "../schemas/password.schema";
 
