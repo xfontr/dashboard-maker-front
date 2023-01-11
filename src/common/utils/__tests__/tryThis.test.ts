@@ -40,5 +40,20 @@ describe("Given a tryThis function", () => {
 
       expect(result).toStrictEqual(expectedResponse);
     });
+
+    test("Then it should return the error and a default error status of '400' if no status was specified", async () => {
+      const error = new AxiosError("", "", {}, "", {} as AxiosResponse);
+
+      const mockFunction = jest.fn().mockRejectedValue(error);
+
+      const expectedResponse = {
+        error: error,
+        status: 400,
+      };
+
+      const result = await tryThis(mockFunction);
+
+      expect(result).toStrictEqual(expectedResponse);
+    });
   });
 });

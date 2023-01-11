@@ -10,6 +10,7 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
     inputProps: {
       id: "postalCode",
     },
+    initialValue: values["postalCode"],
   },
 ];
 

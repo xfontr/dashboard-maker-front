@@ -4,11 +4,7 @@ import INPUT_RULES from "../../../config/inputRules";
 const { email, password, name } = INPUT_RULES;
 
 const formSchema = Joi.object({
-  password: Joi.string()
-    .pattern(/^[a-zA-Z0-9]/)
-    .min(password.min)
-    .max(password.max)
-    .required(),
+  password: Joi.string().min(password.min).max(password.max).required(),
 
   repeatPassword: Joi.string()
     .valid(Joi.ref("password"))

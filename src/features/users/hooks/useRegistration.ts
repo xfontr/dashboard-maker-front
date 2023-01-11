@@ -1,12 +1,14 @@
 import { useState } from "react";
+import useSteps from "../../../common/hooks/useSteps";
 import { api } from "../../../common/services/RequestHandler";
 import UserRoles from "../../../common/types/UserRoles";
 import { IS_TOKEN_REQUIRED, MAIN_IDENTIFIER } from "../../../config/database";
 import ENDPOINTS from "../../../config/endpoints";
 import { IToken, ProtoToken, TokenResponse } from "../types/token.types";
 import IUser, { ProtoUser } from "../types/user.types";
+import joinValues from "../utils/joinValues";
 
-const useRegistration = (next: Function, previous: Function) => {
+const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   const [token, setToken] = useState<IToken>();
   const [user, setUser] = useState<ProtoUser>();
 
@@ -36,40 +38,33 @@ const useRegistration = (next: Function, previous: Function) => {
   };
 
   const handlePasswordSubmit = (values: Record<string, string>) => {
-    setUser((currentState) => ({
-      ...currentState,
-      ...(values as unknown as ProtoUser),
-    }));
+    setUser(joinValues<ProtoUser>(values));
     next();
   };
 
   const handleSignUpSubmit = (
     (role: UserRoles, tokenCode?: string) =>
-    (submit: boolean) =>
     async (values: Record<string, string>) => {
-      setUser((currentState) => ({
-        ...currentState,
-        ...(values as unknown as ProtoUser),
-      }));
-
-      if (!submit) {
-        previous();
-        return;
-      }
+      setUser(joinValues<ProtoUser>(values));
 
       const userToRequest = { ...user!, role };
       delete userToRequest.repeatPassword;
 
-      await api.postWithAuth<unknown, IUser>(
+      const response = await api.postWithAuth<unknown, IUser>(
         ENDPOINTS.users.signUp,
         userToRequest,
         IS_TOKEN_REQUIRED && tokenCode ? tokenCode : ""
       );
+
+      if (response.status !== 201) return;
+
+      next();
     }
   )(token?.role ?? "user", IS_TOKEN_REQUIRED ? token?.code : undefined);
 
   return {
     user,
+    setUser,
     handleTokenSubmit,
     handleSignUpSubmit,
     handlePasswordSubmit,

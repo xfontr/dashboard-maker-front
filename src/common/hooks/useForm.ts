@@ -1,16 +1,23 @@
 import Joi from "joi";
 import { ChangeEvent, FormEventHandler, useState } from "react";
-import { FormSchema } from "./Form.types";
-import { getSchemaValues, validateForm, valueSetter } from "./Form.utils";
+import { FormSchema } from "../components/Form/Form.types";
+import {
+  getSchemaValues,
+  validateForm,
+  valueSetter,
+} from "../components/Form/Form.utils";
 
-const useForm = (schema: FormSchema, action?: Function) => {
-  const [values, setValues] = useState(getSchemaValues(schema));
+const useForm = <T = Record<string, string>>(
+  schema: FormSchema,
+  onSubmit?: Function
+) => {
+  const [values, setValues] = useState<T>(getSchemaValues(schema));
   const [errors, setErrors] = useState<Joi.ValidationErrorItem[] | undefined>();
 
   const onChange = ({
     target: { id, value },
   }: ChangeEvent<HTMLInputElement>) => {
-    setValues(valueSetter(id, value));
+    setValues(valueSetter<T>(id, value));
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (
@@ -18,16 +25,16 @@ const useForm = (schema: FormSchema, action?: Function) => {
   ) => {
     event.preventDefault();
 
-    const validatedForm = validateForm(values);
+    const validatedForm = validateForm<T>(values);
 
     setErrors(validatedForm);
 
     if (validatedForm?.length) return;
 
-    action && action(values);
+    onSubmit && onSubmit(values);
   };
 
-  return { values, errors, onChange, handleSubmit };
+  return { values, errors, onChange, handleSubmit, schema };
 };
 
 export default useForm;

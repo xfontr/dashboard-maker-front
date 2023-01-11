@@ -1,8 +1,9 @@
 import "./Button.scss";
-import { HTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 import setProps from "../../utils/setProps";
+import { ButtonHTMLAttributes } from "react";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
