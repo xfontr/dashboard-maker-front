@@ -1,4 +1,3 @@
-import useForm from "./useForm";
 import { FormProps } from "./Form.types";
 import FormGroup from "./FormGroup/FormGroup";
 import "./Form.scss";
@@ -8,15 +7,11 @@ import { setErrorClass } from "./Form.utils";
 
 const Form = ({
   children,
-  schema,
+  formHandler,
   errorDisplay = "individual",
-  actionWithValues,
   ...rest
 }: FormProps): JSX.Element => {
-  const { values, errors, onChange, handleSubmit } = useForm(
-    schema,
-    actionWithValues
-  );
+  const { values, errors, onChange, handleSubmit, schema } = formHandler;
 
   return (
     <>
@@ -26,7 +21,7 @@ const Form = ({
             inputProps={{
               ...inputProps,
               onChange,
-              value: values[inputProps.id],
+              value: (values as Record<string, string>)[inputProps.id],
             }}
             {...{ label }}
             {...fieldProps}

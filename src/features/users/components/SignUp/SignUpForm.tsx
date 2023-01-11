@@ -8,12 +8,17 @@ import SignUpTokenForm from "./formSteps/SignUpToken.form";
 
 const SignUpForm = (): JSX.Element => {
   const { step, next, previous } = useSteps([!IS_TOKEN_REQUIRED, 1]);
-  const { handleSignUpSubmit, handlePasswordSubmit, handleTokenSubmit, user } =
-    useRegistration(next, previous);
+  const {
+    handleSignUpSubmit,
+    handlePasswordSubmit,
+    handleTokenSubmit,
+    setUser,
+    user,
+  } = useRegistration(next, previous);
 
   return (
     <section className="form-parent">
-      <Steps currentStep={step} totalSteps={3} />
+      <Steps currentStep={step} totalSteps={4} />
       {step === 0 && <SignUpTokenForm handleSubmit={handleTokenSubmit} />}
       {step === 1 && (
         <SignUpPasswordForm
@@ -22,7 +27,17 @@ const SignUpForm = (): JSX.Element => {
         />
       )}
       {step === 2 && (
-        <SignUpSubmitForm values={user!} handleSubmit={handleSignUpSubmit} />
+        <SignUpSubmitForm
+          values={user!}
+          {...{ previous, setUser }}
+          handleSubmit={handleSignUpSubmit}
+        />
+      )}
+      {step === 3 && (
+        <span>
+          Thank you for signing up! You will shortly be redirected to your
+          dashboard.
+        </span>
       )}
     </section>
   );

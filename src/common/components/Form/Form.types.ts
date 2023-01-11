@@ -4,6 +4,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
 } from "react";
+import useForm from "./useForm";
 
 export interface InputProps
   extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
@@ -45,7 +46,6 @@ export type FormSchema = FormField[];
 
 export interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children?: ReactNode;
-  schema: FormSchema;
+  formHandler: ReturnType<typeof useForm>;
   errorDisplay?: "individual" | "global" | "none";
-  actionWithValues?: (values: Record<string, string>) => void;
 }

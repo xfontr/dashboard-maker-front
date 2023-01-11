@@ -4,17 +4,18 @@ import formSchema from "./Form.schema";
 import capitalize from "../../utils/capitalize";
 
 //TODO: Test implementation of initial value
-export const getSchemaValues = (schema: FormSchema): Record<string, string> =>
+export const getSchemaValues = <T>(schema: FormSchema): T =>
   schema.reduce(
     (allInputs, current) => ({
       ...allInputs,
       [current.inputProps.id]: current.initialValue || "",
     }),
-    {}
+    {} as T
   );
 
 export const valueSetter =
-  (id: string, value?: string) => (currentState: Record<string, string>) => ({
+  <T>(id: string, value?: string) =>
+  (currentState: T): T => ({
     ...currentState,
     [id]: value ?? "",
   });
@@ -31,10 +32,10 @@ export const valueSetter =
  */
 
 export const validateForm = (
-  <T = unknown>(schema: ObjectSchema<T>) =>
-  (values: Record<string, string>): Joi.ValidationErrorItem[] | undefined => {
+  <T>(schema: ObjectSchema<T>) =>
+  <R>(values: R): Joi.ValidationErrorItem[] | undefined => {
     const schemaWithOnlyPassedValues = Joi.object(
-      Object.keys(values).reduce(
+      Object.keys(values as R as object).reduce(
         (extractedSchema, key) => ({
           ...extractedSchema,
           [key]: Object(schema)._ids._byKey.get(key)

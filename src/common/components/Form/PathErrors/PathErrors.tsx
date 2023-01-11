@@ -6,20 +6,22 @@ type FormErrorsProps = {
   path: string;
 };
 
-const PathErrors = ({ errors, path }: FormErrorsProps) => (
-  <>
-    {errors?.length!! && (
-      <ul data-testid="errors">
-        {errors
-          .filter((error) => error.path[0] === path)
-          .map((error, index) => (
-            <li key={`${path}${index}`} className="errors__message">
-              {curateErrorMessage(error.message)}
-            </li>
-          ))}
-      </ul>
-    )}
-  </>
-);
+const PathErrors = ({ errors, path }: FormErrorsProps) => {
+  const pathErrors = errors?.length
+    ? errors.filter((error) => error.path[0] === path)
+    : undefined;
+
+  return pathErrors?.length ? (
+    <ul data-testid="errors">
+      {pathErrors.map((error, index) => (
+        <li key={`${path}${index}`} className="errors__message">
+          {curateErrorMessage(error.message)}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <></>
+  );
+};
 
 export default PathErrors;

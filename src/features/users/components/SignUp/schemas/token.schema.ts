@@ -1,3 +1,4 @@
+import { SimpleFormFields } from "../../../../../common/components/Form/Form.services";
 import { FormSchema } from "../../../../../common/components/Form/Form.types";
 import capitalize from "../../../../../common/utils/capitalize";
 import { MAIN_IDENTIFIER } from "../../../../../config/database";
@@ -17,6 +18,7 @@ const signUpTokenSchema: FormSchema = [
       type: "password",
     },
   },
+  ...SimpleFormFields({})("shit"),
 ];
 
 export default signUpTokenSchema;

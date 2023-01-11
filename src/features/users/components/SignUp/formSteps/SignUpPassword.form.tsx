@@ -1,5 +1,6 @@
 import Button from "../../../../../common/components/Button/Button";
 import Form from "../../../../../common/components/Form/Form";
+import useForm from "../../../../../common/components/Form/useForm";
 import { ProtoUser } from "../../../types/user.types";
 import SignUpPasswordSchema from "../schemas/password.schema";
 
@@ -11,11 +12,19 @@ type SignUpFormProps = {
 const SignUpPasswordForm = ({
   values,
   handleSubmit,
-}: SignUpFormProps): JSX.Element => (
-  <Form schema={SignUpPasswordSchema(values)} actionWithValues={handleSubmit}>
-    <Button>Last details</Button>
-    <span>You're almost there!</span>
-  </Form>
-);
+}: SignUpFormProps): JSX.Element => {
+  const formHandler = useForm<ProtoUser>(
+    SignUpPasswordSchema(values),
+    handleSubmit
+  );
 
+  return (
+    <Form {...{ formHandler }}>
+      <div className="form__buttons">
+        <span>You're almost there!</span>
+        <Button>Last details</Button>
+      </div>
+    </Form>
+  );
+};
 export default SignUpPasswordForm;

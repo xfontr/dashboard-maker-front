@@ -40,36 +40,36 @@ const useRegistration = (next: Function, previous: Function) => {
       ...currentState,
       ...(values as unknown as ProtoUser),
     }));
+
     next();
   };
 
   const handleSignUpSubmit = (
     (role: UserRoles, tokenCode?: string) =>
-    (submit: boolean) =>
     async (values: Record<string, string>) => {
       setUser((currentState) => ({
         ...currentState,
         ...(values as unknown as ProtoUser),
       }));
 
-      if (!submit) {
-        previous();
-        return;
-      }
-
       const userToRequest = { ...user!, role };
       delete userToRequest.repeatPassword;
 
-      await api.postWithAuth<unknown, IUser>(
+      const response = await api.postWithAuth<unknown, IUser>(
         ENDPOINTS.users.signUp,
         userToRequest,
         IS_TOKEN_REQUIRED && tokenCode ? tokenCode : ""
       );
+
+      if (response.status !== 201) return;
+
+      next();
     }
   )(token?.role ?? "user", IS_TOKEN_REQUIRED ? token?.code : undefined);
 
   return {
     user,
+    setUser,
     handleTokenSubmit,
     handleSignUpSubmit,
     handlePasswordSubmit,
