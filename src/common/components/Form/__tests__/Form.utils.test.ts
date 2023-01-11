@@ -1,5 +1,5 @@
 import schema from "../../../test-utils/mocks/mockFormSchema";
-import simplifySchema from "../../../test-utils/simplifySchema";
+import { simplifySchema } from "../../../test-utils/test.utils";
 import {
   curateErrorMessage,
   getSchemaValues,

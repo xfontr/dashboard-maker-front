@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { multiType } from "../../../../../common/test-utils/test.utils";
 import signUpLocationSchema from "../schemas/location.schema";
 import SignUpPasswordSchema from "../schemas/password.schema";
 import signUpTokenSchema from "../schemas/token.schema";
@@ -13,15 +14,11 @@ describe("Given a SignUpForm component", () => {
         render(<SignUpForm />);
 
         // First step
-        const firstStep = signUpTokenSchema.map(({ label }) =>
+        const firstStep = signUpTokenSchema.map<HTMLInputElement>(({ label }) =>
           screen.getByLabelText(label)
         );
 
-        await firstStep.reduce(async (previousPromise, element) => {
-          await previousPromise;
-          await userEvent.type(element, typeText);
-          return Promise.resolve();
-        }, Promise.resolve());
+        await multiType(firstStep, typeText);
 
         const firstSubmit = screen.getByRole("button", {
           name: "Verify token",
@@ -30,15 +27,14 @@ describe("Given a SignUpForm component", () => {
         await userEvent.click(firstSubmit);
 
         // Second step
-        const secondStep = SignUpPasswordSchema({}).map(({ label }) =>
-          screen.findByLabelText(label)
+        const signUpSchema = SignUpPasswordSchema({});
+        const secondStep = await Promise.all(
+          signUpSchema.map<Promise<HTMLInputElement>>(({ label }) =>
+            screen.findByLabelText(label)
+          )
         );
 
-        await secondStep.reduce(async (previousPromise, element) => {
-          await previousPromise;
-          await userEvent.type(await element, typeText);
-          return Promise.resolve();
-        }, Promise.resolve());
+        await multiType(secondStep, typeText);
 
         const secondSubmit = await screen.findByRole("button", {
           name: "Last details",
@@ -47,15 +43,11 @@ describe("Given a SignUpForm component", () => {
         await userEvent.click(secondSubmit);
 
         // Third step
-        const thirdStep = signUpLocationSchema({}).map(({ label }) =>
-          screen.findByLabelText(label)
+        const thirdStep = signUpLocationSchema({}).map<HTMLInputElement>(
+          ({ label }) => screen.getByLabelText(label)
         );
 
-        await thirdStep.reduce(async (previousPromise, element) => {
-          await previousPromise;
-          await userEvent.type(await element, typeText);
-          return Promise.resolve();
-        }, Promise.resolve());
+        await multiType(thirdStep, typeText);
 
         // Step back
 

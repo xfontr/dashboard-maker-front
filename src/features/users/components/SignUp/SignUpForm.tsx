@@ -14,7 +14,7 @@ const SignUpForm = (): JSX.Element => {
     handleTokenSubmit,
     setUser,
     user,
-  } = useRegistration(next, previous);
+  } = useRegistration(next);
 
   return (
     <section className="form-parent">

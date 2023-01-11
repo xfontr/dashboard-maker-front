@@ -18,8 +18,8 @@ export const getSchemaValues = <T>(schema: FormSchema): T =>
   );
 
 /**
- * Used to handle the state setter function. It takes the current values and
- * replaces the one with the passed id and value
+ * Simple helper to handle the state setter function. It takes the current
+ * values and replaces the one with the passed id and value
  */
 
 export const valueSetter =
