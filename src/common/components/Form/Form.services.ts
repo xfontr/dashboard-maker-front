@@ -10,7 +10,7 @@ import { FormSchema } from "./Form.types";
  */
 
 export const SimpleFormFields =
-  (values: Record<string, string | number>) =>
+  (values: Record<string, string | number> = {}) =>
   (...names: string[]): FormSchema =>
     names.map((name) => ({
       label: capitalize(name),

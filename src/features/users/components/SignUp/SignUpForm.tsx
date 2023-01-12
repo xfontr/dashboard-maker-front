@@ -22,10 +22,7 @@ const SignUpForm = (): JSX.Element => {
 
       {step === 0 && <SignUpTokenForm handleSubmit={handleTokenSubmit} />}
       {step === 1 && (
-        <SignUpPasswordForm
-          values={user!}
-          handleSubmit={handlePasswordSubmit}
-        />
+        <SignUpPasswordForm values={user} handleSubmit={handlePasswordSubmit} />
       )}
       {step === 2 && (
         <SignUpSubmitForm

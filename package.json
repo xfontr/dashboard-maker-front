@@ -61,8 +61,7 @@
       "!src/setupTests.ts",
       "!src/config/*.ts",
       "!src/**/*.routes.ts",
-      "!src/**/routes.ts",
-      "!src/**/*.schema.ts"
+      "!src/**/routes.ts"
     ]
   }
 }

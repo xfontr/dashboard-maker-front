@@ -6,10 +6,21 @@ import SignUpPasswordSchema from "../schemas/password.schema";
 import signUpTokenSchema from "../schemas/token.schema";
 import SignUpForm from "../SignUpForm";
 
+const mockIsTokenRequiredGetter = jest.fn();
+
+jest.mock("../../../../../config/database", () => ({
+  ...jest.requireActual("../../../../../config/database"),
+  get IS_TOKEN_REQUIRED() {
+    return mockIsTokenRequiredGetter();
+  },
+}));
+
 describe("Given a SignUpForm component", () => {
-  describe("When instantiated", () => {
+  describe("When instantiated and the token is required", () => {
     describe("If the user fills and submits correctly the three steps", () => {
       test("Then it should submit the form", async () => {
+        mockIsTokenRequiredGetter.mockReturnValue(true);
+
         const typeText = "email@email.com";
         render(<SignUpForm />);
 
@@ -81,6 +92,30 @@ describe("Given a SignUpForm component", () => {
         );
 
         expect(successMessage).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When instantiated and the token is not required", () => {
+    test("Then the form should start at the second step", async () => {
+      mockIsTokenRequiredGetter.mockReturnValue(false);
+
+      render(<SignUpForm />);
+
+      const firstStep = screen.queryByLabelText(signUpTokenSchema[1].label);
+
+      expect(firstStep).not.toBeInTheDocument();
+
+      const firstSubmit = screen.queryByRole("button", {
+        name: "Verify token",
+      });
+
+      expect(firstSubmit).not.toBeInTheDocument();
+
+      // Second step
+      SignUpPasswordSchema({}).forEach(({ label }) => {
+        const node = screen.queryByLabelText(label);
+        expect(node).toBeInTheDocument();
       });
     });
   });

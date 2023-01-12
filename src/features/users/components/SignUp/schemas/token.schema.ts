@@ -16,6 +16,7 @@ const signUpTokenSchema: FormSchema = [
       id: "code",
       type: "password",
     },
+    tooltip: "It may not be required if the administrator specified so",
   },
 ];
 
