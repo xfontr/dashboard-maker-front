@@ -7,14 +7,14 @@ import {
 } from "../../../../../config/database";
 import { ProtoUser } from "../../../types/user.types";
 
-const SignUpPasswordSchema = (values: Partial<ProtoUser>): FormSchema => [
+const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
   {
     label: capitalize(MAIN_IDENTIFIER),
     inputProps: {
       id: MAIN_IDENTIFIER,
       disabled: IS_TOKEN_REQUIRED,
     },
-    initialValue: values[MAIN_IDENTIFIER],
+    initialValue: values ? values[MAIN_IDENTIFIER] : "",
   },
 
   ...SimpleFormFields(values)("name", "surname"),
@@ -25,7 +25,7 @@ const SignUpPasswordSchema = (values: Partial<ProtoUser>): FormSchema => [
       id: "password",
       type: "password",
     },
-    initialValue: values.password,
+    initialValue: values?.password,
   },
   {
     label: "Repeat password",
@@ -33,7 +33,7 @@ const SignUpPasswordSchema = (values: Partial<ProtoUser>): FormSchema => [
       id: "repeatPassword",
       type: "password",
     },
-    initialValue: values.repeatPassword,
+    initialValue: values?.repeatPassword,
   },
 ];
 

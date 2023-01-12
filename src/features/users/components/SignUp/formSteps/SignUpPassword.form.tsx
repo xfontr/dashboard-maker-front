@@ -5,7 +5,7 @@ import { ProtoUser } from "../../../types/user.types";
 import SignUpPasswordSchema from "../schemas/password.schema";
 
 type SignUpFormProps = {
-  values: Partial<ProtoUser>;
+  values?: Partial<ProtoUser>;
   handleSubmit: (values: Record<string, string>) => void;
 };
 
