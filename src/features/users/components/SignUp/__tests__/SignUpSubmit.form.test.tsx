@@ -10,13 +10,13 @@ const previous = jest.fn() as ReturnType<typeof useSteps>["previous"];
 
 describe("Given a SignUpSubmit form", () => {
   describe("When instantiated", () => {
-    test("Then it should display the corresponding fields to said form", () => {
-      const {
-        result: {
-          current: { handleSignUpSubmit, setUser },
-        },
-      } = renderHook(useRegistration, { initialProps: next });
+    const {
+      result: {
+        current: { handleSignUpSubmit, setUser },
+      },
+    } = renderHook(useRegistration, { initialProps: next });
 
+    test("Then it should display the corresponding fields to said form", () => {
       render(
         <SignUpSubmitForm
           handleSubmit={handleSignUpSubmit}
@@ -28,6 +28,21 @@ describe("Given a SignUpSubmit form", () => {
       signUpLocationSchema({}).forEach(({ label }) => {
         const node = screen.getByLabelText(label);
         expect(node).toBeInTheDocument();
+      });
+    });
+
+    test("Then some of the fields should have initial values", () => {
+      render(
+        <SignUpSubmitForm
+          handleSubmit={handleSignUpSubmit}
+          values={mockUser}
+          {...{ setUser, previous }}
+        />
+      );
+
+      signUpLocationSchema(mockUser).forEach(({ label, initialValue }) => {
+        const node = screen.getByLabelText(label);
+        expect(node).toHaveValue(initialValue ?? "");
       });
     });
   });
