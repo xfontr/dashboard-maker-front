@@ -16,6 +16,7 @@ const mockFormSchema: FormSchema = [
     inputProps: {
       id: "unvalidated",
     },
+    tooltip: "Test",
   },
 ];
 

@@ -24,7 +24,7 @@ const MockForm = ({
 
 describe("Given a Form component", () => {
   describe("When instantiated with a form schema and a button 'Submit'", () => {
-    test("Then it should render a full editable form", async () => {
+    test("Then it should render a full editable form with its tooltips, if any", async () => {
       const typedText = "test@test.com";
 
       render(<MockForm />);
@@ -36,6 +36,9 @@ describe("Given a Form component", () => {
 
       expect(form).toHaveValue(typedText);
       expect(button).toBeInTheDocument();
+
+      const tooltip = screen.getByText(schema[1].tooltip!);
+      expect(tooltip).toBeInTheDocument();
     });
 
     describe("And filled the inputs with valid data", () => {

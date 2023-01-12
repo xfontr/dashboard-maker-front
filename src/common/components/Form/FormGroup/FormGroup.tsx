@@ -18,7 +18,7 @@ const FormGroup = ({
     </label>
 
     {tooltip && (
-      <div className="form__tooltip">
+      <div className="form__tooltip" data-testid="tooltip">
         <i className="form__tooltip-icon">i</i>
         <span className="tooltip">{tooltip}</span>
       </div>
