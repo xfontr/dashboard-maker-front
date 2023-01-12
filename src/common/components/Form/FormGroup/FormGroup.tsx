@@ -6,6 +6,7 @@ const FormGroup = ({
   label,
   inputProps,
   children,
+  tooltip,
   ...rest
 }: FormGroupProps) => (
   <div
@@ -15,6 +16,13 @@ const FormGroup = ({
     <label className="form__label" htmlFor={inputProps.id}>
       {label}
     </label>
+
+    {tooltip && (
+      <div className="form__tooltip">
+        <i className="form__tooltip-icon">i</i>
+        <span className="tooltip">{tooltip}</span>
+      </div>
+    )}
 
     {!inputProps.renderas && (
       <input {...setProps(inputProps, "className", "form__input")} />

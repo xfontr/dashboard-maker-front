@@ -9,6 +9,7 @@ const signUpTokenSchema: FormSchema = [
       id: MAIN_IDENTIFIER,
       placeholder: "email@email.com",
     },
+    tooltip: "Your email",
   },
   {
     label: "Token code",

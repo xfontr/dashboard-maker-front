@@ -20,9 +20,10 @@ export interface InputProps
 export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}
 
 export interface FormGroupProps extends FieldProps {
-  label: string | number;
+  label: string;
   inputProps: InputProps;
   children?: ReactNode;
+  tooltip?: string;
 }
 
 export type FormField = {
@@ -40,6 +41,8 @@ export type FormField = {
   /** Allows any normal div attributes. Used to style input groups individually */
   fieldProps?: FieldProps;
   initialValue?: string | number;
+  /** Information tag under the input. Renders only if defined */
+  tooltip?: string;
 };
 
 export type FormSchema = FormField[];

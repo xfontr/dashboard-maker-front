@@ -16,14 +16,14 @@ const Form = ({
   return (
     <>
       <form className="form" onSubmit={handleSubmit} {...rest}>
-        {schema.map(({ label, inputProps, fieldProps }) => (
+        {schema.map(({ label, inputProps, fieldProps, tooltip }) => (
           <FormGroup
             inputProps={{
               ...inputProps,
               onChange,
               value: (values as Record<string, string>)[inputProps.id],
             }}
-            {...{ label }}
+            {...{ label, tooltip }}
             {...fieldProps}
             {...setErrorClass(errorDisplay, inputProps.id, fieldProps, errors)}
             key={inputProps.id}

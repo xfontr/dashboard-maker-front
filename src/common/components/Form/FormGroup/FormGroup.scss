@@ -5,7 +5,9 @@
 .form {
   &__group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     gap: spacings.$small;
   }
 
@@ -17,6 +19,41 @@
     color: colors.$typography--lighter;
   }
 
+  &__tooltip {
+    position: relative;
+    width: 70%;
+
+    &-icon {
+      width: 1rem;
+      height: 1rem;
+      font-size: 0.7rem;
+      margin-left: 0.3rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid colors.$typography--very-light;
+      transition: transitions.$fast;
+      margin-top: 0.8px;
+
+      &:hover {
+        background-color: colors.$secondary;
+        color: colors.$primary;
+        transform: rotateY(180deg);
+        border-color: colors.$secondary;
+      }
+    }
+
+    &:hover {
+      & > .tooltip {
+        opacity: 100;
+        visibility: visible;
+        transform: translateX(0);
+      }
+    }
+  }
+
   &__input {
     border-radius: spacings.$rad-small;
     padding: 0.9rem 1.2rem;
@@ -24,6 +61,7 @@
     color: colors.$typography--lighter;
     border: none;
     transition: transitions.$fast;
+    width: 100%;
 
     &:hover {
       background-color: colors.$secondary--lighter;
@@ -36,4 +74,19 @@
       box-shadow: inset 1px 1px 3px 1px rgba(0, 59, 56, 0.1);
     }
   }
+}
+
+.tooltip {
+  transition: transitions.$fast;
+  visibility: hidden;
+  opacity: 0;
+  padding: spacings.$small--very;
+  border-radius: spacings.$rad-small;
+  background-color: colors.$secondary--lighter;
+  font-size: 0.7rem;
+
+  position: absolute;
+  left: 1.8rem;
+  top: -0.3rem;
+  transform: translateX(100px);
 }
