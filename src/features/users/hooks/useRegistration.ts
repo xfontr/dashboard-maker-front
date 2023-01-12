@@ -2,7 +2,7 @@ import { useState } from "react";
 import useSteps from "../../../common/hooks/useSteps";
 import { api } from "../../../common/services/RequestHandler";
 import UserRoles from "../../../common/types/UserRoles";
-import { IS_TOKEN_REQUIRED, MAIN_IDENTIFIER } from "../../../config/database";
+import { MAIN_IDENTIFIER } from "../../../config/database";
 import ENDPOINTS from "../../../config/endpoints";
 import { IToken, ProtoToken, TokenResponse } from "../types/token.types";
 import IUser, { ProtoUser } from "../types/user.types";
@@ -43,7 +43,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   };
 
   const handleSignUpSubmit = (
-    (role: UserRoles, tokenCode?: string) =>
+    (role: UserRoles, tokenCode: string) =>
     async (values: Record<string, string>) => {
       setUser(joinValues<ProtoUser>(values));
 
@@ -53,18 +53,19 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
       const response = await api.postWithAuth<unknown, IUser>(
         ENDPOINTS.users.signUp,
         userToRequest,
-        IS_TOKEN_REQUIRED && tokenCode ? tokenCode : ""
+        tokenCode
       );
 
       if (response.status !== 201) return;
 
       next();
     }
-  )(token?.role ?? "user", IS_TOKEN_REQUIRED ? token?.code : undefined);
+  )(token?.role ?? "user", token?.code ?? "");
 
   return {
     user,
     setUser,
+    token,
     handleTokenSubmit,
     handleSignUpSubmit,
     handlePasswordSubmit,

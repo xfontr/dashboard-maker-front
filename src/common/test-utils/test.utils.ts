@@ -1,4 +1,5 @@
 import userEvent from "@testing-library/user-event";
+import ENDPOINTS from "../../config/endpoints";
 import { FormSchema } from "../components/Form/Form.types";
 
 /**

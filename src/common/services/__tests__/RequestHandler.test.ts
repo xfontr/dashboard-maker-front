@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError, Axios } from "axios";
 import mockUser from "../../test-utils/mocks/mockUser";
 import ENVIRONMENT from "../../../config/environment";
 import REQUEST_RULES from "../../../config/requestRules";
@@ -73,18 +73,37 @@ describe("Given a getWithAuth method from the api service", () => {
 });
 
 describe("Given a post method from the api service", () => {
-  describe("When called with an endpoint 'users' and a user as body", () => {
-    test("Then it should do a request with the api base url, the default configuration and the body", async () => {
+  describe("When called with an endpoint 'users' and a user as body and custom configuration", () => {
+    test("Then it should do a request with the api base url, the passed configuration and the body", async () => {
       const customResponse: IResponse<IUser> = CustomResponse(
         mockAxiosResponse({ success: "Success" }, 201)
       );
 
       const response = await api.post<unknown, IUser>(
         ENDPOINTS.users.signUp,
-        mockUser
+        mockUser,
+        {
+          headers: { isTokenRequired: false },
+        }
       );
 
       expect(response).toStrictEqual(customResponse);
+    });
+
+    describe("When called with an endpoint 'users' and a user as body", () => {
+      test("Then it should do a request with the api base url, the default configuration and the body", async () => {
+        const customResponse: IResponse<IUser> = {
+          error: new AxiosError("Request failed with status code 401"),
+          status: 401,
+        };
+
+        const response = await api.post<unknown, IUser>(
+          ENDPOINTS.users.signUp,
+          mockUser
+        );
+
+        expect(response).toStrictEqual(customResponse);
+      });
     });
   });
 });
