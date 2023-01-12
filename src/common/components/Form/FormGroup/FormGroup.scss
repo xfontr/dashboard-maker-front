@@ -87,6 +87,11 @@
 
   position: absolute;
   left: 1.8rem;
-  top: -0.3rem;
-  transform: translateX(100px);
+  top: -50%;
+  transform: translateX(1.5rem);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  border: 1px solid colors.$secondary--very-light;
 }

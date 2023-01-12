@@ -9,7 +9,6 @@ const signUpTokenSchema: FormSchema = [
       id: MAIN_IDENTIFIER,
       placeholder: "email@email.com",
     },
-    tooltip: "Your email",
   },
   {
     label: "Token code",
@@ -17,6 +16,7 @@ const signUpTokenSchema: FormSchema = [
       id: "code",
       type: "password",
     },
+    tooltip: "It may not be required if the administrator specified so",
   },
 ];
 

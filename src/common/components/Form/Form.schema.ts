@@ -20,7 +20,7 @@ const formSchema = Joi.object({
 
   name: Joi.string().min(name.min).max(name.max).required(),
   surname: Joi.string().min(name.min).max(name.max).required(),
-  code: Joi.string().min(password.min).max(password.max).required(),
+  code: Joi.string().min(password.min).max(password.max).allow(null, ""),
 });
 
 export default formSchema;
