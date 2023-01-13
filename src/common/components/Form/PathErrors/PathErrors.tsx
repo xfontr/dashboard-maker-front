@@ -12,7 +12,7 @@ const PathErrors = ({ errors, path }: FormErrorsProps) => {
     : undefined;
 
   return pathErrors?.length ? (
-    <ul data-testid="errors">
+    <ul className="errors" data-testid="errors">
       {pathErrors.map((error, index) => (
         <li key={`${path}${index}`} className="errors__message">
           {curateErrorMessage(error.message)}

@@ -1,9 +1,18 @@
 @use "../../../../../common/styles/spacings";
 
+.form {
+  max-width: 32rem;
+}
+
+.steps {
+  max-width: 32rem;
+}
+
 .form__buttons {
   display: flex;
   margin-top: spacings.$small;
   gap: spacings.$big;
   align-items: center;
   justify-content: flex-end;
+  width: 100%;
 }

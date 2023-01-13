@@ -1,4 +1,5 @@
-import { SimpleFormFields } from "../../../../../common/components/Form/Form.services";
+import FORM_CLASSES from "../../../../../common/components/Form/Form.constants";
+import { ComplexFormFields } from "../../../../../common/components/Form/Form.services";
 import { FormSchema } from "../../../../../common/components/Form/Form.types";
 import capitalize from "../../../../../common/utils/capitalize";
 import {
@@ -17,24 +18,21 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
     initialValue: values ? values[MAIN_IDENTIFIER] : "",
   },
 
-  ...SimpleFormFields(values)("name", "surname"),
+  ...ComplexFormFields(values, {
+    fieldProps: {
+      className: FORM_CLASSES.half,
+    },
+  })(["name", {}], ["surname", {}]),
 
-  {
-    label: "Password",
+  ...ComplexFormFields(values, {
     inputProps: {
-      id: "password",
+      id: "",
       type: "password",
     },
-    initialValue: values?.password,
-  },
-  {
-    label: "Repeat password",
-    inputProps: {
-      id: "repeatPassword",
-      type: "password",
+    fieldProps: {
+      className: FORM_CLASSES.half,
     },
-    initialValue: values?.repeatPassword,
-  },
+  })(["password", {}], ["repeatPassword", {}]),
 ];
 
 export default SignUpPasswordSchema;
