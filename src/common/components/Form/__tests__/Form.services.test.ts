@@ -1,6 +1,11 @@
+import { ChangeEvent } from "react";
 import capitalize from "../../../utils/capitalize";
-import { SimpleFormFields } from "../Form.services";
-import { FormSchema } from "../Form.types";
+import {
+  ComplexFormFields,
+  limitInputLength,
+  SimpleFormFields,
+} from "../Form.services";
+import { FormField, FormSchema } from "../Form.types";
 
 describe("Given a SimpleFormFields factory function", () => {
   describe("When called with a list of input names", () => {
@@ -17,7 +22,7 @@ describe("Given a SimpleFormFields factory function", () => {
         },
       ];
 
-      const result = SimpleFormFields({})(...names);
+      const result = SimpleFormFields()(...names);
 
       expect(result).toStrictEqual(expectedResult);
     });
@@ -44,6 +49,90 @@ describe("Given a SimpleFormFields factory function", () => {
       const result = SimpleFormFields(values)(...names);
 
       expect(result).toStrictEqual(expectedResult);
+    });
+  });
+});
+
+describe("Given a ComplexFormFields factory function", () => {
+  describe("When called with global props and a list of input names with their respective props", () => {
+    test("Then it should return a form schema with complete input fields", () => {
+      const globalProps: Partial<FormField> = {
+        inputProps: {
+          id: "",
+          className: "Test",
+        },
+      };
+
+      const fieldsWithProps: [string, Partial<FormField>][] = [
+        [
+          "email",
+          {
+            fieldProps: {
+              hidden: true,
+            },
+          },
+        ],
+      ];
+
+      const values = {
+        [fieldsWithProps[0][0]]: "test@test.com",
+      };
+
+      const expectedResult: FormSchema = [
+        {
+          label: capitalize(fieldsWithProps[0][0]),
+          inputProps: {
+            id: fieldsWithProps[0][0],
+            className: "Test",
+          },
+          fieldProps: {
+            hidden: true,
+          },
+          initialValue: values[fieldsWithProps[0][0]],
+          tooltip: "",
+        },
+      ];
+
+      const result = ComplexFormFields(values, globalProps)(...fieldsWithProps);
+
+      expect(result).toStrictEqual(expectedResult);
+    });
+  });
+});
+
+describe("Given a limitInputLength fucntion", () => {
+  describe("When called with a max length of '5' and received a string 'longerThan5'", () => {
+    test("Then it should change the value to 'longe'", () => {
+      const maxLength = 5;
+      const passedWord = "longerThan5";
+      const expectedWord = "longe";
+
+      const mockEvent = {
+        currentTarget: {
+          value: passedWord,
+        },
+      } as ChangeEvent<HTMLInputElement>;
+
+      limitInputLength(maxLength)(mockEvent);
+
+      expect(mockEvent.currentTarget.value).toBe(expectedWord);
+    });
+  });
+
+  describe("When called with a maax length of '5' and received a string 'four'", () => {
+    test("Then it should not change said value", () => {
+      const maxLength = 5;
+      const passedWord = "four";
+
+      const mockEvent = {
+        currentTarget: {
+          value: passedWord,
+        },
+      } as ChangeEvent<HTMLInputElement>;
+
+      limitInputLength(maxLength)(mockEvent);
+
+      expect(mockEvent.currentTarget.value).toBe(passedWord);
     });
   });
 });

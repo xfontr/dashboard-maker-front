@@ -1,22 +1,28 @@
+@use "../../../../common/styles/colors";
+
 .steps {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   user-select: none;
+  position: relative;
 
   &__step {
     border-radius: 50%;
-    background-color: grey;
-    width: 2.5rem;
-    height: 2.5rem;
+    background-color: colors.$contrast--very-light;
+    color: colors.$typography--lighter;
+    width: 2.7rem;
+    height: 2.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+    z-index: 2;
+    position: relative;
+
     &--current {
-      color: white;
-      background-color: black;
+      color: colors.$primary;
+      background-color: colors.$contrast;
     }
   }
 }

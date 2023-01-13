@@ -11,6 +11,15 @@ export const Button = ({ children, ...rest }: ButtonProps): JSX.Element => (
   <button {...setProps(rest, "className", "button")}>{children}</button>
 );
 
+export const OutlineButton = ({
+  children,
+  ...rest
+}: ButtonProps): JSX.Element => (
+  <button {...setProps(rest, "className", "button button--outline")}>
+    {children}
+  </button>
+);
+
 export const AnimatedButton = ({ children, ...rest }: ButtonProps) => (
   <Button {...rest}>
     {children}

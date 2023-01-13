@@ -1,8 +1,11 @@
-import Button from "../../../../../common/components/Button/Button";
+import Button, {
+  OutlineButton,
+} from "../../../../../common/components/Button/Button";
 import Form from "../../../../../common/components/Form/Form";
 import signUpLocationSchema from "../schemas/location.schema";
 import { ProtoUser } from "../../../types/user.types";
 import useForm from "../../../../../common/hooks/useForm";
+import "./formSteps.scss";
 
 type SignUpSubmitProps = {
   values: Partial<ProtoUser>;
@@ -33,9 +36,9 @@ const SignUpSubmitForm = ({
   return (
     <Form {...{ formHandler }}>
       <div className="form__buttons">
-        <Button onClick={stepBack} type="button">
+        <OutlineButton onClick={stepBack} type="button">
           Step back
-        </Button>
+        </OutlineButton>
         <Button>Sign up</Button>
       </div>
     </Form>

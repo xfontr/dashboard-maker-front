@@ -1,12 +1,18 @@
+import { HTMLAttributes } from "react";
+import setProps from "../../../../common/utils/setProps";
 import "./Steps.scss";
 
-type StepsProps = {
+interface StepsProps extends HTMLAttributes<HTMLDivElement> {
   currentStep: number;
   totalSteps: number;
-};
+}
 
-const Steps = ({ currentStep, totalSteps }: StepsProps): JSX.Element => (
-  <div className="steps">
+const Steps = ({
+  currentStep,
+  totalSteps,
+  ...rest
+}: StepsProps): JSX.Element => (
+  <div {...setProps(rest, "className", "steps")}>
     {Array(totalSteps)
       .fill("")
       .map((_, index) => (

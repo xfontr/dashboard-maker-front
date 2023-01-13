@@ -3,27 +3,33 @@
 
 .form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
   gap: spacings.$medium;
 
   &--error {
     input {
       border-bottom: 1px solid red;
 
-      &:focus, &:active {
+      &:focus,
+      &:active {
         border-bottom: 1px solid transparent;
       }
     }
 
     label {
-      color: colors.$error
+      color: colors.$error;
     }
   }
 }
 
 .errors {
+  margin-top: spacings.$small;
+
   &__message {
     font-size: 0.9rem;
-    color: colors.$error
+    color: colors.$error;
   }
 }

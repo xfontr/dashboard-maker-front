@@ -1,4 +1,4 @@
-import SignUpForm from "../components/SignUp/SignUpForm";
+import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 const SignUpPage = (): JSX.Element => <SignUpForm />;
 
