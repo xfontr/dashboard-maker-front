@@ -1,13 +1,18 @@
-import FORM_CLASSES from "../../../../../common/components/Form/Form.constants";
+import worldStates from "../../../../../common/assets/worldStates";
+import {
+  FORM_CLASSES,
+  INPUT_RULES,
+} from "../../../../../common/components/Form/Form.constants";
 import {
   ComplexFormFields,
   limitInputLength,
+  restrictCharTypes,
 } from "../../../../../common/components/Form/Form.services";
 import { FormSchema } from "../../../../../common/components/Form/Form.types";
 import { ProtoUser } from "../../../types/user.types";
 
-const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
-  ...ComplexFormFields(values, {
+const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
+  ComplexFormFields(values, {
     fieldProps: {
       className: FORM_CLASSES.half,
     },
@@ -38,6 +43,10 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
         fieldProps: {
           className: FORM_CLASSES.seventh,
         },
+        inputProps: {
+          id: "",
+          maxLength: INPUT_RULES.standardLong.max,
+        },
       },
     ],
     [
@@ -45,6 +54,10 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
       {
         fieldProps: {
           className: FORM_CLASSES.third,
+        },
+        inputProps: {
+          id: "",
+          maxLength: INPUT_RULES.standardShort.max,
         },
       },
     ],
@@ -54,6 +67,11 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
         fieldProps: {
           className: FORM_CLASSES.third,
         },
+        inputProps: {
+          id: "",
+          onInput: restrictCharTypes("number"),
+          maxLength: INPUT_RULES.standardShort.max,
+        },
       },
     ],
     [
@@ -62,6 +80,12 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
         fieldProps: {
           className: FORM_CLASSES.third,
         },
+        inputProps: {
+          id: "",
+          renderas: "select",
+          subprops: ["States...", ...worldStates],
+        },
+        initialValue: "States...",
       },
     ],
     [
@@ -77,7 +101,6 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema => [
         },
       },
     ]
-  ),
-];
+  );
 
 export default signUpLocationSchema;

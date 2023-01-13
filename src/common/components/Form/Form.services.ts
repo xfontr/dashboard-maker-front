@@ -73,3 +73,15 @@ export const limitInputLength =
     if (event.currentTarget.value.length > maxLength)
       event.currentTarget.value = event.currentTarget.value.slice(0, maxLength);
   };
+
+export const restrictCharTypes =
+  (restrict: "number") => (event: ChangeEvent<HTMLInputElement>) => {
+    const numbers = /^[0-9]/;
+
+    if (restrict && event.currentTarget.value.slice(-1).match(numbers)) {
+      event.currentTarget.value = event.currentTarget.value.slice(
+        0,
+        event.currentTarget.value.length - 1
+      );
+    }
+  };

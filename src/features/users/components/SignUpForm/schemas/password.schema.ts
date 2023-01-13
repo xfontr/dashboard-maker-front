@@ -1,5 +1,11 @@
-import FORM_CLASSES from "../../../../../common/components/Form/Form.constants";
-import { ComplexFormFields } from "../../../../../common/components/Form/Form.services";
+import {
+  FORM_CLASSES,
+  INPUT_RULES,
+} from "../../../../../common/components/Form/Form.constants";
+import {
+  ComplexFormFields,
+  restrictCharTypes,
+} from "../../../../../common/components/Form/Form.services";
 import { FormSchema } from "../../../../../common/components/Form/Form.types";
 import capitalize from "../../../../../common/utils/capitalize";
 import {
@@ -14,7 +20,9 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
     inputProps: {
       id: MAIN_IDENTIFIER,
       disabled: IS_TOKEN_REQUIRED,
+      maxLength: INPUT_RULES[MAIN_IDENTIFIER].max,
     },
+
     initialValue: values ? values[MAIN_IDENTIFIER] : "",
   },
 
@@ -22,12 +30,18 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
     fieldProps: {
       className: FORM_CLASSES.half,
     },
+    inputProps: {
+      id: "",
+      onInput: restrictCharTypes("number"),
+      maxLength: INPUT_RULES.name.max,
+    },
   })(["name", {}], ["surname", {}]),
 
   ...ComplexFormFields(values, {
     inputProps: {
       id: "",
       type: "password",
+      maxLength: INPUT_RULES.password.max,
     },
     fieldProps: {
       className: FORM_CLASSES.half,
