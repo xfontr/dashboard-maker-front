@@ -1,5 +1,5 @@
 import Joi from "joi";
-import INPUT_RULES from "../../../config/inputRules";
+import { INPUT_RULES } from "./Form.constants";
 
 const { email, password, name } = INPUT_RULES;
 

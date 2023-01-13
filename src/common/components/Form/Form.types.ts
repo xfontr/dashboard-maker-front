@@ -7,14 +7,17 @@ import {
 import useForm from "../../hooks/useForm";
 
 export interface InputProps
-  extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+  extends InputHTMLAttributes<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  > {
   /**
    * Important: the ID attribute will be used to match the field with the form
    * validation schema
    */
   id: string;
   /** If undefined, will render as input */
-  renderas?: "textarea";
+  renderas?: "textarea" | "select";
+  subprops?: any[];
 }
 
 export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}

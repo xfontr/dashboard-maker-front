@@ -40,10 +40,13 @@ describe("Given a SignUpSubmit form", () => {
         />
       );
 
-      signUpLocationSchema(mockUser).forEach(({ label, initialValue }) => {
-        const node = screen.getByLabelText<HTMLInputElement>(label);
-        expect(node.value).toBe(!initialValue ? "" : initialValue);
-      });
+      signUpLocationSchema({ ...mockUser, state: "States..." }).forEach(
+        ({ label, initialValue }) => {
+          const node = screen.getByLabelText<HTMLInputElement>(label);
+          console.log(initialValue);
+          expect(node.value).toBe(initialValue ? initialValue : "");
+        }
+      );
     });
   });
 });

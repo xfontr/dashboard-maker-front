@@ -3,6 +3,7 @@ import capitalize from "../../../utils/capitalize";
 import {
   ComplexFormFields,
   limitInputLength,
+  restrictCharTypes,
   SimpleFormFields,
 } from "../Form.services";
 import { FormField, FormSchema } from "../Form.types";
@@ -131,6 +132,42 @@ describe("Given a limitInputLength fucntion", () => {
       } as ChangeEvent<HTMLInputElement>;
 
       limitInputLength(maxLength)(mockEvent);
+
+      expect(mockEvent.currentTarget.value).toBe(passedWord);
+    });
+  });
+});
+
+describe("Given a restrictCharTypes function", () => {
+  describe("When called with a restriction 'number' and a value '9'", () => {
+    test("Then it should return ''", () => {
+      const restriction = "number";
+      const passedWord = "9";
+
+      const mockEvent = {
+        currentTarget: {
+          value: passedWord,
+        },
+      } as ChangeEvent<HTMLInputElement>;
+
+      restrictCharTypes(restriction)(mockEvent);
+
+      expect(mockEvent.currentTarget.value).toBe("");
+    });
+  });
+
+  describe("When called with a restriction 'number' and a value 'a'", () => {
+    test("Then it should return 'a'", () => {
+      const restriction = "number";
+      const passedWord = "a";
+
+      const mockEvent = {
+        currentTarget: {
+          value: passedWord,
+        },
+      } as ChangeEvent<HTMLInputElement>;
+
+      restrictCharTypes(restriction)(mockEvent);
 
       expect(mockEvent.currentTarget.value).toBe(passedWord);
     });

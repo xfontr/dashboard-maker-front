@@ -20,6 +20,7 @@ export type UserAddress = Partial<{
   stairs: string;
   block: string;
   addressExtraInfo: string;
+  state: string;
 }>;
 
 interface IUser extends UserRequiredData, UserName, UserAddress {}
