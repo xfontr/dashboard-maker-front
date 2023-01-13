@@ -4,6 +4,7 @@ import Button from "../../Button/Button";
 import Form from "../Form";
 import userEvent from "@testing-library/user-event";
 import useForm from "../../../hooks/useForm";
+import { INPUT_RULES } from "../Form.constants";
 
 const buttonText = "Button";
 
@@ -129,6 +130,59 @@ describe("Given a Form component", () => {
 
         await userEvent.click(button);
         expect(label).toHaveStyle("color: colors.$error");
+      });
+    });
+
+    describe("And trying to fill a text input with numbers", () => {
+      test("Then it should not type the number", async () => {
+        const typedText = "aaa2a";
+        const expectedTypedText = "aaaa";
+
+        render(<MockForm />);
+
+        const form = screen.getByLabelText(schema[0].label);
+
+        await userEvent.type(form, typedText);
+
+        expect(form).toHaveValue(expectedTypedText);
+      });
+    });
+
+    describe("And trying to type more characters than allowed in a text field", () => {
+      test("Then it should not type any extra characters", async () => {
+        const typedText = Array(INPUT_RULES.email.max + 1)
+          .fill("a")
+          .join("");
+        const expectedTypedText = Array(INPUT_RULES.email.max)
+          .fill("a")
+          .join("");
+
+        render(<MockForm />);
+
+        const form = screen.getByLabelText(schema[0].label);
+
+        await userEvent.type(form, typedText);
+
+        expect(form).toHaveValue(expectedTypedText);
+      });
+    });
+
+    describe("And trying to type more characters than allowed in a number field", () => {
+      test("Then it should not type any extra characters", async () => {
+        const typedText = Array(schema[2].inputProps.maxLength! + 1)
+          .fill("1")
+          .join("");
+        const expectedTypedText = Array(schema[2].inputProps.maxLength!)
+          .fill(1)
+          .join("");
+
+        render(<MockForm />);
+
+        const form = screen.getByLabelText<HTMLInputElement>(schema[2].label);
+
+        await userEvent.type(form, typedText);
+
+        expect(form.value).toBe(expectedTypedText);
       });
     });
   });

@@ -48,9 +48,10 @@ describe("Given a FormGroup component", () => {
       render(<FormGroup {...{ label, inputProps }} {...fieldProps} />);
 
       const input = screen.getByLabelText(label);
+      const select = screen.getByRole("combobox");
 
       expect(input).toBeInTheDocument();
-      expect(input).toContainHTML("select");
+      expect(select).toBeInTheDocument();
 
       const option1 = screen.getByText(inputProps.subprops![0]);
       const option2 = screen.getByText(inputProps.subprops![1]);
