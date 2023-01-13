@@ -27,15 +27,25 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
   },
 
   ...ComplexFormFields(values, {
-    fieldProps: {
-      className: FORM_CLASSES.half,
-    },
+    fieldProps: { className: FORM_CLASSES.half },
     inputProps: {
       id: "",
       onInput: restrictCharTypes("number"),
       maxLength: INPUT_RULES.name.max,
     },
-  })(["name", {}], ["surname", {}]),
+  })(
+    [
+      "name",
+      {
+        inputProps: {
+          id: "",
+          placeholder: "John",
+          className: "form__input--background icon--user",
+        },
+      },
+    ],
+    ["surname", { inputProps: { id: "", placeholder: "Doe" } }]
+  ),
 
   ...ComplexFormFields(values, {
     inputProps: {
@@ -43,10 +53,11 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
       type: "password",
       maxLength: INPUT_RULES.password.max,
     },
-    fieldProps: {
-      className: FORM_CLASSES.half,
-    },
-  })(["password", {}], ["repeatPassword", {}]),
+    fieldProps: { className: FORM_CLASSES.half },
+  })(
+    ["password", { tooltip: "Must contain at least 8 characters" }],
+    ["repeatPassword", {}]
+  ),
 ];
 
 export default SignUpPasswordSchema;

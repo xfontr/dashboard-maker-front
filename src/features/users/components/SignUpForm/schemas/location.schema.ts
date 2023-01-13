@@ -24,6 +24,7 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
           id: "",
           type: "number",
           onInput: limitInputLength(11),
+          placeholder: "674251888",
         },
       },
     ],
@@ -34,52 +35,36 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
           id: "",
           type: "number",
           onInput: limitInputLength(11),
+          placeholder: "934197788",
         },
       },
     ],
     [
       "street",
       {
-        fieldProps: {
-          className: FORM_CLASSES.seventh,
-        },
+        fieldProps: { className: FORM_CLASSES.seventh },
         inputProps: {
           id: "",
           maxLength: INPUT_RULES.standardLong.max,
+          placeholder: "Urgell Street",
         },
       },
     ],
     [
       "streetExtraData",
       {
-        fieldProps: {
-          className: FORM_CLASSES.third,
-        },
+        fieldProps: { className: FORM_CLASSES.third },
         inputProps: {
           id: "",
           maxLength: INPUT_RULES.standardShort.max,
-        },
-      },
-    ],
-    [
-      "city",
-      {
-        fieldProps: {
-          className: FORM_CLASSES.third,
-        },
-        inputProps: {
-          id: "",
-          onInput: restrictCharTypes("number"),
-          maxLength: INPUT_RULES.standardShort.max,
+          placeholder: "Block C",
         },
       },
     ],
     [
       "state",
       {
-        fieldProps: {
-          className: FORM_CLASSES.third,
-        },
+        fieldProps: { className: FORM_CLASSES.third },
         inputProps: {
           id: "",
           renderas: "select",
@@ -89,15 +74,27 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
       },
     ],
     [
+      "city",
+      {
+        fieldProps: { className: FORM_CLASSES.third },
+        inputProps: {
+          id: "",
+          onInput: restrictCharTypes("number"),
+          maxLength: INPUT_RULES.standardShort.max,
+          placeholder: "Barcelona",
+        },
+      },
+    ],
+
+    [
       "postalCode",
       {
-        fieldProps: {
-          className: FORM_CLASSES.third,
-        },
+        fieldProps: { className: FORM_CLASSES.third },
         inputProps: {
           id: "",
           type: "number",
           onInput: limitInputLength(7),
+          placeholder: "00000",
         },
       },
     ]

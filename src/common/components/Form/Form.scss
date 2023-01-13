@@ -33,3 +33,12 @@
     color: colors.$error;
   }
 }
+
+.icon--user {
+  background: linear-gradient(
+      to bottom,
+      colors.$secondary--lighter,
+      colors.$secondary--lighter
+    ),
+    url("./formAssets/icon--user.png") no-repeat;
+}

@@ -117,6 +117,18 @@
   }
 }
 
+.form__input--background {
+  background-size: 1.5rem !important;
+  background-position: 0.9rem !important;
+  padding-left: 3rem;
+
+  &:hover,
+  &:focus {
+    background-size: 1.9rem !important;
+    background-position: 0.7rem !important;
+  }
+}
+
 .tooltip {
   transition: transitions.$fast;
   visibility: hidden;
