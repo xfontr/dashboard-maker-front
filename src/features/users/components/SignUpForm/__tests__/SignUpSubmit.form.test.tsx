@@ -41,8 +41,8 @@ describe("Given a SignUpSubmit form", () => {
       );
 
       signUpLocationSchema(mockUser).forEach(({ label, initialValue }) => {
-        const node = screen.getByLabelText(label);
-        expect(node).toHaveValue(initialValue ?? "");
+        const node = screen.getByLabelText<HTMLInputElement>(label);
+        expect(node.value).toBe(!initialValue ? "" : initialValue);
       });
     });
   });

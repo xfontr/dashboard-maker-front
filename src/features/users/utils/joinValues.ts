@@ -3,8 +3,6 @@
  * values and adds (and replaces if matching) the passed ones as params
  */
 
-// TODO: Test
-
 const joinValues =
   <T>(values: Record<string, string>) =>
   (currentState?: T) => ({

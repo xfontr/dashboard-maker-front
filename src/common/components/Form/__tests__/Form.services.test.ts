@@ -22,7 +22,7 @@ describe("Given a SimpleFormFields factory function", () => {
         },
       ];
 
-      const result = SimpleFormFields({})(...names);
+      const result = SimpleFormFields()(...names);
 
       expect(result).toStrictEqual(expectedResult);
     });

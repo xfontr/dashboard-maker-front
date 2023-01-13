@@ -15,7 +15,7 @@ export const SimpleFormFields =
   (values: Record<string, string | number> = {}) =>
   (...names: string[]): FormSchema =>
     names.map((name) => ({
-      label: capitalize(name),
+      label: capitalize(camelToRegular(name)),
       inputProps: {
         id: name,
       },
@@ -58,7 +58,7 @@ export const ComplexFormFields =
         ...applyToAll?.fieldProps,
         ...field.fieldProps,
       },
-      initialValue: applyToAll?.initialValue ?? values[name] ?? "",
+      initialValue: values[name] ?? null,
       tooltip: applyToAll?.tooltip ?? field.tooltip ?? "",
     }));
 

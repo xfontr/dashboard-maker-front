@@ -14,6 +14,8 @@ const mockUser: IUser = {
   password: "password",
   role: "user",
   id: "id",
+  street: "street",
+  city: "city",
 };
 
 export const mockUserSuperAdmin: IUser = { ...mockUser, role: "superAdmin" };
