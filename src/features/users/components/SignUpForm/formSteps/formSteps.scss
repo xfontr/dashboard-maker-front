@@ -1,0 +1,9 @@
+@use "../../../../../common/styles/spacings";
+
+.form__buttons {
+  display: flex;
+  margin-top: spacings.$small;
+  gap: spacings.$big;
+  align-items: center;
+  justify-content: flex-end;
+}
