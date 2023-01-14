@@ -16,7 +16,7 @@ const useForm = <T = Record<string, string>>(
 
   const onChange = ({
     target: { id, value },
-  }: ChangeEvent<HTMLInputElement>) => {
+  }: ChangeEvent<HTMLInputElement>): void => {
     setValues(valueSetter<T>(id, value));
   };
 

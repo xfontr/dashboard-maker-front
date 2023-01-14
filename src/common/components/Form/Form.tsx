@@ -11,7 +11,7 @@ const Form = ({
   errorDisplay = "individual",
   ...rest
 }: FormProps): JSX.Element => {
-  const { values, errors, onChange, handleSubmit, schema } = formHandler;
+  const { errors, onChange, handleSubmit, schema, values } = formHandler;
 
   return (
     <>
@@ -21,7 +21,7 @@ const Form = ({
             inputProps={{
               ...inputProps,
               onChange,
-              value: (values as Record<string, string>)[inputProps.id],
+              defaultValue: (values as any)[inputProps.id],
             }}
             {...{ label, tooltip }}
             {...fieldProps}

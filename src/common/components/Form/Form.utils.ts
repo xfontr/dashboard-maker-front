@@ -24,10 +24,11 @@ export const getSchemaValues = <T>(schema: FormSchema): T =>
 
 export const valueSetter =
   <T>(id: string, value?: string) =>
-  (currentState: T): T => ({
-    ...currentState,
-    [id]: value ?? "",
-  });
+  (currentState: T): T => {
+    const state = currentState;
+    (state as Record<string, string>)[id] = value ?? "";
+    return state;
+  };
 
 /**
  * Exported automatically with the global and generic form validation fields.
