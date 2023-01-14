@@ -21,6 +21,7 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
       id: MAIN_IDENTIFIER,
       disabled: IS_TOKEN_REQUIRED,
       maxLength: INPUT_RULES[MAIN_IDENTIFIER].max,
+      className: FORM_CLASSES.icon(MAIN_IDENTIFIER),
     },
 
     initialValue: values ? values[MAIN_IDENTIFIER] : "",
@@ -40,7 +41,7 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
         inputProps: {
           id: "",
           placeholder: "John",
-          className: "form__input--background icon--user",
+          className: FORM_CLASSES.icon("user"),
         },
       },
     ],
@@ -52,6 +53,7 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
       id: "",
       type: "password",
       maxLength: INPUT_RULES.password.max,
+      className: FORM_CLASSES.icon("lock"),
     },
     fieldProps: { className: FORM_CLASSES.half },
   })(

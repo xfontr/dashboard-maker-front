@@ -45,9 +45,10 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   const handleSignUpSubmit = (
     (role: UserRoles, tokenCode: string) =>
     async (values: Record<string, string>) => {
-      setUser(joinValues<ProtoUser>(values));
+      const fullUser = { ...user, ...values } as ProtoUser;
+      setUser(fullUser);
 
-      const userToRequest = { ...user!, role };
+      const userToRequest = { ...fullUser, role };
       delete userToRequest.repeatPassword;
 
       const response = await api.postWithAuth<unknown, IUser>(

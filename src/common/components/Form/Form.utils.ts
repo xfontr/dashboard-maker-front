@@ -45,7 +45,7 @@ export const validateForm = (
   <T>(schema: ObjectSchema<T>) =>
   <R>(values: R): Joi.ValidationErrorItem[] | undefined => {
     const schemaWithOnlyPassedValues = Joi.object(
-      Object.keys(values as R as object).reduce(
+      Object.keys(values as object).reduce(
         (extractedSchema, key) => ({
           ...extractedSchema,
           [key]: Object(schema)._ids._byKey.get(key)
