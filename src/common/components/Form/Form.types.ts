@@ -18,6 +18,8 @@ export interface InputProps
   /** If undefined, will render as input */
   renderas?: "textarea" | "select";
   subprops?: any[];
+
+  fieldvalue?: string;
 }
 
 export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}
@@ -25,6 +27,7 @@ export interface FieldProps extends HTMLAttributes<HTMLDivElement> {}
 export interface FormGroupProps extends FieldProps {
   label: string;
   inputProps: InputProps;
+  fieldValue?: string;
   children?: ReactNode;
   tooltip?: string;
 }

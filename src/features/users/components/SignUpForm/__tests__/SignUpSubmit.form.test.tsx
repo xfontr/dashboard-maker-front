@@ -43,7 +43,6 @@ describe("Given a SignUpSubmit form", () => {
       signUpLocationSchema({ ...mockUser, state: "States..." }).forEach(
         ({ label, initialValue }) => {
           const node = screen.getByLabelText<HTMLInputElement>(label);
-          console.log(initialValue);
           expect(node.value).toBe(initialValue ? initialValue : "");
         }
       );

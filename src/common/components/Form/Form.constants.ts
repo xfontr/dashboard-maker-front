@@ -5,6 +5,8 @@ export const FORM_CLASSES = {
   third: "form__group--third",
   /** Max width of 65% on desktop devices */
   seventh: "form__group--seventh",
+  /** Sets an icon as background */
+  icon: (iconName: string) => `form__input--background icon--${iconName}`,
 };
 
 export const INPUT_RULES = {

@@ -28,7 +28,10 @@ const FormGroup = ({
     </div>
 
     {!inputProps.renderas && (
-      <input {...setProps(inputProps, "className", "form__input")} />
+      <input
+        {...setProps(inputProps, "className", "form__input")}
+        autoComplete="off"
+      />
     )}
 
     {inputProps.renderas === "textarea" && (
