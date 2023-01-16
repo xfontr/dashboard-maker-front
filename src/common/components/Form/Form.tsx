@@ -1,4 +1,3 @@
-import useForm from "./useForm";
 import { FormProps } from "./Form.types";
 import FormGroup from "./FormGroup/FormGroup";
 import "./Form.scss";
@@ -8,23 +7,23 @@ import { setErrorClass } from "./Form.utils";
 
 const Form = ({
   children,
-  schema,
+  formHandler,
   errorDisplay = "individual",
   ...rest
 }: FormProps): JSX.Element => {
-  const { values, errors, onChange, onSubmit } = useForm(schema, rest.onSubmit);
+  const { errors, onChange, handleSubmit, schema, values } = formHandler;
 
   return (
     <>
-      <form className="form" {...{ onSubmit }}>
-        {schema.map(({ label, inputProps, fieldProps }) => (
+      <form className="form" onSubmit={handleSubmit} {...rest}>
+        {schema.map(({ label, inputProps, fieldProps, tooltip }) => (
           <FormGroup
-            {...{
-              label,
-              inputProps,
-              value: values[inputProps.id],
+            inputProps={{
+              ...inputProps,
               onChange,
+              defaultValue: (values as any)[inputProps.id],
             }}
+            {...{ label, tooltip }}
             {...fieldProps}
             {...setErrorClass(errorDisplay, inputProps.id, fieldProps, errors)}
             key={inputProps.id}

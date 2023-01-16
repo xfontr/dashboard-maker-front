@@ -5,31 +5,32 @@
 .button {
   border-radius: spacings.$rad-small;
   padding: 0.9rem 2rem;
-  background-color: colors.$secondary;
+  background-color: colors.$contrast;
   color: colors.$primary;
   border: 1px solid transparent;
   letter-spacing: 1px;
   font-weight: bold;
   transition: transitions.$fast;
+  width: fit-content;
 
   position: relative;
   overflow: hidden;
 
   &:hover {
     background-color: colors.$primary;
-    color: colors.$secondary;
-    border-color: colors.$secondary;
+    color: colors.$contrast;
+    border-color: colors.$contrast;
   }
 
   &:hover .button__background {
     transform: translateY(-90%);
     background-color: colors.$primary;
-    color: colors.$secondary;
+    color: colors.$contrast;
   }
 
   &:active .button__background {
     transform: translateY(90%);
-    background-color: colors.$secondary;
+    background-color: colors.$contrast;
     color: colors.$primary;
   }
 
@@ -43,9 +44,20 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: colors.$secondary;
+    background-color: colors.$contrast;
     color: colors.$primary;
     transition: transitions.$fast;
     border: none;
+  }
+}
+
+.button--outline {
+  background-color: colors.$primary;
+  color: colors.$contrast;
+  border-color: colors.$contrast;
+
+  &:hover {
+    background-color: colors.$contrast;
+    color: colors.$primary;
   }
 }

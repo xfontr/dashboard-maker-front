@@ -1,9 +1,10 @@
 import routes from "../../routes";
 import RouteConfig from "./Routes.types";
-import { Routes as ReactRoutes, Route, Navigate } from "react-router-dom";
+import { Routes as ReactRoutes, Route } from "react-router-dom";
 import UserRoles from "../../types/UserRoles";
 import RoutesProtector from "./Routes.protector";
 import { hasAuthLevel } from "./Routes.utils";
+import RoutesRender from "./Routes.render";
 
 type RoutesProps = {
   role: UserRoles;
@@ -14,7 +15,7 @@ export const baseRoutes =
   ({ role }: RoutesProps): JSX.Element =>
     (
       <ReactRoutes>
-        {routes.map(({ path, Element, to, roles, rejectPath }) => (
+        {routes.map(({ path, Element, to, roles, rejectPath, Layout }) => (
           <Route
             {...{ path }}
             element={
@@ -27,7 +28,7 @@ export const baseRoutes =
           >
             <Route
               {...{ path }}
-              element={Element ? <Element /> : <Navigate to={to!} />}
+              element={<RoutesRender {...{ Element, to, Layout }} />}
             />
           </Route>
         ))}

@@ -1,5 +1,5 @@
 import schema from "../../../test-utils/mocks/mockFormSchema";
-import simplifySchema from "../../../test-utils/simplifySchema";
+import { simplifySchema } from "../../../test-utils/test.utils";
 import {
   curateErrorMessage,
   getSchemaValues,
@@ -10,8 +10,20 @@ import {
 
 describe("Given a getSchemaValues function", () => {
   describe("When called with a schema with a input", () => {
-    test("Then it should return a simple list with the input and its value", () => {
+    test("Then it should return a simple list with the input and its empty value", () => {
       const expectedResult = simplifySchema(schema);
+
+      const result = getSchemaValues(schema);
+
+      expect(result).toStrictEqual(expectedResult);
+    });
+  });
+
+  describe("When called with a schema with a input and an initial value of 'Test'", () => {
+    test("Then it should return a simple list with the input and said value", () => {
+      schema[0].initialValue = "Test";
+      const expectedResult = simplifySchema(schema);
+      expectedResult[schema[0].inputProps.id] = "Test";
 
       const result = getSchemaValues(schema);
 
@@ -162,10 +174,10 @@ describe("Given a setErrorClass function", () => {
 });
 
 describe("Given a curateErrorMessage function", () => {
-  describe("When called with a error message of 'email' invalid", () => {
-    test("Then it should return 'Email invalid'", () => {
-      const initialErrorMessage = '"email" invalid';
-      const expectedErrorMessage = "Email invalid";
+  describe("When called with a error message of 'tokenCode' invalid", () => {
+    test("Then it should return 'Token Code invalid'", () => {
+      const initialErrorMessage = '"tokenCode" invalid';
+      const expectedErrorMessage = "Token Code invalid";
 
       const result = curateErrorMessage(initialErrorMessage);
 

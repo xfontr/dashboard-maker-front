@@ -1,4 +1,3 @@
-import { lazy } from "react";
 import PATHS from "../../../config/paths";
 import RouteConfig from "../../components/Routes/Routes.types";
 import {

@@ -1,0 +1,21 @@
+@use "../../styles/breakpoints";
+@use "../../styles/spacings";
+
+.app {
+  margin: 0 auto;
+  max-width: breakpoints.$small;
+  padding: 6rem spacings.$medium;
+  min-height: 100vh;
+
+  @media (min-width: breakpoints.$small) {
+    max-width: breakpoints.$medium;
+  }
+
+  @media (min-width: breakpoints.$medium) {
+    max-width: breakpoints.$big;
+  }
+
+  @media (min-width: breakpoints.$big) {
+    max-width: breakpoints.$large;
+  }
+}

@@ -1,13 +1,23 @@
 import "./Button.scss";
-import { HTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 import setProps from "../../utils/setProps";
+import { ButtonHTMLAttributes } from "react";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
 export const Button = ({ children, ...rest }: ButtonProps): JSX.Element => (
   <button {...setProps(rest, "className", "button")}>{children}</button>
+);
+
+export const OutlineButton = ({
+  children,
+  ...rest
+}: ButtonProps): JSX.Element => (
+  <button {...setProps(rest, "className", "button button--outline")}>
+    {children}
+  </button>
 );
 
 export const AnimatedButton = ({ children, ...rest }: ButtonProps) => (

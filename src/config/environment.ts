@@ -1,7 +1,5 @@
-const { env } = process;
-
 const ENVIRONMENT = {
-  apiUrl: env.REACT_API_URL ?? "",
+  apiUrl: process.env.REACT_APP_API_URL ?? "",
 };
 
 export default ENVIRONMENT;

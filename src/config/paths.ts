@@ -2,8 +2,10 @@ const PATHS = {
   catch: "*",
   root: "/",
   home: "/home",
-  logIn: "/log-in",
   unauthorized: "/unauthorized",
+
+  register: "/sign-up",
+  logIn: "/log-in",
 };
 
 export default PATHS;
