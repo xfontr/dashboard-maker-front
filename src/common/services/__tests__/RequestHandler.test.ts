@@ -1,4 +1,4 @@
-import { AxiosResponse, AxiosError, Axios } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import mockUser from "../../test-utils/mocks/mockUser";
 import ENVIRONMENT from "../../../config/environment";
 import REQUEST_RULES from "../../../config/requestRules";

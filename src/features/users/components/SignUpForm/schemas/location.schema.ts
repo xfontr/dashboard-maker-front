@@ -23,18 +23,18 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
         inputProps: {
           id: "",
           type: "number",
-          onInput: limitInputLength(11),
+          onInput: limitInputLength(INPUT_RULES.phone.max),
           placeholder: "674251888",
         },
       },
     ],
     [
-      "additionalContactNumber",
+      "extraNumber",
       {
         inputProps: {
           id: "",
           type: "number",
-          onInput: limitInputLength(11),
+          onInput: limitInputLength(INPUT_RULES.phone.max),
           placeholder: "934197788",
         },
       },
@@ -93,7 +93,7 @@ const signUpLocationSchema = (values: Partial<ProtoUser>): FormSchema =>
         inputProps: {
           id: "",
           type: "number",
-          onInput: limitInputLength(7),
+          onInput: limitInputLength(INPUT_RULES.postalCode.max),
           placeholder: "00000",
         },
       },

@@ -3,7 +3,7 @@ import ENVIRONMENT from "../../config/environment";
 import REQUEST_RULES from "../../config/requestRules";
 import tryThis from "../utils/tryThis";
 
-const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
+export const RequestHandler = ((handler: Axios) => (baseUrl: string) => {
   const Get = () => ({
     get: async <T>(
       endpoint: string,

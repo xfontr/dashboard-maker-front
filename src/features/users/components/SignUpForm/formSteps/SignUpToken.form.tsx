@@ -13,7 +13,9 @@ const SignUpTokenForm = ({ handleSubmit }: ValidateTokenProps): JSX.Element => {
 
   return (
     <Form {...{ formHandler }}>
-      <Button>Verify token</Button>
+      <div className="form__buttons">
+        <Button>Verify token</Button>
+      </div>
     </Form>
   );
 };

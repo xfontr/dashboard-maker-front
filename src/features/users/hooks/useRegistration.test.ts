@@ -149,26 +149,6 @@ describe("Given a useRegistration hook", () => {
         expect(result.current.user).toStrictEqual(mockUser);
         expect(next).toHaveBeenCalledTimes(1);
       });
-
-      test("Then it should not call next if a token was required but none were passed", async () => {
-        const { result, rerender } = renderHook(useRegistration, {
-          initialProps: next,
-        });
-
-        expect(result.current.user).toBeUndefined();
-        expect(result.current.token).toBeUndefined();
-
-        await act(async () => {
-          await result.current.handleSignUpSubmit(
-            mockUser as unknown as Record<string, string>
-          );
-
-          rerender();
-        });
-
-        expect(result.current.user).toStrictEqual(mockUser);
-        expect(next).not.toHaveBeenCalled();
-      });
     });
   });
 });

@@ -45,7 +45,8 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   const handleSignUpSubmit = (
     (role: UserRoles, tokenCode: string) =>
     async (values: Record<string, string>) => {
-      const fullUser = { ...user, ...values } as ProtoUser;
+      const fullUser = joinValues<ProtoUser>(values)(user);
+
       setUser(fullUser);
 
       const userToRequest = { ...fullUser, role };
