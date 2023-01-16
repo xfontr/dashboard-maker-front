@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { multiType } from "../../../../../common/test-utils/test.utils";
 import signUpLocationSchema from "../schemas/location.schema";
@@ -58,7 +58,16 @@ describe("Given a SignUpForm component", () => {
           ({ label }) => screen.getByLabelText(label)
         );
 
+        const numericFields = [thirdStep[0], thirdStep[1], thirdStep[6]];
+        const select = thirdStep[4];
+
         await multiType(thirdStep, typeText);
+
+        numericFields.forEach((node) => {
+          fireEvent.change(node, { target: { value: 4252372854 } });
+        });
+
+        fireEvent.change(select, { target: { value: "Albania" } });
 
         // Step back
 

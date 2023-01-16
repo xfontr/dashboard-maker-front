@@ -22,6 +22,7 @@ const SignUpPasswordSchema = (values?: Partial<ProtoUser>): FormSchema => [
       disabled: IS_TOKEN_REQUIRED,
       maxLength: INPUT_RULES[MAIN_IDENTIFIER].max,
       className: FORM_CLASSES.icon(MAIN_IDENTIFIER),
+      placeholder: "email@email.com",
     },
 
     initialValue: values ? values[MAIN_IDENTIFIER] : "",

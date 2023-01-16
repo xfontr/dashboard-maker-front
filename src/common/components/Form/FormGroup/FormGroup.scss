@@ -33,12 +33,15 @@
 
     &--third {
       @media (min-width: breakpoints.$medium) {
+        width: 48%;
+      }
+      @media (min-width: breakpoints.$big) {
         width: 31%;
       }
     }
 
     &--seventh {
-      @media (min-width: breakpoints.$medium) {
+      @media (min-width: breakpoints.$big) {
         width: 65%;
       }
     }

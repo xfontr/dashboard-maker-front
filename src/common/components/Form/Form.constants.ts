@@ -25,6 +25,16 @@ export const INPUT_RULES = {
     max: 120,
   },
 
+  phone: {
+    min: 9,
+    max: 11,
+  },
+
+  postalCode: {
+    min: 5,
+    max: 11,
+  },
+
   standardShort: {
     min: 3,
     max: 80,
