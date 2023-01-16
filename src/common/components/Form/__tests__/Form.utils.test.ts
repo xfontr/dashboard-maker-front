@@ -174,10 +174,10 @@ describe("Given a setErrorClass function", () => {
 });
 
 describe("Given a curateErrorMessage function", () => {
-  describe("When called with a error message of 'email' invalid", () => {
-    test("Then it should return 'Email invalid'", () => {
-      const initialErrorMessage = '"email" invalid';
-      const expectedErrorMessage = "Email invalid";
+  describe("When called with a error message of 'tokenCode' invalid", () => {
+    test("Then it should return 'Token Code invalid'", () => {
+      const initialErrorMessage = '"tokenCode" invalid';
+      const expectedErrorMessage = "Token Code invalid";
 
       const result = curateErrorMessage(initialErrorMessage);
 

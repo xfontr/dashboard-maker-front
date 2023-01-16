@@ -2,6 +2,7 @@ import { FieldProps, FormSchema } from "./Form.types";
 import Joi, { ObjectSchema } from "joi";
 import formSchema from "./Form.schema";
 import capitalize from "../../utils/capitalize";
+import camelToRegular from "../../utils/camelToRegular";
 
 /**
  * Converts a form schema into a simpler object with only each ID and each
@@ -77,8 +78,10 @@ export const setErrorClass = (
 export const curateErrorMessage = (message: string) => {
   const firstWord = message.split(" ")[0];
 
-  return `${capitalize(firstWord.replace(/['"]+/g, ""))}${message.replace(
-    firstWord,
-    ""
-  )}`;
+  return camelToRegular(
+    `${capitalize(firstWord.replace(/['"]+/g, ""))}${message.replace(
+      firstWord,
+      ""
+    )}`
+  ).trim();
 };

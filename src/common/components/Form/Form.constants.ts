@@ -26,7 +26,7 @@ export const INPUT_RULES = {
   },
 
   phone: {
-    min: 11,
+    min: 9,
     max: 11,
   },
 
