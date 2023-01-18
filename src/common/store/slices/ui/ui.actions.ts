@@ -14,3 +14,7 @@ export const setSuccessActionCreator = (
   type: "SET_SUCCESS",
   payload: payload ?? "Success",
 });
+
+export const setIdleActionCreator = (): Action<UIActionTypes> => ({
+  type: "SET_IDLE",
+});
