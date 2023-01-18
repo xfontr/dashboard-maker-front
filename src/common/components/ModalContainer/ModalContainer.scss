@@ -1,0 +1,38 @@
+@use "./../../styles/spacings";
+
+.backdrop {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: spacings.$big;
+
+  background-color: rgba(0, 13, 4, 0.6);
+  display: flex;
+
+  &--top {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.modal {
+  &--top {
+    position: fixed;
+    top: spacings.$big;
+    left: 48vw;
+  }
+
+  &--center {
+    position: fixed;
+    top: 48vh;
+    left: 48vw;
+  }
+}
