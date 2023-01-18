@@ -3,7 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./common/components/App/App";
 import { BrowserRouter } from "react-router-dom";
-import Store from "./common/store/store";
+import { Store } from "./common/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
