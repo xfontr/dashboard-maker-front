@@ -58,6 +58,7 @@
       "src/**/*.tsx",
       "src/**/*.ts",
       "!src/index.tsx",
+      "!src/common/test-utils/**/*.ts",
       "!src/setupTests.ts",
       "!src/config/*.ts",
       "!src/**/*.routes.ts",
