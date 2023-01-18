@@ -8,4 +8,4 @@ const store = {
 
 export default store;
 
-export * from "./Store";
+export * from "./StoreProvider";
