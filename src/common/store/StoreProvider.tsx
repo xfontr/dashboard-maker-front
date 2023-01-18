@@ -17,8 +17,8 @@ export const configureStore =
       <>
         {Object.values(initialStore.reducer).reduce(
           (children, { Context, initialState, name, reducer }) => {
-            const { Provider } = Context!;
-            const [value, dispatch] = useReducer(reducer!, { ...initialState });
+            const { Provider } = Context;
+            const [value, dispatch] = useReducer(reducer, { ...initialState });
 
             return (
               <Provider value={{ [name]: value, dispatch }}>
