@@ -1,0 +1,11 @@
+@use "./../../styles/spacings";
+@use "./../../styles/colors";
+
+.modal {
+  &--ui {
+    z-index: 9999;
+    padding: spacings.$medium;
+    border-radius: spacings.$rad-small;
+    background-color: colors.$primary;
+  }
+}
