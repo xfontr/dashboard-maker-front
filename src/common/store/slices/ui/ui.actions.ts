@@ -18,3 +18,10 @@ export const setSuccessActionCreator = (
 export const setIdleActionCreator = (): Action<UIActionTypes> => ({
   type: "SET_IDLE",
 });
+
+export const setLoadingActionCreator = (
+  payload?: Action<UIActionTypes>["payload"]
+): Action<UIActionTypes> => ({
+  type: "SET_LOADING",
+  payload: payload ?? "Loading...",
+});

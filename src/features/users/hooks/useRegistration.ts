@@ -17,6 +17,8 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   const handleTokenSubmit = async (values: Record<string, string>) => {
     const protoToken = { ...values } as unknown as ProtoToken;
 
+    dispatch(uiMethods.setLoadingActionCreator("Verifying token..."));
+
     const response = await api.postWithAuth<
       TokenResponse,
       Omit<ProtoToken, "code">

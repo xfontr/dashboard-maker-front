@@ -22,6 +22,7 @@ const ModalContainer = ({
         "className",
         backDrop ? "modal" : `modal modal--${childrenPosition}`
       )}
+      open
     >
       {children}
     </dialog>

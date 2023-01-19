@@ -22,10 +22,17 @@ const protoUiSlice: ProtoSlice<UIActionTypes, UIState> = {
       status: "SUCCESS",
       message: payload,
     }),
+
     SET_IDLE: (state: UIState) => ({
       ...state,
       status: "IDLE",
       message: "",
+    }),
+
+    SET_LOADING: (state: UIState, payload: string) => ({
+      ...state,
+      status: "LOADING",
+      message: payload,
     }),
   },
 };
