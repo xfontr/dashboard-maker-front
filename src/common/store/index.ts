@@ -7,5 +7,3 @@ const store = {
 };
 
 export default store;
-
-export * from "./StoreProvider";

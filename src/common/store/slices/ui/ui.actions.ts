@@ -14,3 +14,14 @@ export const setSuccessActionCreator = (
   type: "SET_SUCCESS",
   payload: payload ?? "Success",
 });
+
+export const setIdleActionCreator = (): Action<UIActionTypes> => ({
+  type: "SET_IDLE",
+});
+
+export const setLoadingActionCreator = (
+  payload?: Action<UIActionTypes>["payload"]
+): Action<UIActionTypes> => ({
+  type: "SET_LOADING",
+  payload: payload ?? "Loading...",
+});

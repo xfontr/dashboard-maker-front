@@ -1,0 +1,9 @@
+.icon--spin {
+  animation: spinner 1.4s ease infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -5,7 +5,11 @@ export type UIState = {
   message: string;
 };
 
-export type UIActionTypes = "SET_ERROR" | "SET_SUCCESS";
+export type UIActionTypes =
+  | "SET_ERROR"
+  | "SET_SUCCESS"
+  | "SET_IDLE"
+  | "SET_LOADING";
 
 export type UIBaseAction = BaseAction<UIActionTypes>;
 export type UIAction = Action<UIActionTypes>;
