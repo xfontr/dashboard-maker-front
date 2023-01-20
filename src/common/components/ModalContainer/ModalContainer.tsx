@@ -31,7 +31,10 @@ const ModalContainer = ({
   return (
     <Portal>
       {backDrop ? (
-        <div className={`backdrop backdrop--${childrenPosition}`}>
+        <div
+          className={`backdrop backdrop--${childrenPosition}`}
+          data-testid="backdrop"
+        >
           {<Dialog>{children}</Dialog>}
         </div>
       ) : (

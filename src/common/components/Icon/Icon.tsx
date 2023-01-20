@@ -7,8 +7,8 @@ import {
 } from "react-icons/fa";
 import "./Icon.scss";
 
-interface IconProps extends HTMLAttributes<HTMLElement> {
-  children: ReactNode;
+export interface IconProps extends HTMLAttributes<HTMLElement> {
+  children?: ReactNode;
 }
 
 const Icon = ({ children, ...rest }: IconProps): JSX.Element => (

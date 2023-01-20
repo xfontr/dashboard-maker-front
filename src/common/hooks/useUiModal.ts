@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { UIState } from "../store/slices/ui";
 import useUi from "../store/slices/ui/ui.hook";
 
-const modalLife = 1500;
-const modalClosingTime = 250;
+export const MODAL_LIFE = 1_500;
+export const MODAL_CLOSING_TIME = 250;
 
 const useModal = () => {
   const {
@@ -21,7 +21,7 @@ const useModal = () => {
       setLocalStatus("IDLE");
       dispatch(uiMethods.setIdleActionCreator());
       setClosing(false);
-    }, modalClosingTime);
+    }, MODAL_CLOSING_TIME);
   }, [dispatch, uiMethods]);
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const useModal = () => {
       return;
     }
 
-    setTimeout(closeModal, modalLife);
+    const timer = setTimeout(closeModal, MODAL_LIFE);
+
+    return () => clearTimeout(timer);
   }, [closeModal, status]);
 
   return { message, localStatus, isClosing, closeModal };
