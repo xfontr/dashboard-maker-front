@@ -6,7 +6,12 @@ import {
   mockState,
 } from "../../test-utils/mocks/mockSlice";
 import { Action } from "../types";
-import createSlice, { SetReducer, reducer, SetContext } from "./createSlice";
+import createSlice, {
+  SetReducer,
+  reducer,
+  SetContext,
+  SetActions,
+} from "./createSlice";
 
 describe("Given a reducer function", () => {
   describe("When called with a slice methods", () => {
@@ -83,13 +88,34 @@ describe("Given a SetContext function", () => {
   });
 });
 
-describe("Given a ComposeSlice function", () => {
+describe("Given a SetActions function", () => {
+  describe("When called with all slice reducers", () => {
+    test("Then it should return all the functioning slice action creators", () => {
+      const expectedAction: Action<MockActionTypes> = {
+        type: "TEST",
+        payload: "Test",
+      };
+
+      const actions = SetActions(mockProtoSlice.reducers);
+
+      expect(actions.actions.TEST).not.toBeNull();
+      expect(actions.actions.TEST_2).not.toBeNull();
+
+      const actionTest = actions.actions.TEST<string>()("Test");
+
+      expect(actionTest).toStrictEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a createSlice function", () => {
   describe("When called with a slice", () => {
     test("Then it should return said slice with its contexts and reducers", () => {
       const expectedSlice = {
         ...mockSlice,
         ...SetContext(mockProtoSlice),
         ...SetReducer(mockProtoSlice.reducers),
+        ...SetActions(mockProtoSlice.reducers),
       };
 
       const returnedSlice = createSlice(mockProtoSlice);
