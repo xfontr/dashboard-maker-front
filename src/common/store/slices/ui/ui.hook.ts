@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import store from "../..";
-import * as uiMethods from "./ui.actions";
 
 const useUi = () => {
   const { ui, dispatch } = useContext(store.reducer.ui.Context);
@@ -8,7 +7,6 @@ const useUi = () => {
   return {
     ui,
     dispatch,
-    uiMethods,
   };
 };
 

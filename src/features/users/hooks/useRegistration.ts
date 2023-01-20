@@ -1,6 +1,11 @@
 import { useState } from "react";
 import useSteps from "../../../common/hooks/useSteps";
 import { api } from "../../../common/services/RequestHandler";
+import {
+  setErrorActionCreator,
+  setLoadingActionCreator,
+  setSuccessActionCreator,
+} from "../../../common/store/slices/ui";
 import useUi from "../../../common/store/slices/ui/ui.hook";
 import UserRoles from "../../../common/types/UserRoles";
 import { MAIN_IDENTIFIER } from "../../../config/database";
@@ -10,14 +15,14 @@ import IUser, { ProtoUser } from "../types/user.types";
 import joinValues from "../utils/joinValues";
 
 const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
-  const { dispatch, uiMethods } = useUi();
+  const { dispatch } = useUi();
   const [token, setToken] = useState<IToken>();
   const [user, setUser] = useState<ProtoUser>();
 
   const handleTokenSubmit = async (values: Record<string, string>) => {
     const protoToken = { ...values } as unknown as ProtoToken;
 
-    dispatch(uiMethods.setLoadingActionCreator("Verifying token..."));
+    dispatch(setLoadingActionCreator("Verifying token..."));
 
     const response = await api.postWithAuth<
       TokenResponse,
@@ -31,7 +36,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
     );
 
     if (response.status !== 200) {
-      dispatch(uiMethods.setErrorActionCreator("Could not verify the token"));
+      dispatch(setErrorActionCreator("Could not verify the token"));
       return;
     }
 
@@ -40,7 +45,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
       ...currentState!,
       [MAIN_IDENTIFIER]: protoToken[MAIN_IDENTIFIER],
     }));
-    dispatch(uiMethods.setSuccessActionCreator("Token verified"));
+    dispatch(setSuccessActionCreator("Token verified"));
 
     next();
   };
@@ -68,7 +73,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
 
       if (response.status !== 201) {
         dispatch(
-          uiMethods.setErrorActionCreator(
+          setErrorActionCreator(
             "It was not possible to complete the registration"
           )
         );

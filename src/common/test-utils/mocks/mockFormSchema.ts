@@ -5,7 +5,7 @@ import {
 } from "../../components/Form/Form.services";
 import { FormSchema } from "../../components/Form/Form.types";
 
-const mockFormSchema: FormSchema = [
+export const mockFormSchema: FormSchema = [
   {
     label: "Email",
     fieldProps: {
@@ -35,5 +35,3 @@ const mockFormSchema: FormSchema = [
     },
   },
 ];
-
-export default mockFormSchema;

@@ -1,4 +1,4 @@
-import mockRoutes from "../../../test-utils/mocks/mockRoutes";
+import { mockRoutes } from "../../../test-utils/mocks/";
 import { baseRoutes } from "../Routes";
 import { render, screen } from "@testing-library/react";
 import PATHS from "../../../../config/paths";

@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent } from "react";
 import { act } from "react-dom/test-utils";
-import schema from "../../test-utils/mocks/mockFormSchema";
+import { mockFormSchema as schema } from "../../test-utils/mocks/";
 import { simplifySchema } from "../../test-utils/test.utils";
 import useForm from "../useForm";
 

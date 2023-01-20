@@ -1,6 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
+import { act } from "react-dom/test-utils";
 import { MODAL_CLOSING_TIME, MODAL_LIFE } from "../../hooks/useUiModal";
 import { uiSlice } from "../../store/slices/ui";
 import { render } from "../../test-utils/customRender";
@@ -61,7 +62,9 @@ describe("Given a UiModal component", () => {
 
       render(<UiModal />);
 
-      jest.advanceTimersByTime(MODAL_LIFE + MODAL_CLOSING_TIME);
+      act(() => {
+        jest.advanceTimersByTime(MODAL_LIFE + MODAL_CLOSING_TIME);
+      });
 
       const idle = screen.queryByText(modalText);
 
@@ -94,7 +97,9 @@ describe("Given a UiModal component", () => {
 
       render(<UiModal />);
 
-      jest.advanceTimersByTime(MODAL_LIFE + MODAL_CLOSING_TIME);
+      act(() => {
+        jest.advanceTimersByTime(MODAL_LIFE + MODAL_CLOSING_TIME);
+      });
 
       const idle = screen.queryByText(modalText);
 
@@ -121,7 +126,9 @@ describe("Given a UiModal component", () => {
       const modal = screen.getByText(modalText);
       expect(modal).toBeInTheDocument();
 
-      jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+      act(() => {
+        jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+      });
 
       const idle = screen.queryByText(modalText);
 

@@ -6,7 +6,12 @@ import {
   mockState,
 } from "../../test-utils/mocks/mockSlice";
 import { Action } from "../types";
-import ComposeSlice, { SetReducer, reducer, SetContext } from "./ComposeSlice";
+import createSlice, {
+  SetReducer,
+  reducer,
+  SetContext,
+  SetActions,
+} from "./createSlice";
 
 describe("Given a reducer function", () => {
   describe("When called with a slice methods", () => {
@@ -22,7 +27,7 @@ describe("Given a reducer function", () => {
           name: "New name",
         };
 
-        const result = reducer(mockProtoSlice.methods)(mockState, mockAction);
+        const result = reducer(mockProtoSlice.reducers)(mockState, mockAction);
 
         expect(result).toStrictEqual(expectedResult);
       });
@@ -39,7 +44,7 @@ describe("Given a reducer function", () => {
           ...mockState,
         };
 
-        const result = reducer(mockProtoSlice.methods)(mockState, mockAction);
+        const result = reducer(mockProtoSlice.reducers)(mockState, mockAction);
 
         expect(result).toStrictEqual(expectedResult);
       });
@@ -51,10 +56,10 @@ describe("Given a SetReducer function", () => {
   describe("When called with slice methods", () => {
     test("Then it should return a reducer object with a reducer function", () => {
       const expectedReducer = JSON.stringify({
-        reducer: reducer(mockProtoSlice.methods),
+        reducer: reducer(mockProtoSlice.reducers),
       });
 
-      const result = JSON.stringify(SetReducer(mockProtoSlice.methods));
+      const result = JSON.stringify(SetReducer(mockProtoSlice.reducers));
 
       expect(result).toStrictEqual(expectedReducer);
     });
@@ -83,16 +88,37 @@ describe("Given a SetContext function", () => {
   });
 });
 
-describe("Given a ComposeSlice function", () => {
+describe("Given a SetActions function", () => {
+  describe("When called with all slice reducers", () => {
+    test("Then it should return all the functioning slice action creators", () => {
+      const expectedAction: Action<MockActionTypes> = {
+        type: "TEST",
+        payload: "Test",
+      };
+
+      const actions = SetActions(mockProtoSlice.reducers);
+
+      expect(actions.actions.TEST).not.toBeNull();
+      expect(actions.actions.TEST_2).not.toBeNull();
+
+      const actionTest = actions.actions.TEST<string>()("Test");
+
+      expect(actionTest).toStrictEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a createSlice function", () => {
   describe("When called with a slice", () => {
     test("Then it should return said slice with its contexts and reducers", () => {
       const expectedSlice = {
         ...mockSlice,
         ...SetContext(mockProtoSlice),
-        ...SetReducer(mockProtoSlice.methods),
+        ...SetReducer(mockProtoSlice.reducers),
+        ...SetActions(mockProtoSlice.reducers),
       };
 
-      const returnedSlice = ComposeSlice(mockProtoSlice);
+      const returnedSlice = createSlice(mockProtoSlice);
 
       Object.entries(expectedSlice).forEach(([key, value]) => {
         expect(returnedSlice).toHaveProperty(key);

@@ -1,6 +1,6 @@
 import { render, renderHook, screen } from "@testing-library/react";
 import useSteps from "../../../../../common/hooks/useSteps";
-import mockUser from "../../../../../common/test-utils/mocks/mockUser";
+import { mockUser } from "../../../../../common/test-utils/mocks/";
 import useRegistration from "../../../hooks/useRegistration";
 import SignUpSubmitForm from "../formSteps/SignUpSubmit.form";
 import signUpLocationSchema from "../schemas/location.schema";

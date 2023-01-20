@@ -3,7 +3,7 @@ import { IS_TOKEN_REQUIRED } from "../../../config/database";
 import ENDPOINTS from "../../../config/endpoints";
 import ENVIRONMENT from "../../../config/environment";
 import { mockFullToken } from "../mocks/mockToken";
-import mockUser from "../mocks/mockUser";
+import { mockUser } from "../mocks";
 
 export const FORCE_ERROR = "force-error";
 

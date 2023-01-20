@@ -8,7 +8,7 @@ import {
   mockUnauthorizedPage,
 } from "./mockPage";
 
-const mockRoutes: RouteConfig[] = [
+export const mockRoutes: RouteConfig[] = [
   {
     path: PATHS.catch,
     roles: "all",
@@ -48,5 +48,3 @@ const mockRoutes: RouteConfig[] = [
     Element: mockUnauthorizedPage,
   },
 ];
-
-export default mockRoutes;
