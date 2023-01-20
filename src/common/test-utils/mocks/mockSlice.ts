@@ -1,5 +1,5 @@
 import { ProtoSlice, Slice } from "../../store/types";
-import ComposeSlice from "../../store/utils/ComposeSlice";
+import createSlice from "../../store/utils/createSlice";
 import mockUser from "./mockUser";
 
 export type MockActionTypes = "TEST" | "TEST_2";
@@ -14,7 +14,7 @@ export const mockProtoSlice: ProtoSlice<MockActionTypes, typeof mockState> = {
 
   initialState: mockState,
 
-  methods: {
+  reducers: {
     TEST: (state: typeof mockState, payload: string) => ({
       ...state,
       name: payload,
@@ -28,4 +28,4 @@ export const mockProtoSlice: ProtoSlice<MockActionTypes, typeof mockState> = {
 };
 
 export const mockSlice: Slice<MockActionTypes, typeof mockState> =
-  ComposeSlice(mockProtoSlice);
+  createSlice(mockProtoSlice);

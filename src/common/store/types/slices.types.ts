@@ -1,5 +1,6 @@
 import { Context, Dispatch } from "react";
 import store from "..";
+import { ActionCreator } from "./actionCreators.types";
 import { Action, Payload } from "./actions.types";
 
 export type Stores = keyof (typeof store)["reducer"];
@@ -32,13 +33,11 @@ export interface StoreBranchWithDispatch<T, R extends string>
 export type ProtoSlice<T extends string, R> = {
   name: Stores;
   initialState: R;
-  methods: Record<
-    Action<T>["type"],
-    (state: R, payload?: Action<T>["payload"]) => R
-  >;
+  reducers: Record<Action<T>["type"], (state: R, payload?: Payload) => R>;
 };
 
 export interface Slice<T extends string, R> extends ProtoSlice<T, R> {
   Context: Context<StoreBranchWithDispatch<R, T>>;
   reducer: (state: R, payload?: Payload) => R;
+  actions: Record<Action<T>["type"], <S>() => ActionCreator<T, S>>;
 }
