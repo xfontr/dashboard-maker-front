@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import schema from "../../../test-utils/mocks/mockFormSchema";
+import { mockFormSchema as schema } from "../../../test-utils/mocks";
 import { simplifySchema } from "../../../test-utils/test.utils";
 import { curateErrorMessage, validateForm } from "../Form.utils";
 import PathErrors from "./PathErrors";

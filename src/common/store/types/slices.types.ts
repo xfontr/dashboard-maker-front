@@ -39,5 +39,17 @@ export type ProtoSlice<T extends string, R> = {
 export interface Slice<T extends string, R> extends ProtoSlice<T, R> {
   Context: Context<StoreBranchWithDispatch<R, T>>;
   reducer: (state: R, payload?: Payload) => R;
+  /**
+   * Note: The action creator is a curried function (a function inside another
+   * function). The intented purpose is that the first function call will return
+   * the actual action creator _and_ pass the generic type (see example below).
+   *
+   * The idea behind this is to always type the payload.
+   *
+   * @example
+   *   const actualActionCreator = slice.actions.ACTION_CREATOR<string>();
+   *   actualActionCreator("Test"); // No error
+   *   actualActionCreator(43); // Type error
+   */
   actions: Record<Action<T>["type"], <S>() => ActionCreator<T, S>>;
 }

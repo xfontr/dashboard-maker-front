@@ -1,6 +1,6 @@
 import { ProtoSlice, Slice } from "../../store/types";
 import createSlice from "../../store/utils/createSlice";
-import mockUser from "./mockUser";
+import { mockUser } from "./mockUser";
 
 export type MockActionTypes = "TEST" | "TEST_2";
 
