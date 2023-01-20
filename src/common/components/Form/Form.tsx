@@ -21,7 +21,7 @@ const Form = ({
             inputProps={{
               ...inputProps,
               onChange,
-              defaultValue: (values as any)[inputProps.id],
+              defaultValue: (values as Record<string, string>)[inputProps.id],
             }}
             {...{ label, tooltip }}
             {...fieldProps}

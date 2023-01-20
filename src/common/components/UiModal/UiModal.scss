@@ -69,6 +69,18 @@
 
     cursor: pointer;
     color: colors.$typography--lighter;
+
+    border: none;
+    background-color: transparent;
+    transition: transitions.$fast;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    
+    &:active{
+      transform: scale(0.9);
+    }
   }
 }
 

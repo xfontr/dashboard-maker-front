@@ -1,3 +1,4 @@
+import IResponse from "../../../types/IResponse";
 import { Action, BaseAction } from "../../types/actions.types";
 
 export type UIState = {
@@ -13,3 +14,12 @@ export type UIActionTypes =
 
 export type UIBaseAction = BaseAction<UIActionTypes>;
 export type UIAction = Action<UIActionTypes>;
+
+export type SideEffectsOptions = {
+  successCondition: [string, string | number | boolean];
+  loading: string;
+  error: string;
+  success: string;
+};
+
+export type FinalSideEffectCallback<T> = (response: IResponse<T>) => unknown;
