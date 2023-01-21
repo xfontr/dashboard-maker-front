@@ -36,7 +36,6 @@ describe("Given a useUi hook", () => {
 
         let callSuccess: Function;
 
-        // eslint-disable-next-line testing-library/no-unnecessary-act
         await act(async () => {
           callSuccess = await callCallback(callback);
         });
@@ -71,7 +70,6 @@ describe("Given a useUi hook", () => {
 
         let callSuccess: Function;
 
-        // eslint-disable-next-line testing-library/no-unnecessary-act
         await act(async () => {
           callSuccess = await callCallback(callback);
         });
@@ -105,7 +103,6 @@ describe("Given a useUi hook", () => {
 
         let callSuccess: Function;
 
-        // eslint-disable-next-line testing-library/no-unnecessary-act
         await act(async () => {
           callSuccess = await callCallback(callback);
         });

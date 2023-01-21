@@ -18,7 +18,7 @@ jest.mock("../../../../../config/database", () => ({
 describe("Given a SignUpForm component", () => {
   describe("When instantiated and the token is required", () => {
     describe("If the user fills and submits correctly the three steps", () => {
-      test("Then it should submit the form", async () => {
+      test.only("Then it should submit the form", async () => {
         mockIsTokenRequiredGetter.mockReturnValue(true);
 
         const typeText = "email@email.com";

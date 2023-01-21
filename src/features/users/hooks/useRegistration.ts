@@ -75,9 +75,9 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   )(token?.role ?? "user", token?.code ?? "");
 
   return {
+    token,
     user,
     setUser,
-    token,
     handleTokenSubmit,
     handleSignUpSubmit,
     handlePasswordSubmit,
