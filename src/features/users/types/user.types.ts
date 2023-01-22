@@ -1,5 +1,10 @@
 import UserRoles from "../../../common/types/UserRoles";
 
+export type UserLogInData = {
+  password: string;
+  email: string;
+};
+
 export type UserRequiredData = {
   id?: string;
   password: string;

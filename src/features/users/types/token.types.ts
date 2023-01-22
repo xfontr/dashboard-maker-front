@@ -15,3 +15,15 @@ export interface IToken extends ProtoToken {
 export type TokenResponse = {
   token: IToken;
 };
+
+export type CodedToken = {
+  user: {
+    token: string;
+  };
+};
+
+export type DecodedToken = {
+  id: string;
+  [MAIN_IDENTIFIER]: string;
+  iat: number;
+};
