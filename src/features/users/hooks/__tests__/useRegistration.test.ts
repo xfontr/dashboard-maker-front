@@ -1,13 +1,13 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 import { renderHook } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import useSteps from "../../../common/hooks/useSteps";
-import { mockProtoToken } from "../../../common/test-utils/mocks/mockToken";
-import { mockUser, mockProtoUser } from "../../../common/test-utils/mocks";
-import { FORCE_ERROR } from "../../../common/test-utils/mockServer/mockHandlers";
-import { MAIN_IDENTIFIER } from "../../../config/database";
-import ENDPOINTS from "../../../config/endpoints";
-import useRegistration from "./useRegistration";
+import useSteps from "../../../../common/hooks/useSteps";
+import { mockProtoToken } from "../../../../common/test-utils/mocks/mockToken";
+import { mockUser, mockProtoUser } from "../../../../common/test-utils/mocks";
+import { FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
+import { MAIN_IDENTIFIER } from "../../../../config/database";
+import ENDPOINTS from "../../../../config/endpoints";
+import useRegistration from "../useRegistration";
 
 const originalEndpoints = {
   tokens: { ...ENDPOINTS.tokens },
