@@ -40,6 +40,6 @@ const protoUiSlice: ProtoSlice<UIActionTypes, UIState> = {
 export const uiSlice: Slice<UIActionTypes, UIState> = createSlice(protoUiSlice);
 
 export const setErrorActionCreator = uiSlice.actions.SET_ERROR<string>();
-export const setIdleActionCreator = uiSlice.actions.SET_IDLE<string>();
+export const setIdleActionCreator = uiSlice.actions.SET_IDLE<undefined>();
 export const setLoadingActionCreator = uiSlice.actions.SET_LOADING<string>();
 export const setSuccessActionCreator = uiSlice.actions.SET_SUCCESS<string>();

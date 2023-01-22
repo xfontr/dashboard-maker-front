@@ -1,12 +1,16 @@
+import { waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { TOKEN_SIDE_EFFECTS } from "../../../../../features/users/hooks/useRegistration.constants";
+import { VERIFY_TOKEN_UI } from "../../../../../features/users/config/ui.constants";
+import { MODAL_CLOSING_TIME } from "../../../../hooks/useUiModal";
 import { renderHook } from "../../../../test-utils/customRender";
-import useUi from "../ui.hook";
+import { useUi, useUiMiddlewares } from "../ui.hooks";
 import { uiSlice } from "../ui.slice";
+
+jest.useFakeTimers();
 
 describe("Given a useUi hook", () => {
   describe("When called", () => {
-    test("Then it should return the ui state and  a dispatcher", () => {
+    test("Then it should return the ui state and a dispatcher", () => {
       const {
         result: {
           current: { dispatch, ui },
@@ -17,107 +21,127 @@ describe("Given a useUi hook", () => {
       expect(dispatch).not.toBeNull();
     });
   });
+});
 
-  describe("When called its returned function handleSideEffects with token side effects", () => {
-    describe("And when called both of its returned functions with a callback with no error", () => {
-      const mockResponse = {
-        status: TOKEN_SIDE_EFFECTS.successCondition[1],
-      };
-      const callback = () => mockResponse;
-      const successCallback = jest.fn();
+describe("Given a useUiMiddlewares hook", () => {
+  describe("When called with all UI messages", () => {
+    describe("And returned a showLoadingUi function", () => {
+      test("Then, when called, it should show change the ui status to 'LOADING' with a message", () => {
+        const expectedUi = {
+          status: "LOADING",
+          message: VERIFY_TOKEN_UI.loading,
+        };
 
-      test("Then it should update the dispatch to a loading status and then success, call both callbacks, and return the response", async () => {
-        const { result } = renderHook(useUi);
+        const { result } = renderHook(() => useUiMiddlewares(VERIFY_TOKEN_UI));
 
-        expect(result.current.ui.status).toBe("IDLE");
+        expect(result.current.ui.status).toBe(uiSlice.initialState.status);
 
-        const callCallback =
-          result.current.handleSideEffects(TOKEN_SIDE_EFFECTS);
-
-        let callSuccess: Function;
-
-        await act(async () => {
-          callSuccess = await callCallback(callback);
+        act(() => {
+          result.current.showLoadingUi();
         });
 
-        expect(result.current.ui.status).toBe("LOADING");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.loading);
-
-        await act(async () => {
-          const response = await callSuccess(successCallback);
-          expect(response).toStrictEqual(mockResponse);
-        });
-
-        expect(successCallback).toHaveBeenCalledWith(mockResponse);
-        expect(result.current.ui.status).toBe("SUCCESS");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.success);
+        expect(result.current.ui).toStrictEqual(expectedUi);
       });
     });
 
-    describe("And when called both of its returned functions but with only one initial callback", () => {
-      const mockResponse = {
-        status: TOKEN_SIDE_EFFECTS.successCondition[1],
-      };
-      const callback = () => mockResponse;
+    describe("And returned a showErrorUi function", () => {
+      test("Then, when called, it should show change the ui status to 'ERROR' with a message", () => {
+        const expectedUi = {
+          status: "ERROR",
+          message: VERIFY_TOKEN_UI.error,
+        };
 
-      test("Then it should not call anything and dispatch to a success status", async () => {
-        const { result } = renderHook(useUi);
+        const { result } = renderHook(() => useUiMiddlewares(VERIFY_TOKEN_UI));
 
-        expect(result.current.ui.status).toBe("IDLE");
+        expect(result.current.ui.status).toBe(uiSlice.initialState.status);
 
-        const callCallback =
-          result.current.handleSideEffects(TOKEN_SIDE_EFFECTS);
-
-        let callSuccess: Function;
-
-        await act(async () => {
-          callSuccess = await callCallback(callback);
+        act(() => {
+          result.current.showErrorUi();
         });
 
-        expect(result.current.ui.status).toBe("LOADING");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.loading);
-
-        await act(async () => {
-          await callSuccess();
-        });
-
-        expect(result.current.ui.status).toBe("SUCCESS");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.success);
+        expect(result.current.ui).toStrictEqual(expectedUi);
       });
     });
 
-    describe("And when called both of its returned functions with a callback with error", () => {
-      const mockResponse = {
-        status: "",
-      };
-      const callback = () => mockResponse;
-      const successCallback = jest.fn();
+    describe("And returned a showSuccessUi function", () => {
+      test("Then, when called, it should show change the ui status to 'SUCCESS' with a message", () => {
+        const expectedUi = {
+          status: "SUCCESS",
+          message: VERIFY_TOKEN_UI.success,
+        };
 
-      test("Then it should update the dispatch to a loading status and then success, not call the success callback and return the response", async () => {
-        const { result } = renderHook(useUi);
+        const { result } = renderHook(() => useUiMiddlewares(VERIFY_TOKEN_UI));
 
-        expect(result.current.ui.status).toBe("IDLE");
+        expect(result.current.ui.status).toBe(uiSlice.initialState.status);
 
-        const callCallback =
-          result.current.handleSideEffects(TOKEN_SIDE_EFFECTS);
-
-        let callSuccess: Function;
-
-        await act(async () => {
-          callSuccess = await callCallback(callback);
+        act(() => {
+          result.current.showSuccessUi();
         });
 
-        expect(result.current.ui.status).toBe("LOADING");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.loading);
+        expect(result.current.ui).toStrictEqual(expectedUi);
+      });
+    });
 
-        await act(async () => {
-          const response = await callSuccess(successCallback);
-          expect(response).toStrictEqual(mockResponse);
+    describe("And returned a resetUi function", () => {
+      test("Then, when called, it should show change the ui status to 'IDLE' with no message, after some ms", async () => {
+        const expectedUi = {
+          status: "IDLE",
+          message: "",
+        };
+
+        const { result } = renderHook(() => useUiMiddlewares(VERIFY_TOKEN_UI));
+
+        expect(result.current.ui.status).toBe(uiSlice.initialState.status);
+
+        act(() => {
+          result.current.resetUi();
         });
 
-        expect(successCallback).not.toHaveBeenCalled();
-        expect(result.current.ui.status).toBe("ERROR");
-        expect(result.current.ui.message).toBe(TOKEN_SIDE_EFFECTS.error);
+        jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+
+        await waitFor(() => {
+          expect(result.current.ui).toStrictEqual(expectedUi);
+        });
+      });
+    });
+  });
+
+  describe("When called with no UI messages", () => {
+    describe("And called all of the returned functions", () => {
+      test("Every time the status should be updated to 'IDLE' after some ms", async () => {
+        const expectedStatus = "IDLE";
+
+        const { result } = renderHook(() => useUiMiddlewares({}));
+
+        act(() => {
+          result.current.showErrorUi();
+        });
+
+        jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+
+        await waitFor(() => {
+          expect(result.current.ui.status).toBe(expectedStatus);
+        });
+
+        act(() => {
+          result.current.showSuccessUi();
+        });
+
+        jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+
+        await waitFor(() => {
+          expect(result.current.ui.status).toBe(expectedStatus);
+        });
+
+        act(() => {
+          result.current.showLoadingUi();
+        });
+
+        jest.advanceTimersByTime(MODAL_CLOSING_TIME);
+
+        await waitFor(() => {
+          expect(result.current.ui.status).toBe(expectedStatus);
+        });
       });
     });
   });
