@@ -9,6 +9,15 @@
   align-items: stretch;
   gap: spacings.$medium;
 
+  &__buttons {
+    display: flex;
+    margin-top: spacings.$small;
+    gap: spacings.$big;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
   &--error {
     input {
       border-bottom: 1px solid red;

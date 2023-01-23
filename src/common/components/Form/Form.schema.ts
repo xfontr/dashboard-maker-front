@@ -31,7 +31,7 @@ const formSchema = Joi.object({
   code: Joi.string().min(password.min).max(password.max).allow(null, ""),
   street: Joi.string().min(standardLong.min).max(standardLong.max).required(),
   contactNumber: Joi.string().min(phone.min).max(phone.max).required(),
-  extraNumber: Joi.string().min(phone.min).max(phone.max).required(),
+  extraNumber: Joi.string().min(phone.min).max(phone.max),
   city: Joi.string().min(standardShort.min).max(standardShort.max).required(),
   postalCode: Joi.string().min(postalCode.min).max(postalCode.max).required(),
 });

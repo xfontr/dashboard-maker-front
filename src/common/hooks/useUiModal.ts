@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { setIdleActionCreator, UIState } from "../store/slices/ui";
-import useUi from "../store/slices/ui/ui.hook";
+import { setIdleActionCreator, UIState, useUi } from "../store/slices/ui";
 
 export const MODAL_LIFE = 1_500;
 export const MODAL_CLOSING_TIME = 250;
