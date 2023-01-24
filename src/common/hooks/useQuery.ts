@@ -7,7 +7,7 @@ import callFunctionIfExists from "../utils/callFunctionIfExists";
 
 // TODO: Test all the side effects ecosystem
 
-const useQuery = <T, L>(options: QueryOptions<T, L>) => {
+const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
   const { showLoadingUi, showErrorUi, showSuccessUi } = useUiMiddlewares<
     IResponse<T>
   >(options.options);
@@ -23,9 +23,9 @@ const useQuery = <T, L>(options: QueryOptions<T, L>) => {
 
       const response = await callback(values);
 
-      const success = (): unknown | undefined => {
+      const success = async (): Promise<unknown | undefined> => {
         showSuccessUi();
-        return callFunctionIfExists(options.onSuccess, response, values);
+        return await callFunctionIfExists(options.onSuccess, response, values);
       };
 
       const error = (): unknown | undefined => {
@@ -33,13 +33,13 @@ const useQuery = <T, L>(options: QueryOptions<T, L>) => {
         return callFunctionIfExists(options.onError, response);
       };
 
-      const verifyCondition = (): unknown => {
+      const verifyCondition = async (): Promise<unknown> => {
         const {
           successCondition: [status, successStatus],
         } = options.options;
 
         if (response[status] === successStatus) {
-          return success() ?? response;
+          return (await success()) ?? response;
         }
 
         return error() ?? response;

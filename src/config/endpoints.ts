@@ -6,6 +6,7 @@ const ENDPOINTS = {
     getAll: "users/",
     signUp: "users/",
     logIn: "users/log-in",
+    refreshToken: "users/refresh",
   },
 };
 

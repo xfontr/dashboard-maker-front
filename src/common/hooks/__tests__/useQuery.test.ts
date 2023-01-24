@@ -5,10 +5,6 @@ import useQuery from "../useQuery";
 import IResponse from "../../types/IResponse";
 import { act, waitFor } from "@testing-library/react";
 
-// PENDING TEST CASES
-// A) We don't set ui options so it doesn't change the ui. Test for error and success
-// B) We set callbacks for init, success and error.
-
 describe("Given a useQuery hook", () => {
   describe("When called with ui side effects options", () => {
     describe("and called its returned function, if it returns a success status", () => {

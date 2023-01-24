@@ -17,6 +17,7 @@ export const mockUser: IUser = {
   street: "street",
   city: "city",
   state: "spain",
+  authToken: "refreshAuthenticationToken",
 };
 
 export const mockUserSuperAdmin: IUser = { ...mockUser, role: "superAdmin" };

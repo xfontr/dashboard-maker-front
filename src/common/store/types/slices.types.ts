@@ -5,7 +5,7 @@ import { Action, Payload } from "./actions.types";
 
 export type Stores = keyof (typeof store)["reducer"];
 
-export type StoreBranch<T> = Record<Stores, T>;
+export type StoreBranch<T> = Partial<Record<Stores, T>>;
 
 /**
  * @example
@@ -40,9 +40,10 @@ export interface Slice<T extends string, R> extends ProtoSlice<T, R> {
   Context: Context<StoreBranchWithDispatch<R, T>>;
   reducer: (state: R, payload?: Payload) => R;
   /**
-   * Note: The action creator is a curried function (a function inside another
-   * function). The intented purpose is that the first function call will return
-   * the actual action creator _and_ pass the generic type (see example below).
+   * Note: The action creator is a curried function (a function that returns
+   * another function). The intented purpose is that the first function call
+   * will return the actual action creator _and_ pass the generic type (see
+   * example below).
    *
    * The idea behind this is to always type the payload.
    *

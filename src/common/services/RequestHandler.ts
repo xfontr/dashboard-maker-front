@@ -5,13 +5,13 @@ import tryThis from "../utils/tryThis";
 
 const apiHandler = axios.create({
   baseURL: ENVIRONMENT.apiUrl,
+  ...REQUEST_RULES,
 });
 
 export const RequestHandler = (handler: AxiosInstance) => {
   const Get = () => ({
     get: async <T>(endpoint: string, config: AxiosRequestConfig = {}) =>
       await tryThis<T>(handler.get, endpoint, {
-        ...REQUEST_RULES,
         ...config,
       }),
 
@@ -21,7 +21,6 @@ export const RequestHandler = (handler: AxiosInstance) => {
       config: AxiosRequestConfig = {}
     ) =>
       await tryThis<T>(handler.get, endpoint, {
-        ...REQUEST_RULES,
         ...config,
         headers: { ...config?.headers, authorization: `Bearer ${token}` },
       }),
@@ -34,7 +33,6 @@ export const RequestHandler = (handler: AxiosInstance) => {
       config: AxiosRequestConfig = {}
     ) =>
       await tryThis<T>(handler.post, endpoint, body, {
-        ...REQUEST_RULES,
         ...config,
       }),
 
@@ -45,9 +43,7 @@ export const RequestHandler = (handler: AxiosInstance) => {
       config: AxiosRequestConfig = {}
     ) =>
       await tryThis<T>(handler.post, endpoint, body, {
-        ...REQUEST_RULES,
         ...config,
-        withCredentials: true,
         headers: { ...config?.headers, authorization: `Bearer ${token}` },
       }),
   });
