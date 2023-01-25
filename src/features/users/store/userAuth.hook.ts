@@ -1,5 +1,3 @@
-// TODO: Test
-
 import { useContext } from "react";
 import store from "../../../common/store";
 

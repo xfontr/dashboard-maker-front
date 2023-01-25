@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { api } from "../../../common/services/RequestHandler";
-import { MAIN_IDENTIFIER } from "../../../config/database";
 import ENDPOINTS from "../../../config/endpoints";
 import { logInActionCreator, setRefreshTokenActionCreator } from "../store";
 import useUserAuth from "../store/userAuth.hook";
