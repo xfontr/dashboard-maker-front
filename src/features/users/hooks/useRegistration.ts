@@ -29,7 +29,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
   });
 
   const handleTokenSubmit = async (values: ProtoToken) => {
-    tokenQuery((tokenData) =>
+    await tokenQuery((tokenData) =>
       api.postWithAuth(
         tokens.verify,
         {
@@ -60,7 +60,7 @@ const useRegistration = (next: ReturnType<typeof useSteps>["next"]) => {
       const userToRequest = { ...fullUser, role };
       delete userToRequest.repeatPassword;
 
-      userQuery((userToRequest) =>
+      await userQuery((userToRequest) =>
         api.postWithAuth(users.signUp, userToRequest, tokenCode)
       )(values);
     }

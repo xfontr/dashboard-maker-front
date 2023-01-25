@@ -26,4 +26,5 @@ export type DecodedToken = {
   id: string;
   [MAIN_IDENTIFIER]: string;
   iat: number;
+  role: UserRoles;
 };

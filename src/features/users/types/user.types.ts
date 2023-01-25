@@ -10,6 +10,7 @@ export type UserRequiredData = {
   password: string;
   email: string;
   role?: UserRoles;
+  authToken?: string;
 };
 
 export type UserName = Partial<{

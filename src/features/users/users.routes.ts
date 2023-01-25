@@ -12,7 +12,7 @@ const userRoutes = (): RouteConfig[] => [
   },
   {
     path: PATHS.logIn,
-    roles: ["admin", "superAdmin", "user"],
+    roles: ["notLogged"],
     rejectPath: PATHS.home,
     Element: lazy(() => import("./pages/LogIn.page")),
     Layout,

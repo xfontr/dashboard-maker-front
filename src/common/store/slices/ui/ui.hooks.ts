@@ -13,7 +13,7 @@ export const useUi = () => {
   const { ui, dispatch } = useContext(store.reducer.ui.Context);
 
   return {
-    ui,
+    ui: ui!,
     dispatch,
   };
 };
