@@ -4,6 +4,7 @@ import ENDPOINTS from "../../../config/endpoints";
 import ENVIRONMENT from "../../../config/environment";
 import { mockFullToken } from "../mocks/mockToken";
 import { mockUser } from "../mocks";
+import { CodedToken } from "../../../features/users/types/token.types";
 
 export const FORCE_ERROR = "force-error";
 
@@ -30,6 +31,13 @@ const handlers = [
     }
 
     return res(ctx.status(201), ctx.json({ success: "Success" }));
+  }),
+
+  rest.post(urlWithEndpoint(ENDPOINTS.users.logIn), (req, res, ctx) => {
+    return res(
+      ctx.status(req.body ? 200 : 400),
+      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+    );
   }),
 
   rest.get(urlWithEndpoint(ENDPOINTS.users.getAll), (req, res, ctx) => {
