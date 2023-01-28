@@ -6,6 +6,11 @@ import useUserAuth from "../store/userAuth.hook";
 import { CodedToken } from "../types/token.types";
 import decodeToken from "../utils/decodeToken";
 
+const refreshTokenRequest = async () =>
+  await api.get<CodedToken>(ENDPOINTS.users.refreshToken, {
+    withCredentials: true,
+  });
+
 const useRefreshToken = () => {
   const { dispatch, userAuth } = useUserAuth();
   const [isLogging, setIsLogging] = useState<boolean>(true);
@@ -14,10 +19,7 @@ const useRefreshToken = () => {
     (async () => {
       if ((!isLogging && !userAuth.isLogged) || userAuth.isLogged) return;
 
-      const { body: refreshToken } = await api.get<CodedToken>(
-        ENDPOINTS.users.refreshToken,
-        { withCredentials: true }
-      );
+      const { body: refreshToken } = await refreshTokenRequest();
 
       if (isLogging) {
         const { email, role } = decodeToken(refreshToken?.user.token!);
@@ -36,7 +38,15 @@ const useRefreshToken = () => {
 
       dispatch(setRefreshTokenActionCreator(refreshToken?.user.token));
     })();
-  }, [dispatch, isLogging, userAuth.isLogged]);
+  }, [isLogging, userAuth.isLogged, dispatch]);
+
+  const forceRefresh = () => {
+    setIsLogging(true);
+  };
+
+  return {
+    forceRefresh,
+  };
 };
 
 export default useRefreshToken;

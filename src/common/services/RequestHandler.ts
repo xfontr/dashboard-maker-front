@@ -48,9 +48,21 @@ export const RequestHandler = (handler: AxiosInstance) => {
       }),
   });
 
+  const Patch = () => ({
+    patch: async <T, R>(
+      endpoint: string,
+      body: R,
+      config: AxiosRequestConfig = {}
+    ) =>
+      await tryThis<T>(handler.patch, endpoint, body, {
+        ...config,
+      }),
+  });
+
   return {
     ...Get(),
     ...Post(),
+    ...Patch(),
   };
 };
 

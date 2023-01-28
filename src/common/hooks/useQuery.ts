@@ -73,7 +73,7 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
       const success = async (): Promise<unknown | undefined> => {
         showSuccessUi();
 
-        return await callFunctionIfExists(options.onSuccess, response, values);
+        return callFunctionIfExists(options.onSuccess, response, values);
       };
 
       const error = (): unknown | undefined => {
