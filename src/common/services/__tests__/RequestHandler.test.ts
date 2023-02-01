@@ -1,7 +1,5 @@
 import { AxiosResponse, AxiosError } from "axios";
 import { mockUser } from "../../test-utils/mocks";
-import ENVIRONMENT from "../../../config/environment";
-import REQUEST_RULES from "../../../config/requestRules";
 import { api } from "../RequestHandler";
 import ENDPOINTS from "../../../config/endpoints";
 import { CustomResponse } from "../../utils/tryThis";
@@ -33,19 +31,12 @@ describe("Given a get method from the api service", () => {
         );
 
         const config = {
-          ...REQUEST_RULES,
           headers: {
             authorization: "bearer",
           },
         };
 
-        const baseUrl = ENVIRONMENT.apiUrl;
-
-        const response = await api.get<IUser>(
-          ENDPOINTS.users.getAll,
-          config,
-          baseUrl
-        );
+        const response = await api.get<IUser>(ENDPOINTS.users.getAll, config);
 
         expect(response).toStrictEqual(customResponse);
       });

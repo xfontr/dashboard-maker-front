@@ -8,15 +8,19 @@ import { CodedToken } from "../../../features/users/types/token.types";
 
 export const FORCE_ERROR = "force-error";
 
+const { tokens, users } = ENDPOINTS;
+
 const urlWithEndpoint = (endpoint: string) =>
   `${ENVIRONMENT.apiUrl}/${endpoint}`;
 
 const handlers = [
-  rest.post(urlWithEndpoint(ENDPOINTS.tokens.verify), (_, res, ctx) =>
+  /** VERIFY TOKEN */
+  rest.post(urlWithEndpoint(tokens.verify), (_, res, ctx) =>
     res(ctx.status(200), ctx.json({ token: mockFullToken }))
   ),
 
-  rest.post(urlWithEndpoint(ENDPOINTS.users.signUp), (req, res, ctx) => {
+  /** SIGN UP USER */
+  rest.post(urlWithEndpoint(users.signUp), (req, res, ctx) => {
     const isTokenRequired = req.headers.get("isTokenRequired")
       ? req.headers.get("isTokenRequired") === "true"
       : IS_TOKEN_REQUIRED;
@@ -33,20 +37,39 @@ const handlers = [
     return res(ctx.status(201), ctx.json({ success: "Success" }));
   }),
 
-  rest.post(urlWithEndpoint(ENDPOINTS.users.logIn), (req, res, ctx) => {
+  /** LOG IN USER */
+  rest.post(urlWithEndpoint(users.logIn), (req, res, ctx) => {
     return res(
       ctx.status(req.body ? 200 : 400),
       ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
     );
   }),
 
-  rest.get(urlWithEndpoint(ENDPOINTS.users.getAll), (req, res, ctx) => {
+  /** LOG OUT USER */
+  rest.patch(urlWithEndpoint(users.logOut), (req, res, ctx) => {
+    return res(
+      ctx.status(req.body ? 200 : 400),
+      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+    );
+  }),
+
+  /** GET ALL USERS */
+  rest.get(urlWithEndpoint(users.getAll), (req, res, ctx) => {
     if (req.headers.get("authorization"))
       return res(ctx.status(200), ctx.json({ authorized: mockUser }));
 
     return res(ctx.status(200), ctx.json({ user: mockUser }));
   }),
 
+  /** REFRESH TOKEN */
+  rest.get(urlWithEndpoint(users.refreshToken), (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+    );
+  }),
+
+  /** FALSE ENDPOINT TO TEST ERROR CASES */
   rest.post(urlWithEndpoint(FORCE_ERROR), (_, res, ctx) =>
     res(ctx.status(400), ctx.json({ error: "error" }))
   ),

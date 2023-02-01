@@ -1,11 +1,10 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import ENVIRONMENT from "../../config/environment";
-import REQUEST_RULES from "../../config/requestRules";
 import tryThis from "../utils/tryThis";
 
 const apiHandler = axios.create({
   baseURL: ENVIRONMENT.apiUrl,
-  ...REQUEST_RULES,
+  timeout: 8_000,
 });
 
 export const RequestHandler = (handler: AxiosInstance) => {

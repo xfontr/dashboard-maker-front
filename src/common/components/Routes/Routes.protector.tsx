@@ -8,7 +8,7 @@ interface RoutesProtectorProps {
 
 const RoutesProtector = ({
   condition,
-  rejectPath = PATHS.unauthorized,
+  rejectPath = PATHS.root,
 }: RoutesProtectorProps): JSX.Element =>
   condition ? <Outlet /> : <Navigate to={rejectPath} />;
 

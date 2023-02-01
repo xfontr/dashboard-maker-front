@@ -12,11 +12,7 @@ const routes: RouteConfig[] = [
   {
     path: PATHS.root,
     roles: "all",
-    to: PATHS.home,
-  },
-  {
-    path: PATHS.home,
-    roles: "all",
+    rejectPath: PATHS.logIn,
     Element: lazy(() => import("./pages/Home.page")),
   },
   {
