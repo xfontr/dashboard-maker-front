@@ -6,7 +6,22 @@ import { mockFullToken } from "../mocks/mockToken";
 import { mockUser } from "../mocks";
 import { CodedToken } from "../../../features/users/types/token.types";
 
-export const FORCE_ERROR = "force-error";
+/**
+ * Expected usage: When testing, the test can replace an endpoint (see constant
+ * ENDPOINTS) by this variable. If so, the request will be handled by a mock
+ * endpoint that always returns a 400 error
+ */
+
+export const MOCK_FORCE_ERROR = "force-error";
+
+/**
+ * Change this object attributes to alter the handlers returned value, in order
+ * to adapt the responses to the desired outcome when testing
+ */
+
+export const MOCK_DYNAMIC_DATA = {
+  refreshToken: mockUser.authToken,
+};
 
 const { tokens, users } = ENDPOINTS;
 
@@ -41,7 +56,7 @@ const handlers = [
   rest.post(urlWithEndpoint(users.logIn), (req, res, ctx) => {
     return res(
       ctx.status(req.body ? 200 : 400),
-      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+      ctx.json<CodedToken>({ user: { token: MOCK_DYNAMIC_DATA.refreshToken! } })
     );
   }),
 
@@ -49,7 +64,7 @@ const handlers = [
   rest.patch(urlWithEndpoint(users.logOut), (req, res, ctx) => {
     return res(
       ctx.status(req.body ? 200 : 400),
-      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+      ctx.json<CodedToken>({ user: { token: MOCK_DYNAMIC_DATA.refreshToken! } })
     );
   }),
 
@@ -65,12 +80,16 @@ const handlers = [
   rest.get(urlWithEndpoint(users.refreshToken), (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json<CodedToken>({ user: { token: mockUser.authToken! } })
+      ctx.json<CodedToken>({ user: { token: MOCK_DYNAMIC_DATA.refreshToken! } })
     );
   }),
 
   /** FALSE ENDPOINT TO TEST ERROR CASES */
-  rest.post(urlWithEndpoint(FORCE_ERROR), (_, res, ctx) =>
+  rest.post(urlWithEndpoint(MOCK_FORCE_ERROR), (_, res, ctx) =>
+    res(ctx.status(400), ctx.json({ error: "error" }))
+  ),
+
+  rest.get(urlWithEndpoint(MOCK_FORCE_ERROR), (_, res, ctx) =>
     res(ctx.status(400), ctx.json({ error: "error" }))
   ),
 ];

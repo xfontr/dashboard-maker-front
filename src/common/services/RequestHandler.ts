@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import ENVIRONMENT from "../../config/environment";
 import tryThis from "../utils/tryThis";
 
-const apiHandler = axios.create({
+export const apiHandler = axios.create({
   baseURL: ENVIRONMENT.apiUrl,
   timeout: 8_000,
 });

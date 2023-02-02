@@ -6,7 +6,7 @@ import { UserAuthActionTypes, UserAuthState } from "./userAuth.types";
 
 const initialState: UserAuthState = {
   [MAIN_IDENTIFIER]: "",
-  role: "notLogged",
+  role: "user",
   authToken: "",
   isLogged: false,
 };
@@ -23,7 +23,7 @@ const protoUserAuthSlice: ProtoSlice<UserAuthActionTypes, UserAuthState> = {
       isLogged: true,
     }),
 
-    LOG_OUT: () => initialState,
+    LOG_OUT: () => ({ ...initialState, role: "notLogged" }),
 
     REFRESH_TOKEN: (state, payload: string) => ({
       ...state,

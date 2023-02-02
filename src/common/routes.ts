@@ -20,10 +20,6 @@ const routes: RouteConfig[] = [
     roles: "all",
     Element: lazy(() => import("./pages/Unauthorized.page")),
   },
-  {
-    path: "/shit",
-    roles: "all",
-  },
   ...userRoutes(),
 ];
 

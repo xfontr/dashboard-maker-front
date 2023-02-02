@@ -7,13 +7,19 @@ import useUserAuth from "../store/userAuth.hook";
 const logOutRequest = () =>
   api.patch(ENDPOINTS.users.logOut, undefined, { withCredentials: true });
 
-const useLogOut = (refresh?: Function) => {
+/**
+ * @param callback Expected usage: to activate side effects that are related to
+ *   the log out action. For example, a tokenRefresh function that will require
+ *   the API to delete the database token
+ */
+
+const useLogOut = (callback?: Function) => {
   const { dispatch } = useUserAuth();
 
   return useQuery({
     onSuccess: async () => {
       dispatch(logOutActionCreator());
-      refresh && refresh();
+      callback && callback();
     },
     options: { successCondition: ["status", 200] },
   })(logOutRequest);

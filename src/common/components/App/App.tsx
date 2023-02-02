@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import useLogOut from "../../../features/users/hooks/useLogOut";
 import useRefreshToken from "../../../features/users/hooks/useRefreshToken";
 import useUserAuth from "../../../features/users/store/userAuth.hook";
@@ -11,9 +11,13 @@ const App = (): JSX.Element => {
     userAuth: { role },
   } = useUserAuth();
 
-  const { forceRefresh } = useRefreshToken();
+  const refresh = useRefreshToken();
 
-  const logOut = useLogOut(forceRefresh);
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  const logOut = useLogOut(refresh);
 
   return (
     <div className="app">
