@@ -65,7 +65,7 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
      * calls the callback and then does the success/error actions depending on
      * the outcome
      */
-    async (values?: L): Promise<unknown | IResponse<T>> => {
+    async (values?: L): Promise<IResponse<T>> => {
       init();
 
       const response = await callback(values);
@@ -81,7 +81,7 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
         return callFunctionIfExists(options.onError, response);
       };
 
-      const verifyCondition = async (): Promise<unknown> => {
+      const verifyCondition = async (): Promise<IResponse<T>> => {
         const {
           successCondition: [status, successStatus],
         } = options.options;

@@ -62,10 +62,7 @@ const handlers = [
 
   /** LOG OUT USER */
   rest.patch(urlWithEndpoint(users.logOut), (req, res, ctx) => {
-    return res(
-      ctx.status(req.body ? 200 : 400),
-      ctx.json<CodedToken>({ user: { token: MOCK_DYNAMIC_DATA.refreshToken! } })
-    );
+    return res(ctx.status(200), ctx.json({ logOut: "User logged out" }));
   }),
 
   /** GET ALL USERS */
@@ -90,6 +87,10 @@ const handlers = [
   ),
 
   rest.get(urlWithEndpoint(MOCK_FORCE_ERROR), (_, res, ctx) =>
+    res(ctx.status(400), ctx.json({ error: "error" }))
+  ),
+
+  rest.patch(urlWithEndpoint(MOCK_FORCE_ERROR), (_, res, ctx) =>
     res(ctx.status(400), ctx.json({ error: "error" }))
   ),
 ];

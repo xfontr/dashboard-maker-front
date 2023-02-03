@@ -7,6 +7,7 @@ import Routes from "../Routes/Routes";
 import "./App.scss";
 
 const App = (): JSX.Element => {
+  const logOut = useLogOut();
   const {
     userAuth: { role },
   } = useUserAuth();
@@ -16,8 +17,6 @@ const App = (): JSX.Element => {
   useEffect(() => {
     refresh();
   }, [refresh]);
-
-  const logOut = useLogOut(refresh);
 
   return (
     <div className="app">

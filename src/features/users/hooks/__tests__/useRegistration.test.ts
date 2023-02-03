@@ -11,8 +11,6 @@ import { ProtoToken } from "../../types/token.types";
 import { renderHook } from "../../../../common/test-utils/customRender";
 import { useUi } from "../../../../common/store/slices/ui";
 import { SIGN_USER_UP_UI, VERIFY_TOKEN_UI } from "../../config/ui.constants";
-import { waitFor } from "@testing-library/react";
-import { wait } from "@testing-library/user-event/dist/types/utils";
 
 const originalEndpoints = {
   tokens: { ...ENDPOINTS.tokens },
