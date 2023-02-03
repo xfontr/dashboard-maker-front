@@ -8,6 +8,11 @@ import useQuery from "../../../common/hooks/useQuery";
 import useUserAuth from "../store/userAuth.hook";
 import { logInActionCreator } from "../store";
 
+const requestLogIn = (userLogInData?: UserLogInData) =>
+  api.post<CodedToken, UserLogInData>(ENDPOINTS.users.logIn, userLogInData!, {
+    withCredentials: true,
+  });
+
 const useLogIn = () => {
   const { dispatch } = useUserAuth();
 
@@ -24,9 +29,7 @@ const useLogIn = () => {
       );
     },
     options: LOG_IN_UI,
-  })((userLogInData) =>
-    api.post(ENDPOINTS.users.logIn, userLogInData!, { withCredentials: true })
-  );
+  })(requestLogIn);
 };
 
 export default useLogIn;

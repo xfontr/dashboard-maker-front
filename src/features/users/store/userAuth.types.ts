@@ -9,7 +9,7 @@ export interface UserAuthState {
   isLogged: boolean;
 }
 
-export type UserAuthActionTypes = "LOG_IN" | "REFRESH_TOKEN";
+export type UserAuthActionTypes = "LOG_IN" | "REFRESH_TOKEN" | "LOG_OUT";
 
 export type UserAuthBaseAction = BaseAction<UserAuthActionTypes>;
 export type UserAuthAction = Action<UserAuthActionTypes>;

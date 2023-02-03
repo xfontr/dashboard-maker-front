@@ -3,7 +3,7 @@ import { act } from "react-dom/test-utils";
 import { useUi } from "../../../../common/store/slices/ui";
 import { renderHook } from "../../../../common/test-utils/customRender";
 import { mockUser } from "../../../../common/test-utils/mocks";
-import { FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
+import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
 import { LOG_IN_UI } from "../../config/ui.constants";
@@ -46,7 +46,7 @@ describe("Given a useLogin hook", () => {
     });
 
     test("If the login goes wrong, it should not log the user and update the ui", async () => {
-      ENDPOINTS.users.logIn = FORCE_ERROR;
+      ENDPOINTS.users.logIn = MOCK_FORCE_ERROR;
 
       const { result } = renderHook(() => ({
         logIn: useLogIn(),

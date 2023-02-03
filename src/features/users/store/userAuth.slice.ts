@@ -4,23 +4,27 @@ import { MAIN_IDENTIFIER } from "../../../config/database";
 import { UserRequiredData } from "../types/user.types";
 import { UserAuthActionTypes, UserAuthState } from "./userAuth.types";
 
+const initialState: UserAuthState = {
+  [MAIN_IDENTIFIER]: "",
+  role: "user",
+  authToken: "",
+  isLogged: false,
+};
+
 const protoUserAuthSlice: ProtoSlice<UserAuthActionTypes, UserAuthState> = {
   name: "userAuth",
 
-  initialState: {
-    [MAIN_IDENTIFIER]: "",
-    role: "notLogged",
-    authToken: "",
-    isLogged: false,
-  },
+  initialState,
 
   reducers: {
-    // TODO: This could lead to problems because the payload could be an object with only a token or a role or something (incomplete) and would set the islogged to true anyways
     LOG_IN: (state, payload: UserRequiredData) => ({
       ...state,
       ...payload,
       isLogged: true,
     }),
+
+    LOG_OUT: () => ({ ...initialState, role: "notLogged" }),
+
     REFRESH_TOKEN: (state, payload: string) => ({
       ...state,
       authToken: payload,
@@ -33,5 +37,8 @@ export const userAuthSlice: Slice<UserAuthActionTypes, UserAuthState> =
 
 export const logInActionCreator =
   userAuthSlice.actions.LOG_IN<Omit<UserRequiredData, "password">>();
+
 export const setRefreshTokenActionCreator =
   userAuthSlice.actions.REFRESH_TOKEN<string>();
+
+export const logOutActionCreator = userAuthSlice.actions.LOG_OUT<undefined>();

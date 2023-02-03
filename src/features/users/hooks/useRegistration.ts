@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useSteps from "../../../common/hooks/useSteps";
-import { api } from "../../../common/services/RequestHandler";
 import UserRoles from "../../../common/types/UserRoles";
 import { MAIN_IDENTIFIER } from "../../../config/database";
 import ENDPOINTS from "../../../config/endpoints";
@@ -9,6 +8,7 @@ import { ProtoUser } from "../types/user.types";
 import joinValues from "../utils/joinValues";
 import { SIGN_USER_UP_UI, VERIFY_TOKEN_UI } from "../config/ui.constants";
 import useQuery from "../../../common/hooks/useQuery";
+import { api } from "../../../common/services/RequestHandler";
 
 const { tokens, users } = ENDPOINTS;
 

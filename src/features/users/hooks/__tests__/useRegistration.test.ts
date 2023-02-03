@@ -3,7 +3,7 @@ import { act } from "react-dom/test-utils";
 import useSteps from "../../../../common/hooks/useSteps";
 import { mockProtoToken } from "../../../../common/test-utils/mocks/mockToken";
 import { mockUser, mockProtoUser } from "../../../../common/test-utils/mocks";
-import { FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
+import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
 import useRegistration from "../useRegistration";
@@ -11,8 +11,6 @@ import { ProtoToken } from "../../types/token.types";
 import { renderHook } from "../../../../common/test-utils/customRender";
 import { useUi } from "../../../../common/store/slices/ui";
 import { SIGN_USER_UP_UI, VERIFY_TOKEN_UI } from "../../config/ui.constants";
-import { waitFor } from "@testing-library/react";
-import { wait } from "@testing-library/user-event/dist/types/utils";
 
 const originalEndpoints = {
   tokens: { ...ENDPOINTS.tokens },
@@ -62,7 +60,7 @@ describe("Given a useRegistration hook", () => {
       });
 
       test("Then it should do nothing if there's an error while requesting the token", async () => {
-        ENDPOINTS.tokens.verify = FORCE_ERROR;
+        ENDPOINTS.tokens.verify = MOCK_FORCE_ERROR;
 
         const { result } = renderHook(() => ({
           useRegistration: useRegistration(next),
@@ -139,7 +137,7 @@ describe("Given a useRegistration hook", () => {
       });
 
       test("Then it should not call next if there's an error while registering the user, and update the ui", async () => {
-        ENDPOINTS.users.signUp = FORCE_ERROR;
+        ENDPOINTS.users.signUp = MOCK_FORCE_ERROR;
 
         const { result } = renderHook(() => ({
           useRegistration: useRegistration(next),
