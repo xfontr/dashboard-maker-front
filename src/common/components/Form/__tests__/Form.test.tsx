@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import schema from "../../../test-utils/mocks/mockFormSchema";
 import Button from "../../Button/Button";
 import Form from "../Form";
 import userEvent from "@testing-library/user-event";
 import useForm from "../../../hooks/useForm";
 import { INPUT_RULES } from "../Form.constants";
+import { mockFormSchema as schema } from "../../../test-utils/mocks";
 
 const buttonText = "Button";
 

@@ -8,7 +8,7 @@ export const mockProtoUser: IUser = {
   role: "user",
 };
 
-const mockUser: IUser = {
+export const mockUser: IUser = {
   name: "Name",
   [MAIN_IDENTIFIER]: "email@email.com",
   password: "password",
@@ -17,9 +17,8 @@ const mockUser: IUser = {
   street: "street",
   city: "city",
   state: "spain",
+  authToken: "refreshAuthenticationToken",
 };
 
 export const mockUserSuperAdmin: IUser = { ...mockUser, role: "superAdmin" };
 export const mockUserAdmin: IUser = { ...mockUser, role: "admin" };
-
-export default mockUser;

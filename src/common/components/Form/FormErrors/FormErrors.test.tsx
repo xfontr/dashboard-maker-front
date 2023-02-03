@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import mockFormSchema from "../../../test-utils/mocks/mockFormSchema";
+import { mockFormSchema } from "../../../test-utils/mocks";
 import { curateErrorMessage, validateForm } from "../Form.utils";
 import FormErrors from "./FormErrors";
 

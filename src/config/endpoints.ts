@@ -6,6 +6,8 @@ const ENDPOINTS = {
     getAll: "users/",
     signUp: "users/",
     logIn: "users/log-in",
+    logOut: "users/log-out",
+    refreshToken: "users/refresh",
   },
 };
 

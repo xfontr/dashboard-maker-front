@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import schema from "../../../test-utils/mocks/mockFormSchema";
+import { mockFormSchema as schema } from "../../../test-utils/mocks";
 import { InputProps } from "../Form.types";
 import FormGroup from "./FormGroup";
 

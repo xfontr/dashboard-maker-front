@@ -3,6 +3,20 @@ import { RoutesUserRoles } from "../Routes.types";
 import MAX_ROLE from "../../../../config/maxRole";
 
 describe("Given a hasAuthLevel function", () => {
+  describe("When called with a role of 'notLogged'", () => {
+    const role = "notLogged";
+
+    describe("And the required role is 'all'", () => {
+      test("Then it should return false", () => {
+        const requiredRole: RoutesUserRoles = "all";
+
+        const result = hasAuthLevel(role, requiredRole);
+
+        expect(result).toBeFalsy();
+      });
+    });
+  });
+
   describe("When called with a role of 'user'", () => {
     const role = "user";
 

@@ -1,0 +1,97 @@
+@use "./../../styles/spacings";
+@use "./../../styles/colors";
+@use "./../../styles/breakpoints";
+@use "./../../styles/transitions";
+
+.modal {
+  &--ui {
+    z-index: 9999;
+    padding: spacings.$medium;
+    border-radius: spacings.$rad-small;
+    background-color: colors.$primary;
+    box-shadow: 10px 10px 30px 10px rgba(0, 0, 0, 0.15);
+    min-width: 90%;
+    animation: ease 0.2s in;
+    transition: transitions.$fast;
+
+    display: flex;
+    flex-direction: row;
+
+    @media (min-width: breakpoints.$small) {
+      min-width: 23rem;
+    }
+  }
+
+  &--error {
+    color: colors.$error;
+  }
+
+  &--success {
+    color: colors.$success;
+  }
+
+  &--closing {
+    animation: linear infinite transitions.$fast out;
+  }
+
+  &__icon {
+    width: 13%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.8rem;
+    line-height: 0;
+    color: colors.$typography--lighter;
+  }
+
+  &__content {
+    width: 87%;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    margin: 0;
+    margin-bottom: 0.2rem;
+    opacity: 0.9;
+  }
+
+  &__message {
+    font-size: 0.8rem;
+  }
+
+  &__close {
+    position: absolute;
+    top: spacings.$medium;
+    right: spacings.$medium;
+
+    cursor: pointer;
+    color: colors.$typography--lighter;
+
+    border: none;
+    background-color: transparent;
+    transition: transitions.$fast;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    
+    &:active{
+      transform: scale(0.9);
+    }
+  }
+}
+
+@keyframes in {
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes out {
+  to {
+    opacity: 0;
+  }
+}

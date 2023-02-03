@@ -15,19 +15,15 @@ export const configureStore =
   ({ children }: PropsWithChildren) =>
     (
       <>
-        {Object.values(initialStore.reducer).reduce(
-          (children, { Context, initialState, name, reducer }) => {
-            const { Provider } = Context;
-            const [value, dispatch] = useReducer(reducer, { ...initialState });
+        {Object.values(initialStore.reducer).reduce((children, slice) => {
+          const { Context, initialState, name, reducer } = slice;
+          const { Provider } = Context;
+          const [value, dispatch] = useReducer(reducer, { ...initialState });
 
-            return (
-              <Provider value={{ [name]: value, dispatch }}>
-                {children}
-              </Provider>
-            );
-          },
-          children
-        )}
+          return (
+            <Provider value={{ [name]: value, dispatch }}>{children}</Provider>
+          );
+        }, children)}
       </>
     );
 

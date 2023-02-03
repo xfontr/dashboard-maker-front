@@ -6,6 +6,7 @@ import {
   validateForm,
   valueSetter,
 } from "../components/Form/Form.utils";
+import callFunctionIfExists from "../utils/callFunctionIfExists";
 
 const useForm = <T = Record<string, string>>(
   schema: FormSchema,
@@ -31,7 +32,7 @@ const useForm = <T = Record<string, string>>(
 
     if (validatedForm?.length) return;
 
-    onSubmit && onSubmit(values);
+    callFunctionIfExists(onSubmit, values);
   };
 
   return { values, errors, onChange, handleSubmit, schema };

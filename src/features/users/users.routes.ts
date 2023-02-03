@@ -6,13 +6,16 @@ import Layout from "./components/Layout/Layout";
 const userRoutes = (): RouteConfig[] => [
   {
     path: PATHS.register,
-    roles: "all",
+    roles: ["notLogged"],
     Element: lazy(() => import("./pages/SignUp.page")),
     Layout,
   },
   {
     path: PATHS.logIn,
-    roles: "all",
+    roles: ["notLogged"],
+    rejectPath: PATHS.root,
+    Element: lazy(() => import("./pages/LogIn.page")),
+    Layout,
   },
 ];
 
