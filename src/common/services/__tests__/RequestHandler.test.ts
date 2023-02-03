@@ -117,3 +117,17 @@ describe("Given a postWithAuth method from the api service", () => {
     });
   });
 });
+
+describe("Given a patch method from the api service", () => {
+  describe("When called with an endpoint 'users/log-out'", () => {
+    test("Then it should do a request with the api base url and return a custom response", async () => {
+      const customResponse: IResponse<IUser> = CustomResponse(
+        mockAxiosResponse({ logOut: "User logged out" })
+      );
+
+      const response = await api.patch<IUser>(ENDPOINTS.users.logOut, mockUser);
+
+      expect(response).toStrictEqual(customResponse);
+    });
+  });
+});

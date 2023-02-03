@@ -26,7 +26,7 @@ export const RequestHandler = (handler: AxiosInstance) => {
   });
 
   const Post = () => ({
-    post: async <T, R>(
+    post: async <T = unknown, R = unknown>(
       endpoint: string,
       body: R,
       config: AxiosRequestConfig = {}
@@ -35,7 +35,7 @@ export const RequestHandler = (handler: AxiosInstance) => {
         ...config,
       }),
 
-    postWithAuth: async <T, R>(
+    postWithAuth: async <T = unknown, R = unknown>(
       endpoint: string,
       body: R,
       token: string,
@@ -48,7 +48,7 @@ export const RequestHandler = (handler: AxiosInstance) => {
   });
 
   const Patch = () => ({
-    patch: async <T, R>(
+    patch: async <T = unknown, R = unknown>(
       endpoint: string,
       body: R,
       config: AxiosRequestConfig = {}
