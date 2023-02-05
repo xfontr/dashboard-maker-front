@@ -11,7 +11,7 @@ const Box = ({ children, ...rest }: BoxProps): JSX.Element => (
 );
 
 export const GlassBox = ({ children, ...rest }: BoxProps) => (
-  <Box {...setProps(rest, "className", "box box--glass")}>{children}</Box>
+  <Box {...setProps(rest, "className", "box--glass")}>{children}</Box>
 );
 
 export default Box;

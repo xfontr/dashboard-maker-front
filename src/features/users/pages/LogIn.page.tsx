@@ -3,7 +3,7 @@ import LogInForm from "../components/LogInForm/LogIn.form";
 
 const headingInfo: Omit<PageProps, "children"> = {
   heading: "Log in",
-  subheading: "Log in, please",
+  subheading: "Access your private dashboard with your email and password.",
 };
 
 const LogInPage = (): JSX.Element => (
