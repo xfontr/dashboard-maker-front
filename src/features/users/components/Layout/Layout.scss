@@ -1,7 +1,43 @@
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/breakpoints";
+@use "../../../../common/styles/spacings";
+
+body {
+  background-image: linear-gradient(
+      to bottom,
+      colors.$primary--lighter,
+      colors.$secondary--light
+    ),
+    url("../../assets/out--background.jpeg");
+  background-attachment: fixed;
+}
+
 .main {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 70vh;
+  gap: spacings.$big;
 
-  & > div {
-    width: 50%;
+  &__company {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
+    max-width: 100%;
+
+    @media (min-width: breakpoints.$small) {
+      max-width: 32rem;
+    }
+  }
+
+  @media (min-width: breakpoints.$medium) {
+    flex-direction: row;
+
+    &__company,
+    &__content {
+      width: 50%;
+    }
   }
 }
