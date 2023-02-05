@@ -3,7 +3,6 @@ import Form from "../../../../../common/components/Form/Form";
 import useForm from "../../../../../common/hooks/useForm";
 import { ProtoUser } from "../../../types/user.types";
 import SignUpPasswordSchema from "../schemas/password.schema";
-import "./formSteps.scss";
 
 type SignUpFormProps = {
   values?: Partial<ProtoUser>;
