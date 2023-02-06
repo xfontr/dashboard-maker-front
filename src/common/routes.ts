@@ -6,7 +6,7 @@ import RouteConfig from "./components/Routes/Routes.types";
 const routes: RouteConfig[] = [
   {
     path: PATHS.catch,
-    roles: "all",
+    roles: ["admin", "user", "superAdmin", "notLogged"],
     Element: lazy(() => import("./pages/NotFound.page")),
   },
   {

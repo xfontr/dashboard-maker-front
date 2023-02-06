@@ -6,7 +6,7 @@ import { UserAuthActionTypes, UserAuthState } from "./userAuth.types";
 
 const initialState: UserAuthState = {
   [MAIN_IDENTIFIER]: "",
-  role: "user",
+  role: "notLogged",
   authToken: "",
   isLogged: false,
 };

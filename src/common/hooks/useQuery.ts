@@ -3,8 +3,10 @@ import { QueryOptions } from "../types/IQuery";
 import IResponse from "../types/IResponse";
 import callFunctionIfExists from "../utils/callFunctionIfExists";
 
+// TODO: Since now there is a default status 200 condition, test it
+
 /**
- * Takes a custom object of options that defines the UI behaviour and forces an
+ * Takes a custom object of options that defines the UI behavior and forces an
  * error if the response doesn't match a specific status
  *
  * It returns a function that receives a callback, which is the one that will be
@@ -34,9 +36,13 @@ import callFunctionIfExists from "../utils/callFunctionIfExists";
  */
 
 const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
-  const { showLoadingUi, showErrorUi, showSuccessUi } = useUiMiddlewares<
-    IResponse<T>
-  >(options.options);
+  const fullOptions: QueryOptions<T, L>["options"] = {
+    successCondition: ["status", 200],
+    ...options.options,
+  };
+
+  const { showLoadingUi, showErrorUi, showSuccessUi } =
+    useUiMiddlewares<IResponse<T>>(fullOptions);
 
   const init = () => {
     showLoadingUi();
@@ -82,9 +88,7 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
       };
 
       const verifyCondition = async (): Promise<IResponse<T>> => {
-        const {
-          successCondition: [status, successStatus],
-        } = options.options;
+        const [status, successStatus] = fullOptions.successCondition!;
 
         if (response[status] === successStatus) {
           return (await success()) ?? response;

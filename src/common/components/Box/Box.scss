@@ -1,0 +1,18 @@
+@use "../../styles/breakpoints";
+@use "../../styles/colors";
+@use "../../styles/spacings";
+
+.box {
+  padding: spacings.$big;
+  border-radius: spacings.$rad-small;
+  background-color: colors.$primary;
+
+  &--glass {
+    background: rgba(251, 245, 243, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(251, 245, 243, 0.3);
+  }
+}
