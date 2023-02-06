@@ -22,13 +22,17 @@ body {
   &__company {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: spacings.$medium;
   }
 
   &__content {
     max-width: 100%;
 
     @media (min-width: breakpoints.$small) {
-      max-width: 32rem;
+      max-width: 33rem;
     }
   }
 
@@ -39,5 +43,14 @@ body {
     &__content {
       width: 50%;
     }
+  }
+}
+
+.company__info {
+  max-width: 90%;
+  color: colors.$typography--lighter;
+
+  @media (min-width: breakpoints.$medium) {
+    max-width: 60%;
   }
 }

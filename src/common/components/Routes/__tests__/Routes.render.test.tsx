@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { PropsWithChildren } from "react";
+import { render } from "../../../test-utils/customRender";
 import RoutesRender from "../Routes.render";
 
 const MockLayout = ({ children }: PropsWithChildren) => <>Layout: {children}</>;
@@ -48,7 +49,9 @@ describe("Given a RoutesRender component", () => {
     test("Then it should render the not found page", () => {
       render(<RoutesRender />);
 
-      const view = screen.getByText("Not found");
+      const view = screen.getByText(
+        "We couldn't find what you were looking for (404)"
+      );
 
       expect(view).toBeInTheDocument();
     });

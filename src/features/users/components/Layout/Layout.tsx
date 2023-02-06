@@ -11,6 +11,10 @@ const Layout = ({ children }: PropsWithChildren) => (
         height={200}
         width={200}
       />
+      <span className="company__info">
+        Welcome to our private dashboard. From here, you can freely administrate
+        your schedules with us.
+      </span>
     </header>
 
     <GlassBox className="main__content">{children}</GlassBox>

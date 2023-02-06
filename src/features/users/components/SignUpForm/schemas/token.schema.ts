@@ -1,3 +1,4 @@
+import { FORM_CLASSES } from "../../../../../common/components/Form/Form.constants";
 import { FormSchema } from "../../../../../common/components/Form/Form.types";
 import capitalize from "../../../../../common/utils/capitalize";
 import { MAIN_IDENTIFIER } from "../../../../../config/database";
@@ -8,6 +9,7 @@ const signUpTokenSchema: FormSchema = [
     inputProps: {
       id: MAIN_IDENTIFIER,
       placeholder: "email@email.com",
+      className: FORM_CLASSES.icon("email"),
     },
   },
   {
