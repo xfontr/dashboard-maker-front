@@ -1,5 +1,6 @@
 import { screen } from "@testing-library/react";
 import { PropsWithChildren } from "react";
+import { notFoundHeading } from "../../../pages/NotFound.page";
 import { render } from "../../../test-utils/customRender";
 import RoutesRender from "../Routes.render";
 
@@ -49,9 +50,7 @@ describe("Given a RoutesRender component", () => {
     test("Then it should render the not found page", () => {
       render(<RoutesRender />);
 
-      const view = screen.getByText(
-        "We couldn't find what you were looking for (404)"
-      );
+      const view = screen.getByText(notFoundHeading.heading);
 
       expect(view).toBeInTheDocument();
     });
