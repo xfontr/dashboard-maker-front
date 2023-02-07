@@ -1,0 +1,14 @@
+@use "../../styles/colors";
+@use "../../styles/spacings";
+
+.board-main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: spacings.$big;
+}
+
+.sideboard {
+  width: 25%;
+  min-height: 100%;
+}

@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFound.page";
+import DashboardLayout from "../DashboardLayout/DashboardLayout";
 
 type RoutesRenderProps = {
   to?: string;
@@ -11,7 +12,7 @@ type RoutesRenderProps = {
 const RoutesRender = ({
   to,
   Element,
-  Layout,
+  Layout = DashboardLayout,
 }: RoutesRenderProps): JSX.Element => {
   if (!Element && !to) {
     return <NotFoundPage />;
