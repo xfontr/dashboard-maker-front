@@ -4,7 +4,7 @@ import { render } from "../../../../common/test-utils/customRender";
 import Sideboard from "./Sideboard";
 
 describe("Given a Sideboard component", () => {
-  const labels = ["Home", "Log out", "Contract/Expand"];
+  const labels = ["Overview", "Log out", "Contract/Expand"];
 
   describe("When instantiated", () => {
     test("Then it should show a menu with items", () => {

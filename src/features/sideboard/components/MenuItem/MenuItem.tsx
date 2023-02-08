@@ -23,7 +23,7 @@ const MenuItem = ({
   ...rest
 }: MenuItemProps) => (
   <li {...setMenuItemProps(rest, showOnlyIcon)}>
-    {Icon && <Icon />}
+    {Icon && <Icon data-testid="icon" />}
     {showOnlyIcon || label}
   </li>
 );

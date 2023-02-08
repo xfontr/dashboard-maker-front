@@ -19,7 +19,7 @@ const Sideboard = (): JSX.Element => {
     >
       <ul className="sideboard__items">
         <MenuItem
-          label="Home"
+          label="Overview"
           onClick={() => navigate(PATHS.home)}
           Icon={CloseIcon}
           {...{ showOnlyIcon }}
