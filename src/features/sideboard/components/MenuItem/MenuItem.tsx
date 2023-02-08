@@ -6,7 +6,6 @@ import "./MenuItem.scss";
 interface MenuItemProps extends HTMLAttributes<HTMLLIElement> {
   label: ReactNode | string;
   Icon?: (args: IconProps) => JSX.Element;
-  children?: ReactNode[];
   showOnlyIcon?: boolean;
 }
 
@@ -20,11 +19,10 @@ interface MenuItemProps extends HTMLAttributes<HTMLLIElement> {
 const MenuItem = ({
   label,
   Icon,
-  children,
   showOnlyIcon = false,
   ...rest
 }: MenuItemProps) => (
-  <li {...setMenuItemProps(rest, !!children, showOnlyIcon)}>
+  <li {...setMenuItemProps(rest, showOnlyIcon)}>
     {Icon && <Icon />}
     {showOnlyIcon || label}
   </li>

@@ -7,7 +7,7 @@ import PATHS from "../../../../config/paths";
 import { useState } from "react";
 
 const Sideboard = (): JSX.Element => {
-  const [showOnlyIcon, setIsExpanded] = useState<boolean>(true);
+  const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
 
   const logOut = useLogOut();
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Sideboard = (): JSX.Element => {
   return (
     <aside
       className={`sideboard${showOnlyIcon ? " sideboard--contracted" : ""}`}
+      data-testid="sideboard"
     >
       <ul className="sideboard__items">
         <MenuItem
@@ -33,6 +34,7 @@ const Sideboard = (): JSX.Element => {
           label="Contract/Expand"
           onClick={() => setIsExpanded((current) => !current)}
           Icon={CloseIcon}
+          aria-label={showOnlyIcon ? "Expand menu" : "Contract menu"}
           {...{ showOnlyIcon }}
         />
       </ul>
