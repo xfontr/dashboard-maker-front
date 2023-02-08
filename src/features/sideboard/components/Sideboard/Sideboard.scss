@@ -1,5 +1,7 @@
 @use "../../../../common/styles/colors";
 @use "../../../../common/styles/breakpoints";
+@use "../../../../common/styles/spacings";
+@use "../../../../common/styles/transitions";
 
 .sideboard {
   width: 70%;
@@ -14,4 +16,19 @@
     #048a8150
   );
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  padding: spacings.$big spacings.$medium;
+  font-size: 1.1rem;
+  transition: transitions.$fast;
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: spacings.$big;
+  }
+
+  &--contracted {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+  }
 }
