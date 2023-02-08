@@ -1,0 +1,11 @@
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/spacings";
+
+.board-main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: spacings.$big;
+  min-height: 100vh;
+  background-color: colors.$primary;
+}

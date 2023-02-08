@@ -5,6 +5,7 @@ import {
   FaRegSurprise,
   FaSpinner,
 } from "react-icons/fa";
+import setProps from "../../utils/setProps";
 import "./Icon.scss";
 
 export interface IconProps extends HTMLAttributes<HTMLElement> {
@@ -12,7 +13,7 @@ export interface IconProps extends HTMLAttributes<HTMLElement> {
 }
 
 const Icon = ({ children, ...rest }: IconProps): JSX.Element => (
-  <i {...rest}>{children}</i>
+  <i {...setProps(rest, "className", "icon-wrap")}>{children}</i>
 );
 
 export const CloseIcon = ({ children, ...rest }: IconProps): JSX.Element => (
