@@ -1,0 +1,17 @@
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/breakpoints";
+
+.sideboard {
+  width: 70%;
+  max-width: 20rem;
+  min-height: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #da938750,
+    #bb936550,
+    #8f945a50,
+    #5a916750,
+    #048a8150
+  );
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+}

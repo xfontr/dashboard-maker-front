@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFound.page";
-import DashboardLayout from "../DashboardLayout/DashboardLayout";
+import DashboardLayout from "../../../features/sideboard/components/DashboardLayout/DashboardLayout";
 
 type RoutesRenderProps = {
   to?: string;
