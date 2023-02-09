@@ -21,25 +21,32 @@ const UserMiniCard = ({ showOnlyIcon }: UserMiniCardProps) => {
 
   const UserProfile = (
     <img
+      className="user-card__profile"
       src="./img/default-user-profile.png"
+      aria-label="User settings"
+      title="Open user settings"
       alt="User profile"
-      height={45}
-      width={45}
+      height={showOnlyIcon ? 25 : 45}
+      width={showOnlyIcon ? 25 : 45}
     />
   );
 
   return showOnlyIcon ? (
-    <>{UserProfile}</>
+    <div className="user-card">{UserProfile}</div>
   ) : (
     <article className="user-card">
       <GlassBox className={boxVariants.small}>
         <div className="user-card__info">
           {UserProfile}
 
-          <ul className="user-card__details">
-            <li className="user-card__identifier">{mockUserName}</li>
-            <li className="user-card__role">{role}</li>
-          </ul>
+          <div className="user-card__details">
+            <h3 className="user-card__identifier" title="User name">
+              {mockUserName}
+            </h3>
+            <span className="user-card__role" title="User role">
+              {role}
+            </span>
+          </div>
         </div>
 
         <ul className="user-card__options">

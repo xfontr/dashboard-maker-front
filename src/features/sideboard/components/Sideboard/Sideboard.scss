@@ -6,7 +6,7 @@
 .sideboard {
   position: relative;
   width: 70%;
-  max-width: 20rem;
+  max-width: 18rem;
   min-height: 100%;
   background-image: linear-gradient(
     to right top,
@@ -37,7 +37,16 @@
   &--contracted {
     width: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: spacings.$big;
+
+    & .user-card {
+      position: absolute;
+      bottom: spacings.$big;
+      left: spacings.$medium;
+    }
   }
 
   & .user-card {

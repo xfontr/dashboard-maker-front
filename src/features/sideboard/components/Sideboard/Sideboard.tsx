@@ -1,4 +1,3 @@
-import useLogOut from "../../../users/hooks/useLogOut";
 import "./Sideboard.scss";
 import MenuItem from "../MenuItem/MenuItem";
 import { CloseIcon } from "../../../../common/components/Icon/Icon";

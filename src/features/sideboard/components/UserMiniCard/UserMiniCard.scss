@@ -4,6 +4,10 @@
 .user-card {
   width: 88%;
 
+  &__profile {
+    cursor: pointer;
+  }
+
   &__info {
     display: flex;
     gap: spacings.$medium;
@@ -18,11 +22,16 @@
     margin-bottom: 0.1rem;
   }
 
-  &__role {
+  &__identifier {
+    margin: 0;
+    font-size: inherit;
     font-weight: bold;
+  }
+
+  &__role {
     font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1.8px;
     color: colors.$typography--lighter;
   }
 
