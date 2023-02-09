@@ -9,7 +9,7 @@ describe("Given a DashboardLayout component", () => {
 
       render(<DashboardLayout>{child}</DashboardLayout>);
 
-      const view = [screen.getByText(child), screen.getByRole("list")];
+      const view = [screen.getByText(child), ...screen.getAllByRole("list")];
 
       view.forEach((node) => expect(node).toBeInTheDocument());
     });
