@@ -1,0 +1,23 @@
+@use "../../../../common/styles/spacings";
+@use "../../../../common/styles/colors";
+
+.user-card {
+  width: 88%;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: spacings.$medium;
+    margin-bottom: spacings.$medium;
+  }
+
+  &__role,
+  &__email {
+    display: block;
+  }
+
+  &__options {
+    display: flex;
+    gap: spacings.$medium;
+  }
+}

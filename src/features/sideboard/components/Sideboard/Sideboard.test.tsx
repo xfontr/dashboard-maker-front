@@ -8,7 +8,7 @@ describe("Given a Sideboard component", () => {
 
   describe("When instantiated", () => {
     test("Then it should show a menu with items", () => {
-      const totalMenuItems = 3;
+      const totalMenuItems = 2;
 
       render(<Sideboard />);
 

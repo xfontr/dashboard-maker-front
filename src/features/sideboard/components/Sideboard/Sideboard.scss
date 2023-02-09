@@ -4,6 +4,7 @@
 @use "../../../../common/styles/transitions";
 
 .sideboard {
+  position: relative;
   width: 70%;
   max-width: 20rem;
   min-height: 100%;
@@ -26,9 +27,21 @@
     gap: spacings.$big;
   }
 
+  &__company > * {
+    margin-top: 0;
+    margin-bottom: spacings.$big;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
   &--contracted {
     width: fit-content;
     display: flex;
     justify-content: center;
+  }
+
+  & .user-card {
+    position: absolute;
+    bottom: spacings.$big;
   }
 }
