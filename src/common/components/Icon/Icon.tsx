@@ -4,9 +4,17 @@ import {
   FaRegCheckCircle,
   FaRegSurprise,
   FaSpinner,
+  FaSignOutAlt,
 } from "react-icons/fa";
+import { AiOutlineSetting } from "react-icons/ai";
 import setProps from "../../utils/setProps";
 import "./Icon.scss";
+
+const baseClass = "icon";
+
+const variants = {
+  spin: `${baseClass}--spin`,
+};
 
 export interface IconProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
@@ -18,28 +26,42 @@ const Icon = ({ children, ...rest }: IconProps): JSX.Element => (
 
 export const CloseIcon = ({ children, ...rest }: IconProps): JSX.Element => (
   <Icon {...rest}>
-    <FaRegTimesCircle className="icon" />
+    <FaRegTimesCircle className={baseClass} />
     {children}
   </Icon>
 );
 
 export const SuccessIcon = ({ children, ...rest }: IconProps): JSX.Element => (
   <Icon {...rest}>
-    <FaRegCheckCircle className="icon" />
+    <FaRegCheckCircle className={baseClass} />
     {children}
   </Icon>
 );
 
 export const ErrorIcon = ({ children, ...rest }: IconProps): JSX.Element => (
   <Icon {...rest}>
-    <FaRegSurprise className="icon" />
+    <FaRegSurprise className={baseClass} />
     {children}
   </Icon>
 );
 
 export const SpinnerIcon = ({ children, ...rest }: IconProps): JSX.Element => (
   <Icon {...rest}>
-    <FaSpinner className="icon icon--spin" />
+    <FaSpinner className={`${baseClass} ${variants.spin}`} />
+    {children}
+  </Icon>
+);
+
+export const LogOutIcon = ({ children, ...rest }: IconProps): JSX.Element => (
+  <Icon {...rest}>
+    <FaSignOutAlt className={baseClass} />
+    {children}
+  </Icon>
+);
+
+export const SettingsIcon = ({ children, ...rest }: IconProps): JSX.Element => (
+  <Icon {...rest}>
+    <AiOutlineSetting className={baseClass} />
     {children}
   </Icon>
 );

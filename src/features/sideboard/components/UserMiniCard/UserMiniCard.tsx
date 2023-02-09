@@ -1,4 +1,9 @@
-import { GlassBox } from "../../../../common/components/Box/Box";
+import { boxVariants, GlassBox } from "../../../../common/components/Box/Box";
+import { GlassButton } from "../../../../common/components/Button/Button";
+import {
+  LogOutIcon,
+  SettingsIcon,
+} from "../../../../common/components/Icon/Icon";
 import useLogOut from "../../../users/hooks/useLogOut";
 import useUserAuth from "../../../users/store/userAuth.hook";
 import "./UserMiniCard.scss";
@@ -8,9 +13,10 @@ type UserMiniCardProps = {
 };
 
 const UserMiniCard = ({ showOnlyIcon }: UserMiniCardProps) => {
+  const mockUserName = "John Doe";
   const logOut = useLogOut();
   const {
-    userAuth: { email, role },
+    userAuth: { role },
   } = useUserAuth();
 
   const UserProfile = (
@@ -26,21 +32,29 @@ const UserMiniCard = ({ showOnlyIcon }: UserMiniCardProps) => {
     <>{UserProfile}</>
   ) : (
     <article className="user-card">
-      <GlassBox className="box--spacious">
+      <GlassBox className={boxVariants.small}>
         <div className="user-card__info">
           {UserProfile}
 
           <ul className="user-card__details">
-            <li className="user-card__detail">{email}</li>
-            <li className="user-card__detail">{role}</li>
+            <li className="user-card__identifier">{mockUserName}</li>
+            <li className="user-card__role">{role}</li>
           </ul>
         </div>
 
         <ul className="user-card__options">
           <li className="user-card__option" onClick={logOut}>
-            Log out
+            <GlassButton variant="tiny">
+              Log out
+              <LogOutIcon />
+            </GlassButton>
           </li>
-          <li className="user-card__option">Settings</li>
+          <li className="user-card__option">
+            <GlassButton variant="tiny">
+              Settings
+              <SettingsIcon />
+            </GlassButton>
+          </li>
         </ul>
       </GlassBox>
     </article>

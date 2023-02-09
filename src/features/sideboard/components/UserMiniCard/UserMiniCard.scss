@@ -6,18 +6,34 @@
 
   &__info {
     display: flex;
-    align-items: center;
     gap: spacings.$medium;
+    align-items: center;
     margin-bottom: spacings.$medium;
   }
 
-  &__role,
-  &__email {
-    display: block;
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 0.1rem;
+  }
+
+  &__role {
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: colors.$typography--lighter;
   }
 
   &__options {
     display: flex;
     gap: spacings.$medium;
+    line-height: 0;
+  }
+
+  &__option > .icon-wrap {
+    cursor: pointer;
+    font-size: 1.3rem;
   }
 }
