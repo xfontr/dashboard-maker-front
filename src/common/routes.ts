@@ -16,6 +16,10 @@ const routes: RouteConfig[] = [
     roles: "all",
     rejectPath: PATHS.logIn,
     Element: lazy(() => import("./pages/Home.page")),
+    layoutProps: {
+      heading: "Overview",
+      subheading: "See everything in one page",
+    },
   },
   {
     path: PATHS.unauthorized,
