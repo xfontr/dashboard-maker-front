@@ -1,6 +1,6 @@
 @use "../../../../common/styles/spacings";
 
-.menu-item {
+.menu-item > a {
   display: flex;
   gap: spacings.$medium;
   align-items: center;

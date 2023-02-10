@@ -1,6 +1,20 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { useLocation } from "react-router-dom";
 import { CloseIcon } from "../../../../common/components/Icon/Icon";
+import { render } from "../../../../common/test-utils/customRender";
 import MenuItem from "./MenuItem";
+
+const MockComponent = () => {
+  const { pathname } = useLocation();
+
+  return (
+    <>
+      path: {pathname}
+      <MenuItem label="Test" to="home" />
+    </>
+  );
+};
 
 describe("Given a MenuItem component", () => {
   describe("When instantiated with a label, an icon and a class 'Test'", () => {
@@ -20,6 +34,9 @@ describe("Given a MenuItem component", () => {
       view.forEach((node) => expect(node).toBeInTheDocument());
 
       expect(view[0]).toHaveClass(`menu-item ${className}`);
+
+      const hiddenView = screen.queryByRole("link");
+      expect(hiddenView).not.toBeInTheDocument();
     });
   });
 
@@ -70,6 +87,23 @@ describe("Given a MenuItem component", () => {
       ];
 
       hiddenView.forEach((node) => expect(node).not.toBeInTheDocument());
+    });
+  });
+
+  describe("When instantiated with a label and a 'to' option", () => {
+    test("Then it should also render a link that on click redirects to the 'to' path", async () => {
+      render(<MockComponent />);
+
+      const currentPage = screen.getByText("path: /");
+      const link = screen.getByRole("link", { name: "Test" });
+
+      expect(currentPage).toBeInTheDocument();
+      expect(link).toBeInTheDocument();
+
+      await userEvent.click(link);
+
+      const updatedPage = screen.getByText("path: /home");
+      expect(updatedPage).toBeInTheDocument();
     });
   });
 });

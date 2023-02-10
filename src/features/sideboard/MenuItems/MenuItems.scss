@@ -1,0 +1,7 @@
+@use "../../../common/styles/spacings";
+
+.sideboard__items {
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$big;
+}
