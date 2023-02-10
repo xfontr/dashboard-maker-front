@@ -13,6 +13,7 @@ const logInSchema: FormSchema = [
     inputProps: {
       id: MAIN_IDENTIFIER,
       placeholder: "email@email.com",
+      className: FORM_CLASSES.icon("email"),
     },
   },
   ...ComplexFormFields(

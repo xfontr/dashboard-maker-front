@@ -1,0 +1,19 @@
+@use "../../styles/spacings";
+@use "../../styles/colors";
+
+.page-header {
+  margin-bottom: spacings.$big;
+
+  &__title {
+    font-size: 2.1rem;
+    margin: 0;
+    margin-bottom: spacings.$small--very;
+    color: colors.$secondary;
+  }
+
+  &__subtitle {
+    display: block;
+    max-width: 80%;
+    color: colors.$typography--lighter;
+  }
+}

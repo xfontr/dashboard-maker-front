@@ -1,0 +1,63 @@
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/breakpoints";
+@use "../../../../common/styles/spacings";
+@use "../../../../common/styles/transitions";
+
+.sideboard {
+  position: relative;
+  width: 70%;
+  max-width: 18rem;
+  min-height: 100%;
+  background-image: linear-gradient(
+    to right top,
+    #da938750,
+    #bb936550,
+    #8f945a50,
+    #5a916750,
+    #048a8150
+  );
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
+  padding: spacings.$big spacings.$medium;
+  font-size: 1.1rem;
+  transition: transitions.$fast;
+
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: spacings.$medium;
+    line-height: 0;
+    margin-bottom: spacings.$medium;
+
+    .icon-wrap {
+      font-size: 1.2rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    & > * {
+      margin-top: 0;
+      margin-bottom: spacings.$medium;
+      font-weight: normal;
+      font-size: 1.5rem;
+    }
+  }
+
+  &--contracted {
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    & .user-card {
+      position: absolute;
+      bottom: spacings.$big;
+      left: spacings.$medium;
+    }
+  }
+
+  & .user-card {
+    position: absolute;
+    bottom: spacings.$big;
+  }
+}

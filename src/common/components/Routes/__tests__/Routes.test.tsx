@@ -172,4 +172,19 @@ describe("Given a Routes component", () => {
       expect(view).toBeInTheDocument();
     });
   });
+
+  describe("When called with any role and with a route that has a heading", () => {
+    test("Then it should render the route with its heading data", () => {
+      const Wrapper = baseWrapper(["/layout-with-heading"]);
+
+      render(<Routes role="user" />, { wrapper: Wrapper });
+
+      const heading = [
+        screen.getByText(mockRoutes[7].layoutProps?.heading!),
+        screen.getByText(mockRoutes[7].layoutProps?.subheading!),
+      ];
+
+      heading.forEach((node) => expect(node).toBeInTheDocument());
+    });
+  });
 });

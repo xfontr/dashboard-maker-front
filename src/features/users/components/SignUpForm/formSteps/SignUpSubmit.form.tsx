@@ -5,7 +5,6 @@ import Form from "../../../../../common/components/Form/Form";
 import signUpLocationSchema from "../schemas/location.schema";
 import { ProtoUser } from "../../../types/user.types";
 import useForm from "../../../../../common/hooks/useForm";
-import "./formSteps.scss";
 
 type SignUpSubmitProps = {
   values: Partial<ProtoUser>;

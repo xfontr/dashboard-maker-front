@@ -6,6 +6,7 @@ Object.entries(icons).forEach(([iconName, Icon]) => {
     describe("When instantiated with a child 'Test' and a className 'Test'", () => {
       test("Then it should render said child in a container with the referred class", () => {
         const children = "Test";
+        const baseClass = "icon-wrap";
 
         const view = render(
           <Icon className={children} data-testid="icon">
@@ -17,7 +18,7 @@ Object.entries(icons).forEach(([iconName, Icon]) => {
         const parent = screen.getByTestId("icon");
 
         expect(iconChildren).toBeInTheDocument();
-        expect(parent).toHaveClass(children);
+        expect(parent).toHaveClass(`${baseClass} ${children}`);
 
         view.unmount();
       });

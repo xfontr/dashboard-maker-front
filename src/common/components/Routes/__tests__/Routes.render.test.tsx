@@ -1,8 +1,17 @@
-import { render, screen } from "@testing-library/react";
-import { PropsWithChildren } from "react";
+import { screen } from "@testing-library/react";
+import { DashboardLayoutProps } from "../../../../features/sideboard/components/DashboardLayout/DashboardLayout";
+import { notFoundHeading } from "../../../pages/NotFound.page";
+import { render } from "../../../test-utils/customRender";
 import RoutesRender from "../Routes.render";
 
-const MockLayout = ({ children }: PropsWithChildren) => <>Layout: {children}</>;
+const MockLayout = (props: DashboardLayoutProps) => (
+  <>
+    Layout: {props.children}
+    {Object.values(props).map((value) => (
+      <span>{value}</span>
+    ))}
+  </>
+);
 
 const MockElement = () => <>Element</>;
 
@@ -19,6 +28,30 @@ describe("Given a RoutesRender component", () => {
       const view = screen.getByText("Layout: Element");
 
       expect(view).toBeInTheDocument();
+    });
+
+    test("Then it should render the layout props, if any", () => {
+      const layoutProps = {
+        heading: "Heading",
+        subheading: "Subheading",
+        className: "className",
+      };
+
+      render(
+        <RoutesRender
+          Element={MockElement}
+          Layout={MockLayout}
+          layoutProps={layoutProps}
+        />
+      );
+
+      const view = [
+        screen.getByText(layoutProps.heading),
+        screen.getByText(layoutProps.subheading),
+        screen.getByText(layoutProps.className),
+      ];
+
+      view.forEach((node) => expect(node).toBeInTheDocument());
     });
   });
 
@@ -48,7 +81,7 @@ describe("Given a RoutesRender component", () => {
     test("Then it should render the not found page", () => {
       render(<RoutesRender />);
 
-      const view = screen.getByText("Not found");
+      const view = screen.getByText(notFoundHeading.heading!);
 
       expect(view).toBeInTheDocument();
     });

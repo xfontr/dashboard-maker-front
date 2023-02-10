@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/manrope": "^4.5.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -29,7 +30,9 @@
     "test:dev": "react-scripts test",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "undo": "git reset --soft HEAD~1 && git reset && git status",
+    "undo:current": "git status && git stash && git stash clear && git status"
   },
   "eslintConfig": {
     "extends": [

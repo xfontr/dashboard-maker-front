@@ -5,11 +5,17 @@ import useQuery from "../useQuery";
 import IResponse from "../../types/IResponse";
 import { act, waitFor } from "@testing-library/react";
 
+const status = 200;
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("Given a useQuery hook", () => {
   describe("When called with ui side effects options", () => {
     describe("and called its returned function, if it returns a success status", () => {
       const mockResponse = {
-        status: VERIFY_TOKEN_UI.successCondition[1],
+        status,
       };
       const callback = () => mockResponse;
 
@@ -96,80 +102,10 @@ describe("Given a useQuery hook", () => {
     });
   });
 
-  describe("When called with no ui side effects options", () => {
-    describe("and called its returned function, if it returns a success status", () => {
-      const mockResponse = {
-        status: VERIFY_TOKEN_UI.successCondition[1],
-      };
-      const callback = () => mockResponse;
-
-      test("Then it should keep the ui with 'IDLE' status", async () => {
-        const { result } = renderHook(() => ({
-          query: useQuery({
-            options: { successCondition: VERIFY_TOKEN_UI.successCondition },
-          }),
-          ui: useUi(),
-        }));
-
-        expect(result.current.ui.ui.status).toBe("IDLE");
-
-        const callCallback = result.current.query(
-          callback as unknown as (
-            values?: unknown
-          ) => Promise<IResponse<unknown>>
-        );
-
-        act(() => {
-          callCallback();
-        });
-
-        expect(result.current.ui.ui.status).toBe("IDLE");
-
-        await waitFor(() => {
-          expect(result.current.ui.ui.status).toBe("IDLE");
-        });
-      });
-    });
-
-    describe("and called its returned function, if it returns an error status", () => {
-      const mockResponse = {
-        status: "",
-      };
-      const callback = () => mockResponse;
-
-      test("Then it should keep the ui with 'IDLE' status", async () => {
-        const { result } = renderHook(() => ({
-          query: useQuery({
-            options: { successCondition: VERIFY_TOKEN_UI.successCondition },
-          }),
-          ui: useUi(),
-        }));
-
-        expect(result.current.ui.ui.status).toBe("IDLE");
-
-        const callCallback = result.current.query(
-          callback as unknown as (
-            values?: unknown
-          ) => Promise<IResponse<unknown>>
-        );
-
-        act(() => {
-          callCallback();
-        });
-
-        expect(result.current.ui.ui.status).toBe("IDLE");
-
-        await waitFor(() => {
-          expect(result.current.ui.ui.status).toBe("IDLE");
-        });
-      });
-    });
-  });
-
   describe("When called with custom side effect functions", () => {
     const mockResponse = {
       body: "The body before the custom callback updates it",
-      status: VERIFY_TOKEN_UI.successCondition[1],
+      status: 200,
     };
 
     describe("and called its returned function, if it returns a success status", () => {
@@ -264,6 +200,72 @@ describe("Given a useQuery hook", () => {
 
         expect(onInitCallback).toHaveBeenCalledTimes(1);
         expect(onSuccessCallback).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("When called with no ui side effects options", () => {
+    describe("and called its returned function, if it returns a success status", () => {
+      const mockResponse = {
+        status,
+      };
+      const callback = () => mockResponse;
+
+      test("Then it should keep the ui with 'IDLE' status", async () => {
+        const { result } = renderHook(() => ({
+          query: useQuery({}),
+          ui: useUi(),
+        }));
+
+        expect(result.current.ui.ui.status).toBe("IDLE");
+
+        const callCallback = result.current.query(
+          callback as unknown as (
+            values?: unknown
+          ) => Promise<IResponse<unknown>>
+        );
+
+        act(() => {
+          callCallback();
+        });
+
+        expect(result.current.ui.ui.status).toBe("IDLE");
+
+        await waitFor(() => {
+          expect(result.current.ui.ui.status).toBe("IDLE");
+        });
+      });
+    });
+
+    describe("and called its returned function, if it returns an error status", () => {
+      const mockResponse = {
+        status: "",
+      };
+      const callback = () => mockResponse;
+
+      test("Then it should keep the ui with 'IDLE' status", async () => {
+        const { result } = renderHook(() => ({
+          query: useQuery({}),
+          ui: useUi(),
+        }));
+
+        expect(result.current.ui.ui.status).toBe("IDLE");
+
+        const callCallback = result.current.query(
+          callback as unknown as (
+            values?: unknown
+          ) => Promise<IResponse<unknown>>
+        );
+
+        act(() => {
+          callCallback();
+        });
+
+        expect(result.current.ui.ui.status).toBe("IDLE");
+
+        await waitFor(() => {
+          expect(result.current.ui.ui.status).toBe("IDLE");
+        });
       });
     });
   });

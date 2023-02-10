@@ -1,17 +1,21 @@
-import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFound.page";
+import DashboardLayout, {
+  DashboardLayoutProps,
+} from "../../../features/sideboard/components/DashboardLayout/DashboardLayout";
 
 type RoutesRenderProps = {
   to?: string;
   Element?: React.LazyExoticComponent<() => JSX.Element> | (() => JSX.Element);
-  Layout?: ({ children }: PropsWithChildren) => JSX.Element;
+  Layout?: (props: DashboardLayoutProps) => JSX.Element;
+  layoutProps?: Omit<DashboardLayoutProps, "children">;
 };
 
 const RoutesRender = ({
   to,
   Element,
-  Layout,
+  Layout = DashboardLayout,
+  layoutProps,
 }: RoutesRenderProps): JSX.Element => {
   if (!Element && !to) {
     return <NotFoundPage />;
@@ -19,15 +23,12 @@ const RoutesRender = ({
 
   return (
     <>
-      {Element && Layout ? (
-        <Layout>
+      {Element ? (
+        <Layout {...layoutProps}>
           <Element />
         </Layout>
       ) : (
-        <>
-          {Element && <Element />}
-          {!Element && <Navigate to={to!} />}
-        </>
+        <>{!Element && <Navigate to={to!} />}</>
       )}
     </>
   );
