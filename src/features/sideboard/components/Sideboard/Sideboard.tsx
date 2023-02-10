@@ -1,16 +1,12 @@
 import "./Sideboard.scss";
-import MenuItem from "../MenuItem/MenuItem";
-import { CloseIcon, MenuIcon } from "../../../../common/components/Icon/Icon";
-import { useNavigate } from "react-router-dom";
-import PATHS from "../../../../config/paths";
+import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
 import UserMiniCard from "../UserMiniCard/UserMiniCard";
+import { MenuItems } from "../../MenuItems/MenuItems";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
-
-  const navigate = useNavigate();
 
   return (
     <aside
@@ -29,12 +25,7 @@ const Sideboard = (): JSX.Element => {
       </header>
 
       <ul className="sideboard__items">
-        <MenuItem
-          label="Overview"
-          onClick={() => navigate(PATHS.home)}
-          Icon={CloseIcon}
-          {...{ showOnlyIcon }}
-        />
+        <MenuItems {...{ showOnlyIcon }} />
       </ul>
       <footer>
         <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
