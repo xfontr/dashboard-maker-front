@@ -40,7 +40,7 @@ const Sideboard = (): JSX.Element => {
       </ul>
 
       <footer>
-        <UserMiniCard {...{ showOnlyIcon }} />
+        <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
       </footer>
     </aside>
   );

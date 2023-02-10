@@ -1,5 +1,5 @@
 const COMPANY = {
-  name: "Fake name",
+  name: "CustomWirth",
 };
 
 export default COMPANY;
