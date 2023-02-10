@@ -31,7 +31,8 @@
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "undo": "git status && git stash && git stash clear && git status"
+    "undo": "git reset --soft HEAD~1 && git reset && git status",
+    "undo:current": "git status && git stash && git stash clear && git status"
   },
   "eslintConfig": {
     "extends": [
