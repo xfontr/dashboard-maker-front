@@ -1,6 +1,6 @@
-import menuOptions from "../../../common/menuOptions";
-import MenuItem from "../components/MenuItem/MenuItem";
-import { MenuOption } from "../types/MenuOption";
+import menuOptions from "../../../../common/menuOptions";
+import MenuItem from "../MenuItem/MenuItem";
+import { MenuOption } from "../../types/MenuOption";
 import "./MenuItems.scss";
 
 type MenuItemsProps = {

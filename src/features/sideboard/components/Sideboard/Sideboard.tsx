@@ -3,7 +3,7 @@ import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
 import UserMiniCard from "../UserMiniCard/UserMiniCard";
-import { MenuItems } from "../../MenuItems/MenuItems";
+import { MenuItems } from "../MenuItems/MenuItems";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
