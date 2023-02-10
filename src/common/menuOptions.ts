@@ -1,10 +1,10 @@
 import { MenuOption } from "../features/sideboard/types/MenuOption";
-import { CloseIcon } from "./components/Icon/Icon";
+import { DashboardIcon } from "./components/Icon/Icon";
 
 const menuOptions: MenuOption[] = [
   {
     label: "Overview",
-    Icon: CloseIcon,
+    Icon: DashboardIcon,
     to: "home",
   },
 ];

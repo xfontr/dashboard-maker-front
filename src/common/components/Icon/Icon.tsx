@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineSetting } from "react-icons/ai";
 import { CgMenuGridR } from "react-icons/cg";
+import { MdDashboard } from "react-icons/md";
 import setProps from "../../utils/setProps";
 import "./Icon.scss";
 
@@ -70,6 +71,16 @@ export const SettingsIcon = ({ children, ...rest }: IconProps): JSX.Element => (
 export const MenuIcon = ({ children, ...rest }: IconProps): JSX.Element => (
   <Icon {...rest}>
     <CgMenuGridR className={baseClass} />
+    {children}
+  </Icon>
+);
+
+export const DashboardIcon = ({
+  children,
+  ...rest
+}: IconProps): JSX.Element => (
+  <Icon {...rest}>
+    <MdDashboard className={baseClass} />
     {children}
   </Icon>
 );

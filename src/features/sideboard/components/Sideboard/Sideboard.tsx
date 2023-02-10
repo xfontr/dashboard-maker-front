@@ -24,9 +24,8 @@ const Sideboard = (): JSX.Element => {
         {showOnlyIcon || <h3>{COMPANY.name}</h3>}
       </header>
 
-      <ul className="sideboard__items">
-        <MenuItems {...{ showOnlyIcon }} />
-      </ul>
+      <MenuItems {...{ showOnlyIcon }} />
+
       <footer>
         <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
       </footer>

@@ -21,12 +21,6 @@
   font-size: 1.1rem;
   transition: transitions.$fast;
 
-  &__items {
-    display: flex;
-    flex-direction: column;
-    gap: spacings.$big;
-  }
-
   &__company {
     display: flex;
     align-items: center;
