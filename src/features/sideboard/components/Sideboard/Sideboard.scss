@@ -27,11 +27,24 @@
     gap: spacings.$big;
   }
 
-  &__company > * {
-    margin-top: 0;
-    margin-bottom: spacings.$big;
-    font-weight: bold;
-    font-size: 1.5rem;
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: spacings.$medium;
+    line-height: 0;
+
+    .icon-wrap {
+      font-size: 1.2rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    & > * {
+      margin-top: 0;
+      margin-bottom: spacings.$big;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
   }
 
   &--contracted {
@@ -40,7 +53,6 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: spacings.$big;
 
     & .user-card {
       position: absolute;
