@@ -1,10 +1,11 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "../../../../common/test-utils/customRender";
+import COMPANY from "../../../../config/company";
 import Sideboard from "./Sideboard";
 
 describe("Given a Sideboard component", () => {
-  const labels = ["Overview", "Log out", "Settings"];
+  const labels = ["Overview", "Log out", "Settings", COMPANY.name];
 
   describe("When instantiated", () => {
     test("Then it should show two menus with items", () => {
@@ -74,8 +75,12 @@ describe("Given a Sideboard component", () => {
         // Contracts the sideboard
         await userEvent.click(contractButton);
 
+        const expandButton = screen.getByRole("button", {
+          name: "Expand menu",
+        });
+
         // Expands the sideboard
-        await userEvent.click(contractButton);
+        await userEvent.click(expandButton);
 
         labels.forEach((label) => {
           expect(screen.getByText(label)).toBeInTheDocument();
