@@ -19,7 +19,6 @@ const Page = ({
   <>
     <header {...setProps(rest, "className", "page-header")}>
       {hasBreadcrumbs && <p data-testid="breadcrumbs">Breadcrumbs</p>}
-      {/* TODO: Test conditional heading */}
       {heading && <h1 className="page-header__title">{heading}</h1>}
       {subheading && (
         <span className="page-header__subtitle">{subheading}</span>
