@@ -17,7 +17,6 @@ const Sideboard = (): JSX.Element => {
       className={`sideboard${showOnlyIcon ? " sideboard--contracted" : ""}`}
       data-testid="sideboard"
     >
-      {/* TODO: Test this case */}
       <header className="sideboard__company">
         <button
           title={showOnlyIcon ? "Expand menu" : "Contract menu"}
