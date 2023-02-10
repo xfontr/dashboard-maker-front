@@ -1,6 +1,6 @@
 import "./Sideboard.scss";
 import MenuItem from "../MenuItem/MenuItem";
-import { CloseIcon } from "../../../../common/components/Icon/Icon";
+import { CloseIcon, MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useNavigate } from "react-router-dom";
 import PATHS from "../../../../config/paths";
 import { useState } from "react";
@@ -18,11 +18,17 @@ const Sideboard = (): JSX.Element => {
       data-testid="sideboard"
     >
       {/* TODO: Test this case */}
-      {showOnlyIcon || (
-        <header className="sideboard__company">
-          <h3>{COMPANY.name}</h3>
-        </header>
-      )}
+      <header className="sideboard__company">
+        <button
+          title={showOnlyIcon ? "Expand menu" : "Contract menu"}
+          onClick={() => setIsExpanded((current) => !current)}
+        >
+          <MenuIcon />
+        </button>
+
+        {showOnlyIcon || <h3>{COMPANY.name}</h3>}
+      </header>
+
       <ul className="sideboard__items">
         <MenuItem
           label="Overview"
@@ -30,15 +36,7 @@ const Sideboard = (): JSX.Element => {
           Icon={CloseIcon}
           {...{ showOnlyIcon }}
         />
-        <MenuItem
-          label="Contract/Expand"
-          onClick={() => setIsExpanded((current) => !current)}
-          Icon={CloseIcon}
-          aria-label={showOnlyIcon ? "Expand menu" : "Contract menu"}
-          {...{ showOnlyIcon }}
-        />
       </ul>
-
       <footer>
         <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
       </footer>

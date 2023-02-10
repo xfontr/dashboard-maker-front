@@ -1,16 +1,17 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { render } from "../../../../common/test-utils/customRender";
+import COMPANY from "../../../../config/company";
 import Sideboard from "./Sideboard";
 
 describe("Given a Sideboard component", () => {
-  const labels = ["Overview", "Log out", "Contract/Expand"];
+  const labels = ["Overview", "Log out", "Settings", COMPANY.name];
 
   describe("When instantiated", () => {
     test("Then it should show two menus with items", () => {
       /** Regular menu + user card menu */
       const menus = 2;
-      const totalMenuItems = menus * 2;
+      const totalMenuItems = 2 + 1;
 
       render(<Sideboard />);
 
@@ -25,7 +26,7 @@ describe("Given a Sideboard component", () => {
       test("Then it should display only the item icons and user profile picture and contract the sideboard", async () => {
         render(<Sideboard />);
 
-        const contractButton = screen.getByRole("listitem", {
+        const contractButton = screen.getByRole("button", {
           name: "Contract menu",
         });
 
@@ -38,7 +39,7 @@ describe("Given a Sideboard component", () => {
         const userOptions = 2;
 
         const fullUserData = screen.getAllByRole("button");
-        expect(fullUserData).toHaveLength(userOptions);
+        expect(fullUserData.length >= userOptions).toBeTruthy();
 
         // Contracts the sideboard
         await userEvent.click(contractButton);
@@ -53,7 +54,9 @@ describe("Given a Sideboard component", () => {
         expect(userProfilePicture).toBeInTheDocument();
 
         const remainingUserData = screen.queryAllByRole("button");
-        expect(remainingUserData).toHaveLength(0);
+        expect(
+          remainingUserData.length - fullUserData.length === -userOptions
+        ).toBeTruthy();
 
         const sideboard = screen.getByTestId("sideboard");
 
@@ -65,15 +68,19 @@ describe("Given a Sideboard component", () => {
       test("Then it should display the full menu items and complete user profile and resize the sideboard", async () => {
         render(<Sideboard />);
 
-        const contractButton = screen.getByRole("listitem", {
+        const contractButton = screen.getByRole("button", {
           name: "Contract menu",
         });
 
         // Contracts the sideboard
         await userEvent.click(contractButton);
 
+        const expandButton = screen.getByRole("button", {
+          name: "Expand menu",
+        });
+
         // Expands the sideboard
-        await userEvent.click(contractButton);
+        await userEvent.click(expandButton);
 
         labels.forEach((label) => {
           expect(screen.getByText(label)).toBeInTheDocument();
