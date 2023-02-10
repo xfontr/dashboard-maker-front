@@ -1,5 +1,6 @@
 import { HTMLProps, ReactNode } from "react";
 import setProps from "../../utils/setProps";
+import Breadcrumbs from "../Breadcrumbs/BreadCrumbs";
 import "./Page.scss";
 
 export interface PageProps extends HTMLProps<HTMLDivElement> {
@@ -18,7 +19,7 @@ const Page = ({
 }: PageProps): JSX.Element => (
   <>
     <header {...setProps(rest, "className", "page-header")}>
-      {hasBreadcrumbs && <p data-testid="breadcrumbs">Breadcrumbs</p>}
+      {hasBreadcrumbs && <Breadcrumbs data-testid="breadcrumbs" />}
       {heading && <h1 className="page-header__title">{heading}</h1>}
       {subheading && (
         <span className="page-header__subtitle">{subheading}</span>
