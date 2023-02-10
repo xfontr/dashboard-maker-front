@@ -1,15 +1,15 @@
-import useLogOut from "../../../users/hooks/useLogOut";
 import "./Sideboard.scss";
 import MenuItem from "../MenuItem/MenuItem";
 import { CloseIcon } from "../../../../common/components/Icon/Icon";
 import { useNavigate } from "react-router-dom";
 import PATHS from "../../../../config/paths";
 import { useState } from "react";
+import COMPANY from "../../../../config/company";
+import UserMiniCard from "../UserMiniCard/UserMiniCard";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
 
-  const logOut = useLogOut();
   const navigate = useNavigate();
 
   return (
@@ -17,16 +17,16 @@ const Sideboard = (): JSX.Element => {
       className={`sideboard${showOnlyIcon ? " sideboard--contracted" : ""}`}
       data-testid="sideboard"
     >
+      {/* TODO: Test this case */}
+      {showOnlyIcon || (
+        <header className="sideboard__company">
+          <h3>{COMPANY.name}</h3>
+        </header>
+      )}
       <ul className="sideboard__items">
         <MenuItem
           label="Overview"
           onClick={() => navigate(PATHS.home)}
-          Icon={CloseIcon}
-          {...{ showOnlyIcon }}
-        />
-        <MenuItem
-          label="Log out"
-          onClick={logOut}
           Icon={CloseIcon}
           {...{ showOnlyIcon }}
         />
@@ -38,6 +38,10 @@ const Sideboard = (): JSX.Element => {
           {...{ showOnlyIcon }}
         />
       </ul>
+
+      <footer>
+        <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
+      </footer>
     </aside>
   );
 };

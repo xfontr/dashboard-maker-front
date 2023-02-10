@@ -1,0 +1,48 @@
+@use "../../../../common/styles/spacings";
+@use "../../../../common/styles/colors";
+
+.user-card {
+  width: 88%;
+
+  &__profile {
+    cursor: pointer;
+  }
+
+  &__info {
+    display: flex;
+    gap: spacings.$medium;
+    align-items: center;
+    margin-bottom: spacings.$medium;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 0.1rem;
+  }
+
+  &__identifier {
+    margin: 0;
+    font-size: inherit;
+    font-weight: bold;
+  }
+
+  &__role {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: colors.$typography--lighter;
+  }
+
+  &__options {
+    display: flex;
+    gap: spacings.$medium;
+    line-height: 0;
+  }
+
+  &__option > .icon-wrap {
+    cursor: pointer;
+    font-size: 1.3rem;
+  }
+}

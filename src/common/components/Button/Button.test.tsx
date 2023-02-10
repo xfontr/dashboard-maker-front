@@ -1,39 +1,38 @@
 import { render, screen } from "@testing-library/react";
-import Button, { AnimatedButton } from "./Button";
 import userEvent from "@testing-library/user-event";
+import * as buttons from "./Button";
 
-describe("Given a button component", () => {
-  describe("When instantiated with a text 'Test' and a class 'test'", () => {
-    test("Then it should display said text and have said class", () => {
-      const text = "Test";
+const baseClass = "button";
 
-      const defaultClassName = "button";
-      const className = "test";
+Object.entries(buttons).forEach(([buttonName, Button]) => {
+  describe(`Given a ${buttonName} component`, () => {
+    describe("When instantiated with a text 'Test', a class 'test' and a variant 'tiny'", () => {
+      test("Then it should display said text and have said class", async () => {
+        const text = "Test";
+        const className = "test";
+        const onClick = jest.fn();
 
-      render(<Button {...{ className }}>{text}</Button>);
+        const view = render(
+          <Button {...{ className, onClick }} variant="tiny">
+            {text}
+          </Button>
+        );
 
-      const button = screen.getByRole("button", { name: text });
+        // We don't use the name option in case the button renders the text twice
+        const button = screen.getByRole("button");
 
-      expect(button).toBeInTheDocument();
-      expect(button).toHaveClass(defaultClassName, className);
-    });
-  });
-});
+        // We take all texts because some buttons my render the text twice
+        const buttonText = screen.getAllByText(text);
 
-describe("Given a AnimatedButton component", () => {
-  describe("When instantiated with a text 'Test' and an onClick action", () => {
-    test("Then it should display said text and perform said action on click", async () => {
-      const text = "Test";
-      const onClick = jest.fn();
+        await userEvent.click(button);
 
-      render(<AnimatedButton {...{ onClick }}>{text}</AnimatedButton>);
+        expect(button).toBeInTheDocument();
+        expect(button).toHaveClass(baseClass, className, `${baseClass}--tiny`);
+        expect(buttonText.length > 0).toBeTruthy();
+        expect(onClick).toHaveBeenCalled();
 
-      const button = screen.getByRole("button", { name: `${text} ${text}` });
-
-      await userEvent.click(button);
-
-      expect(button).toBeInTheDocument();
-      expect(onClick).toHaveBeenCalled();
+        view.unmount();
+      });
     });
   });
 });

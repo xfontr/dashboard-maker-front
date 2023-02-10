@@ -4,8 +4,9 @@
 @use "../../../../common/styles/transitions";
 
 .sideboard {
+  position: relative;
   width: 70%;
-  max-width: 20rem;
+  max-width: 18rem;
   min-height: 100%;
   background-image: linear-gradient(
     to right top,
@@ -26,9 +27,30 @@
     gap: spacings.$big;
   }
 
+  &__company > * {
+    margin-top: 0;
+    margin-bottom: spacings.$big;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
   &--contracted {
     width: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: spacings.$big;
+
+    & .user-card {
+      position: absolute;
+      bottom: spacings.$big;
+      left: spacings.$medium;
+    }
+  }
+
+  & .user-card {
+    position: absolute;
+    bottom: spacings.$big;
   }
 }
