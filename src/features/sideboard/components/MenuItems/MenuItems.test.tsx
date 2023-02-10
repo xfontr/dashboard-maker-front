@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
-import menuOptions from "../../../common/menuOptions";
-import { render } from "../../../common/test-utils/customRender";
-import { MenuOption } from "../types/MenuOption";
+import menuOptions from "../../../../common/menuOptions";
+import { render } from "../../../../common/test-utils/customRender";
+import { MenuOption } from "../../types/MenuOption";
 import { baseMenuItems } from "./MenuItems";
 
 const mockMenuItems: MenuOption[] = [{ ...menuOptions[0], className: "test" }];

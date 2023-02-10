@@ -15,23 +15,27 @@ export const baseRoutes =
   ({ role }: RoutesProps): JSX.Element =>
     (
       <ReactRoutes>
-        {routes.map(({ path, Element, to, roles, rejectPath, Layout }) => (
-          <Route
-            {...{ path }}
-            element={
-              <RoutesProtector
-                condition={hasAuthLevel(role, roles)}
-                {...{ rejectPath }}
-              />
-            }
-            key={path}
-          >
+        {routes.map(
+          ({ path, Element, to, roles, rejectPath, Layout, layoutProps }) => (
             <Route
               {...{ path }}
-              element={<RoutesRender {...{ Element, to, Layout }} />}
-            />
-          </Route>
-        ))}
+              element={
+                <RoutesProtector
+                  condition={hasAuthLevel(role, roles)}
+                  {...{ rejectPath }}
+                />
+              }
+              key={path}
+            >
+              <Route
+                {...{ path }}
+                element={
+                  <RoutesRender {...{ Element, to, Layout, layoutProps }} />
+                }
+              />
+            </Route>
+          )
+        )}
       </ReactRoutes>
     );
 

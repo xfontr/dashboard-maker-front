@@ -26,6 +26,7 @@
     align-items: center;
     gap: spacings.$medium;
     line-height: 0;
+    margin-bottom: spacings.$medium;
 
     .icon-wrap {
       font-size: 1.2rem;
@@ -35,8 +36,8 @@
 
     & > * {
       margin-top: 0;
-      margin-bottom: spacings.$big;
-      font-weight: bold;
+      margin-bottom: spacings.$medium;
+      font-weight: normal;
       font-size: 1.5rem;
     }
   }

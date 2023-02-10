@@ -27,6 +27,10 @@ describe("Given a Page component", () => {
 
       const container = screen.getByTestId("test");
       expect(container).toHaveClass("page-header test-class");
+
+      const notView = screen.queryByTestId("breadcrumbs");
+
+      expect(notView).not.toBeInTheDocument();
     });
   });
 
@@ -37,6 +41,26 @@ describe("Given a Page component", () => {
       const heading = screen.getByRole("heading", { name: "heading" });
 
       expect(heading).toBeInTheDocument();
+    });
+  });
+
+  describe("When instantiated with nothing", () => {
+    test("Then it should render nothing", () => {
+      render(<Page data-testid="page" />);
+
+      const view = screen.getByTestId("page");
+
+      expect(view).toBeEmptyDOMElement();
+    });
+  });
+
+  describe("When instantiated with breadcrumbs", () => {
+    test("Then it should render them", () => {
+      render(<Page hasBreadcrumbs={true} />);
+
+      const view = screen.getByTestId("breadcrumbs");
+
+      expect(view).toBeInTheDocument();
     });
   });
 });

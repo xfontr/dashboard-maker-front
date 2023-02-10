@@ -47,4 +47,14 @@ export const mockRoutes: RouteConfig[] = [
     roles: "all",
     Element: mockUnauthorizedPage,
   },
+  {
+    path: "/layout-with-heading",
+    roles: "all",
+    Element: mockHomePage,
+    layoutProps: {
+      heading: "Heading",
+      subheading: "Subheading",
+      className: "Test",
+    },
+  },
 ];
