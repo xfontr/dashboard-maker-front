@@ -7,7 +7,6 @@ import {
 import UserRoles from "../../../../common/types/UserRoles";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import useLogOut from "../../../users/hooks/useLogOut";
-import useUserAuth from "../../../users/store/userAuth.hook";
 import "./UserMiniCard.scss";
 
 type UserMiniCardProps = {
@@ -76,21 +75,6 @@ const UserMiniCard = ({
       </GlassBox>
     </article>
   );
-};
-
-// TODO: Test the component below
-
-type UserMiniCardWrapperProps = {
-  showOnlyIcon: boolean;
-  isMobile?: boolean;
-};
-
-export const UserMiniCardWrapper = (props: UserMiniCardWrapperProps) => {
-  const {
-    userAuth: { email, role },
-  } = useUserAuth();
-
-  return <UserMiniCard {...props} identifier={email} role={role} />;
 };
 
 export default UserMiniCard;

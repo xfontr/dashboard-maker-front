@@ -29,11 +29,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "test:dev": "react-scripts test",
-    "test:coverage": "react-scripts test --coverage --watchAll=false",
+    "test:coverage": "react-scripts test --coverage --watchAll=false && open coverage/lcov-report/index.html",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "undo": "git reset --soft HEAD~1 && git reset && git status",
-    "undo:current": "git status && git stash && git stash clear && git status"
+    "undo:current": "git status && git stash && git stash clear && git status",
+    "file:coverage": "open coverage/lcov-report/index.html"
   },
   "eslintConfig": {
     "extends": [
