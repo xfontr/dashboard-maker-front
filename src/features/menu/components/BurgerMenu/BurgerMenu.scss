@@ -4,9 +4,8 @@
 @use "../../../../common/styles/transitions";
 
 .burger {
-  position: relative;
-  width: 100%;
   position: fixed;
+  width: 100%;
   z-index: 999;
   background: linear-gradient(to left top, #8f945a70, #5a916770, #048a8170),
     colors.$secondary;
