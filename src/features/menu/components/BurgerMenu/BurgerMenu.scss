@@ -4,33 +4,52 @@
 
 .burger {
   position: relative;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: spacings.$medium;
+  padding-right: spacings.$medium;
   z-index: 999;
 
-  &--open {
-    @media (min-width: breakpoints.$big) {
-      position: fixed;
-      right: 9%;
+  & .sideboard__items {
+    & .icon-wrap {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    & .menu-item > * {
+      font-size: 1.5rem;
     }
   }
 
-  ul {
+  &--open {
+    min-height: 100%;
+    background: linear-gradient(
+        to right top,
+        #da938750,
+        #bb936550,
+        #8f945a50,
+        #5a916750,
+        #048a8150
+      ),
+      colors.$primary;
+    padding: spacings.$big spacings.$medium;
+    font-size: 1.4rem;
+
     display: flex;
     flex-direction: column;
-    gap: spacings.$medium;
-  }
-
-  a {
-    text-decoration: inherit;
-    color: inherit;
+    justify-content: flex-start;
   }
 
   &__icon {
     position: relative;
     height: 36px;
-    display: flex;
-    align-items: center;
+    display: block;
     cursor: pointer;
     z-index: 9999;
+    align-self: flex-end;
   }
 
   &__line {
@@ -44,6 +63,7 @@
     &::after {
       content: "";
       position: absolute;
+      left: 0;
       bottom: 10px;
       background-color: colors.$secondary;
       width: 35px;
@@ -55,6 +75,7 @@
     &::before {
       content: "";
       position: absolute;
+      left: 0;
       top: 10px;
       background-color: colors.$secondary;
       width: 35px;
@@ -66,19 +87,21 @@
     &--crossed {
       height: 0px;
       transform: rotate(180deg);
-      background-color: colors.$primary;
 
       &::after {
-        bottom: -2.5px;
+        bottom: -14px;
         transform: rotate(315deg);
-        background-color: colors.$primary;
       }
 
       &::before {
-        top: -2.5px;
         transform: rotate(-497deg);
-        background-color: colors.$primary;
       }
     }
+  }
+
+  & .user-card {
+    position: absolute;
+    bottom: spacings.$big;
+    max-width: 94%;
   }
 }

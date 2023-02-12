@@ -1,6 +1,7 @@
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import useBurgerMenu from "../../hooks/useBurgerMenu";
 import { MenuItems } from "../MenuItems/MenuItems";
+import { UserMiniCardWrapper } from "../UserMiniCard/UserMiniCard";
 import "./BurgerMenu.scss";
 
 const BurgerMenu = (): JSX.Element => {
@@ -22,7 +23,12 @@ const BurgerMenu = (): JSX.Element => {
         ></div>
       </button>
 
-      {isMenuVisible && <MenuItems showOnlyIcon={false} />}
+      {isMenuVisible && (
+        <>
+          <MenuItems showOnlyIcon={false} />
+          <UserMiniCardWrapper showOnlyIcon={false} isMobile={true} />
+        </>
+      )}
     </nav>
   );
 };

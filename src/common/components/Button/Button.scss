@@ -1,6 +1,7 @@
 @use "../../../common/styles/spacings";
 @use "../../../common/styles/colors";
 @use "../../../common/styles/transitions";
+@use "../../../common/styles/breakpoints";
 
 .button {
   border-radius: spacings.$rad-small;
@@ -83,8 +84,12 @@
 
 .button--tiny {
   border-radius: spacings.$rad-small;
-  padding: spacings.$small--very spacings.$small;
+  padding: spacings.$small spacings.$medium;
   font-weight: normal;
   font-size: 0.9rem;
   letter-spacing: 0;
+
+  @media (min-width: breakpoints.$small-medium) {
+    padding: spacings.$small--very spacings.$small;
+  }
 }
