@@ -9,8 +9,6 @@ import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
 
-  // TODO: Consider custom hook, just like for burger. Or opposite, consider no custom hooks
-
   const toggleSideboard = () => {
     setIsExpanded((current) => !current);
   };
