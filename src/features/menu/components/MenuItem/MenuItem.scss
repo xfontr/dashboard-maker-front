@@ -1,26 +1,37 @@
 @use "../../../../common/styles/spacings";
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/transitions";
 
-.menu-item > a {
-  display: flex;
-  gap: spacings.$medium;
-  align-items: center;
-  line-height: 0;
+.menu-item {
+  & > a {
+    display: flex;
+    gap: spacings.$medium;
+    align-items: center;
+    line-height: 0;
+    width: fit-content;
 
-  .icon-wrap {
-    font-size: 1.2rem;
-    width: 1.1rem;
-    height: 1.1rem;
-  }
+    transition: transitions.$fast--very;
 
-  &--clickable {
-    cursor: pointer;
-  }
+    &:hover {
+      transform: skew(-10deg);
+    }
 
-  &--contracted {
     .icon-wrap {
-      width: 1.4rem;
-      height: 1.4rem;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    &--clickable {
+      cursor: pointer;
+    }
+
+    &--contracted {
+      .icon-wrap {
+        width: 1.4rem;
+        height: 1.4rem;
+        font-size: 1.4rem;
+      }
     }
   }
 }

@@ -1,40 +1,85 @@
 @use "../../../../common/styles/colors";
 @use "../../../../common/styles/breakpoints";
 @use "../../../../common/styles/spacings";
+@use "../../../../common/styles/transitions";
 
 .burger {
   position: relative;
+  width: 100%;
+  position: fixed;
   z-index: 999;
+  background: linear-gradient(to left top, #8f945a70, #5a916770, #048a8170),
+    colors.$secondary;
+  background-size: 200%;
+  animation: amazing-background infinite transitions.$animation-fast;
 
-  &--open {
-    @media (min-width: breakpoints.$big) {
-      position: fixed;
-      right: 9%;
+  &__header {
+    color: colors.$primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 spacings.$medium;
+    height: spacings.$header;
+  }
+
+  &__company {
+    line-height: 0;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: colors.$primary;
+  }
+
+  & .sideboard__items {
+    & .icon-wrap {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    & .menu-item > * {
+      font-size: 1.5rem;
     }
   }
 
-  ul {
+  &--open {
+    min-height: 100%;
+    background: linear-gradient(
+        to right top,
+        #da938750,
+        #bb936550,
+        #8f945a50,
+        #5a916750,
+        #048a8150
+      ),
+      colors.$primary;
+    background-size: 500%;
+    animation: amazing-background infinite transitions.$animation-medium;
+    font-size: 1.4rem;
+
     display: flex;
     flex-direction: column;
-    gap: spacings.$medium;
-  }
+    justify-content: flex-start;
 
-  a {
-    text-decoration: inherit;
-    color: inherit;
+    & .burger__full-menu {
+      padding: spacings.$big spacings.$medium;
+    }
+
+    & .burger__company {
+      color: colors.$secondary;
+    }
   }
 
   &__icon {
     position: relative;
     height: 36px;
-    display: flex;
-    align-items: center;
+    display: block;
     cursor: pointer;
     z-index: 9999;
   }
 
   &__line {
-    background-color: colors.$secondary;
+    background-color: colors.$primary;
     width: 35px;
     height: 4px;
     border-radius: 3px;
@@ -44,8 +89,9 @@
     &::after {
       content: "";
       position: absolute;
+      left: 0;
       bottom: 10px;
-      background-color: colors.$secondary;
+      background-color: colors.$primary;
       width: 35px;
       height: 4px;
       border-radius: 3px;
@@ -55,8 +101,9 @@
     &::before {
       content: "";
       position: absolute;
+      left: 0;
       top: 10px;
-      background-color: colors.$secondary;
+      background-color: colors.$primary;
       width: 35px;
       height: 4px;
       border-radius: 3px;
@@ -66,19 +113,36 @@
     &--crossed {
       height: 0px;
       transform: rotate(180deg);
-      background-color: colors.$primary;
 
       &::after {
-        bottom: -2.5px;
+        bottom: -4px;
         transform: rotate(315deg);
-        background-color: colors.$primary;
+        background-color: colors.$secondary;
       }
 
       &::before {
-        top: -2.5px;
+        top: 0;
         transform: rotate(-497deg);
-        background-color: colors.$primary;
+        background-color: colors.$secondary;
       }
     }
+  }
+
+  & .user-card {
+    position: absolute;
+    bottom: spacings.$big;
+    max-width: 94%;
+  }
+}
+
+@keyframes amazing-background {
+  from {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  to {
+    background-position: 0%;
   }
 }

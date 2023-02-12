@@ -1,4 +1,4 @@
-import { getByRole, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { render } from "../../../../common/test-utils/customRender";
 import DashboardLayout from "./DashboardLayout";
 

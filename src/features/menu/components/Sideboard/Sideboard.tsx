@@ -2,21 +2,32 @@ import "./Sideboard.scss";
 import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
-import UserMiniCard from "../UserMiniCard/UserMiniCard";
+import { UserMiniCardWrapper } from "../UserMiniCard/UserMiniCard";
 import { MenuItems } from "../MenuItems/MenuItems";
+import concatIfTrue from "../../../../common/utils/concatIfTrue";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
 
+  // TODO: Consider custom hook, just like for burger. Or opposite, consider no custom hooks
+
+  const toggleSideboard = () => {
+    setIsExpanded((current) => !current);
+  };
+
   return (
     <aside
-      className={`sideboard${showOnlyIcon ? " sideboard--contracted" : ""}`}
+      className={concatIfTrue(
+        "sideboard",
+        "sideboard--contracted",
+        showOnlyIcon
+      )}
       data-testid="sideboard"
     >
       <header className="sideboard__company">
         <button
           title={showOnlyIcon ? "Expand menu" : "Contract menu"}
-          onClick={() => setIsExpanded((current) => !current)}
+          onClick={toggleSideboard}
         >
           <MenuIcon />
         </button>
@@ -29,7 +40,7 @@ const Sideboard = (): JSX.Element => {
       </nav>
 
       <footer>
-        <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
+        <UserMiniCardWrapper {...{ showOnlyIcon }} />
       </footer>
     </aside>
   );

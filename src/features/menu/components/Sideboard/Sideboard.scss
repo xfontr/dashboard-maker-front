@@ -16,6 +16,8 @@
     #5a916750,
     #048a8150
   );
+  background-size: 600%;
+  animation: amazing-background infinite transitions.$animation-medium;
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.1);
   padding: spacings.$big spacings.$medium;
   font-size: 1.1rem;
@@ -59,5 +61,18 @@
   & .user-card {
     position: absolute;
     bottom: spacings.$big;
+    max-width: 87%;
+  }
+}
+
+@keyframes amazing-background {
+  from {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  to {
+    background-position: 0%;
   }
 }
