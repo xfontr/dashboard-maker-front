@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { DashboardLayoutProps } from "../../../../features/sideboard/components/DashboardLayout/DashboardLayout";
+import { DashboardLayoutProps } from "../../../../features/menu/components/DashboardLayout/DashboardLayout";
 import { notFoundHeading } from "../../../pages/NotFound.page";
 import { render } from "../../../test-utils/customRender";
 import RoutesRender from "../Routes.render";
