@@ -1,11 +1,12 @@
 @use "../../../../common/styles/colors";
 @use "../../../../common/styles/spacings";
+@use "../../../../common/styles/breakpoints";
 
 .board-main {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  gap: spacings.$big;
-  min-height: 100vh;
+
   background: linear-gradient(
       to right top,
       #da938720,
@@ -15,10 +16,21 @@
       #048a8120
     ),
     colors.$primary;
+
+  @media (min-width: breakpoints.$small-medium) {
+    flex-direction: row;
+    min-height: 100vh;
+  }
 }
 
 .content {
   width: 100%;
+  margin-left: spacings.$medium;
+  padding-top: spacings.$big;
+
+  @media (min-width: breakpoints.$small-medium) {
+    margin-left: spacings.$big;
+  }
 
   &__header {
     margin-top: spacings.$big;

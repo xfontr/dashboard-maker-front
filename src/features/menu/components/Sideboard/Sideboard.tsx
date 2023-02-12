@@ -2,7 +2,7 @@ import "./Sideboard.scss";
 import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
-import UserMiniCard from "../UserMiniCard/UserMiniCard";
+import { UserMiniCardWrapper } from "../UserMiniCard/UserMiniCard";
 import { MenuItems } from "../MenuItems/MenuItems";
 
 const Sideboard = (): JSX.Element => {
@@ -29,7 +29,7 @@ const Sideboard = (): JSX.Element => {
       </nav>
 
       <footer>
-        <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
+        <UserMiniCardWrapper {...{ showOnlyIcon }} />
       </footer>
     </aside>
   );
