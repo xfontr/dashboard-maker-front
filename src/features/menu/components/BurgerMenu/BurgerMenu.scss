@@ -1,0 +1,84 @@
+@use "../../../../common/styles/colors";
+@use "../../../../common/styles/breakpoints";
+@use "../../../../common/styles/spacings";
+
+.burger {
+  position: relative;
+  z-index: 999;
+
+  &--open {
+    @media (min-width: breakpoints.$big) {
+      position: fixed;
+      right: 9%;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: spacings.$medium;
+  }
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
+  &__icon {
+    position: relative;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  &__line {
+    background-color: colors.$secondary;
+    width: 35px;
+    height: 4px;
+    border-radius: 3px;
+    position: relative;
+    transition: 0.5s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 10px;
+      background-color: colors.$secondary;
+      width: 35px;
+      height: 4px;
+      border-radius: 3px;
+      transition: 0.5s;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      background-color: colors.$secondary;
+      width: 35px;
+      height: 4px;
+      border-radius: 3px;
+      transition: 0.5s;
+    }
+
+    &--crossed {
+      height: 0px;
+      transform: rotate(180deg);
+      background-color: colors.$primary;
+
+      &::after {
+        bottom: -2.5px;
+        transform: rotate(315deg);
+        background-color: colors.$primary;
+      }
+
+      &::before {
+        top: -2.5px;
+        transform: rotate(-497deg);
+        background-color: colors.$primary;
+      }
+    }
+  }
+}
