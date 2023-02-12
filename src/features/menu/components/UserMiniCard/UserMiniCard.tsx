@@ -5,7 +5,9 @@ import {
   SettingsIcon,
 } from "../../../../common/components/Icon/Icon";
 import UserRoles from "../../../../common/types/UserRoles";
+import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import useLogOut from "../../../users/hooks/useLogOut";
+import useUserAuth from "../../../users/store/userAuth.hook";
 import "./UserMiniCard.scss";
 
 type UserMiniCardProps = {
@@ -13,6 +15,7 @@ type UserMiniCardProps = {
   role: UserRoles;
   showOnlyIcon: boolean;
   profilePicture?: string;
+  isMobile?: boolean;
 };
 
 const UserMiniCard = ({
@@ -20,6 +23,7 @@ const UserMiniCard = ({
   role,
   showOnlyIcon,
   profilePicture,
+  isMobile = false,
 }: UserMiniCardProps) => {
   const logOut = useLogOut();
 
@@ -38,7 +42,9 @@ const UserMiniCard = ({
   return showOnlyIcon ? (
     <div className="user-card">{UserProfile}</div>
   ) : (
-    <article className="user-card">
+    <article
+      className={concatIfTrue("user-card", "user-card--mobile", isMobile)}
+    >
       <GlassBox className={boxVariants.small}>
         <div className="user-card__info">
           {UserProfile}
@@ -70,6 +76,21 @@ const UserMiniCard = ({
       </GlassBox>
     </article>
   );
+};
+
+// TODO: Test the component below
+
+type UserMiniCardWrapperProps = {
+  showOnlyIcon: boolean;
+  isMobile?: boolean;
+};
+
+export const UserMiniCardWrapper = (props: UserMiniCardWrapperProps) => {
+  const {
+    userAuth: { email, role },
+  } = useUserAuth();
+
+  return <UserMiniCard {...props} identifier={email} role={role} />;
 };
 
 export default UserMiniCard;
