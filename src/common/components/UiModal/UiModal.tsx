@@ -1,5 +1,6 @@
 import useModal from "../../hooks/useUiModal";
 import { UIState } from "../../store/slices/ui";
+import concatIfTrue from "../../utils/concatIfTrue";
 import {
   CloseIcon,
   ErrorIcon,
@@ -26,9 +27,11 @@ const UiModal = (): JSX.Element => {
     <>
       {localStatus !== "IDLE" && (
         <ModalContainer
-          className={`modal--ui modal--${localStatus.toLowerCase()}${
-            isClosing ? " modal--closing" : ""
-          }`}
+          className={concatIfTrue(
+            `modal--ui modal--${localStatus.toLowerCase()}`,
+            "modal--closing",
+            isClosing
+          )}
           childrenPosition="top"
         >
           <div className="modal__icon">{icons[localStatus]({})}</div>

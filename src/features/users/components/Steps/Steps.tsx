@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import setProps from "../../../../common/utils/setProps";
 import "./Steps.scss";
 
@@ -18,9 +19,11 @@ const Steps = ({
       .map((_, index) => (
         <span
           key={`step-${index}`}
-          className={`steps__step${
-            index === currentStep ? " steps__step--current" : ""
-          }`}
+          className={concatIfTrue(
+            "steps__step",
+            "steps__step--current",
+            index === currentStep
+          )}
         >
           {index + 1}
         </span>
