@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "test:dev": "react-scripts test",
-    "test:coverage": "react-scripts test --coverage --watchAll=false && open coverage/lcov-report/index.html",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "undo": "git reset --soft HEAD~1 && git reset && git status",
