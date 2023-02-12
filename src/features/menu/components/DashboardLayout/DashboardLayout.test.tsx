@@ -4,14 +4,20 @@ import DashboardLayout from "./DashboardLayout";
 
 describe("Given a DashboardLayout component", () => {
   describe("When instantiated with a child 'Test'", () => {
-    test("Then it should render said child, a sideboard and breadcrumbs", () => {
+    test("Then it should render said child, a menu and breadcrumbs", () => {
       const child = "Test";
 
       render(<DashboardLayout>{child}</DashboardLayout>);
 
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 1500,
+      });
+
       const view = [
         screen.getByText(child),
-        ...screen.getAllByRole("list"),
+        screen.getByRole("navigation"),
         screen.getByTestId("breadcrumbs"),
       ];
 

@@ -2,21 +2,30 @@ import "./Sideboard.scss";
 import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
-import UserMiniCard from "../UserMiniCard/UserMiniCard";
 import { MenuItems } from "../MenuItems/MenuItems";
+import concatIfTrue from "../../../../common/utils/concatIfTrue";
+import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
 
+  const toggleSideboard = () => {
+    setIsExpanded((current) => !current);
+  };
+
   return (
     <aside
-      className={`sideboard${showOnlyIcon ? " sideboard--contracted" : ""}`}
+      className={concatIfTrue(
+        "sideboard",
+        "sideboard--contracted",
+        showOnlyIcon
+      )}
       data-testid="sideboard"
     >
       <header className="sideboard__company">
         <button
           title={showOnlyIcon ? "Expand menu" : "Contract menu"}
-          onClick={() => setIsExpanded((current) => !current)}
+          onClick={toggleSideboard}
         >
           <MenuIcon />
         </button>
@@ -24,10 +33,12 @@ const Sideboard = (): JSX.Element => {
         {showOnlyIcon || <h3>{COMPANY.name}</h3>}
       </header>
 
-      <MenuItems {...{ showOnlyIcon }} />
+      <nav>
+        <MenuItems {...{ showOnlyIcon }} />
+      </nav>
 
       <footer>
-        <UserMiniCard {...{ showOnlyIcon }} identifier="John Doe" role="user" />
+        <UserDataWrapper {...{ showOnlyIcon }} />
       </footer>
     </aside>
   );

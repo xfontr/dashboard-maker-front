@@ -5,6 +5,7 @@ import {
   SettingsIcon,
 } from "../../../../common/components/Icon/Icon";
 import UserRoles from "../../../../common/types/UserRoles";
+import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import useLogOut from "../../../users/hooks/useLogOut";
 import "./UserMiniCard.scss";
 
@@ -13,6 +14,7 @@ type UserMiniCardProps = {
   role: UserRoles;
   showOnlyIcon: boolean;
   profilePicture?: string;
+  isMobile?: boolean;
 };
 
 const UserMiniCard = ({
@@ -20,6 +22,7 @@ const UserMiniCard = ({
   role,
   showOnlyIcon,
   profilePicture,
+  isMobile = false,
 }: UserMiniCardProps) => {
   const logOut = useLogOut();
 
@@ -38,7 +41,9 @@ const UserMiniCard = ({
   return showOnlyIcon ? (
     <div className="user-card">{UserProfile}</div>
   ) : (
-    <article className="user-card">
+    <article
+      className={concatIfTrue("user-card", "user-card--mobile", isMobile)}
+    >
       <GlassBox className={boxVariants.small}>
         <div className="user-card__info">
           {UserProfile}

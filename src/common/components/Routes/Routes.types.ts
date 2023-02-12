@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { DashboardLayoutProps } from "../../../features/sideboard/components/DashboardLayout/DashboardLayout";
+import { DashboardLayoutProps } from "../../../features/menu/components/DashboardLayout/DashboardLayout";
 import UserRoles from "../../types/UserRoles";
 
 export type RoutesUserRoles = "all" | UserRoles[] | "max";

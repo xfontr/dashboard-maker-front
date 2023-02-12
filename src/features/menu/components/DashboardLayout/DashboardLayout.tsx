@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import Page from "../../../../common/components/Page/Page";
 import setProps from "../../../../common/utils/setProps";
-import Sideboard from "../Sideboard/Sideboard";
+import Menu from "../Menu/Menu";
 import "./DashboardLayout.scss";
 
 export interface DashboardLayoutProps extends HTMLAttributes<HTMLDivElement> {
@@ -18,7 +18,7 @@ const DashboardLayout = ({
 }: DashboardLayoutProps): JSX.Element => {
   return (
     <main className="board-main">
-      <Sideboard />
+      <Menu />
       <div {...setProps(rest, "className", "content")}>
         <Page
           className="content__header"

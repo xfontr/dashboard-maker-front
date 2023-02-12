@@ -3,8 +3,6 @@ import { QueryOptions } from "../types/IQuery";
 import IResponse from "../types/IResponse";
 import callFunctionIfExists from "../utils/callFunctionIfExists";
 
-// TODO: Since now there is a default status 200 condition, test it
-
 /**
  * Takes a custom object of options that defines the UI behavior and forces an
  * error if the response doesn't match a specific status

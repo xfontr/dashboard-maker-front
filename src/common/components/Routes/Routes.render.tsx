@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFound.page";
 import DashboardLayout, {
   DashboardLayoutProps,
-} from "../../../features/sideboard/components/DashboardLayout/DashboardLayout";
+} from "../../../features/menu/components/DashboardLayout/DashboardLayout";
 
 type RoutesRenderProps = {
   to?: string;
