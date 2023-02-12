@@ -11,6 +11,9 @@ const BREAKPOINTS = {
   /** 380px */
   small: 23.75 * fontSize,
 
+  /** 608px */
+  smallMedium: 38 * fontSize,
+
   /** 960px */
   medium: 50 * fontSize,
 

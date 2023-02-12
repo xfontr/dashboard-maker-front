@@ -4,7 +4,6 @@ import { useState } from "react";
 import COMPANY from "../../../../config/company";
 import UserMiniCard from "../UserMiniCard/UserMiniCard";
 import { MenuItems } from "../MenuItems/MenuItems";
-import MediaQuery from "../../../../common/components/MediaQuery/MediaQuery";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
