@@ -26,20 +26,24 @@
 .content {
   width: 100%;
   margin-left: spacings.$medium;
-  padding-top: spacings.$big;
+  margin-top: calc(spacings.$header + spacings.$big - 0.3rem);
 
   @media (min-width: breakpoints.$small-medium) {
     margin-left: spacings.$big;
+    margin-top: 0;
   }
 
   &__header {
-    margin-top: spacings.$big;
     min-height: 9rem;
     height: 15%;
     max-height: 13rem;
 
     & h1 {
       font-size: 3.5rem;
+    }
+
+    @media (min-width: breakpoints.$small-medium) {
+      margin-top: spacings.$big;
     }
   }
 }

@@ -1,16 +1,34 @@
 @use "../../../../common/styles/colors";
 @use "../../../../common/styles/breakpoints";
 @use "../../../../common/styles/spacings";
+@use "../../../../common/styles/transitions";
 
 .burger {
   position: relative;
   width: 100%;
   position: fixed;
-  display: flex;
-  justify-content: flex-end;
-  padding-top: spacings.$medium;
-  padding-right: spacings.$medium;
   z-index: 999;
+  background: linear-gradient(to left top, #8f945a70, #5a916770, #048a8170),
+    colors.$secondary;
+  background-size: 200%;
+  animation: amazing-background infinite transitions.$animation-fast;
+
+  &__header {
+    color: colors.$primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 spacings.$medium;
+    height: spacings.$header;
+  }
+
+  &__company {
+    line-height: 0;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: colors.$primary;
+  }
 
   & .sideboard__items {
     & .icon-wrap {
@@ -35,12 +53,21 @@
         #048a8150
       ),
       colors.$primary;
-    padding: spacings.$big spacings.$medium;
+    background-size: 500%;
+    animation: amazing-background infinite transitions.$animation-medium;
     font-size: 1.4rem;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
+    & .burger__full-menu {
+      padding: spacings.$big spacings.$medium;
+    }
+
+    & .burger__company {
+      color: colors.$secondary;
+    }
   }
 
   &__icon {
@@ -49,11 +76,10 @@
     display: block;
     cursor: pointer;
     z-index: 9999;
-    align-self: flex-end;
   }
 
   &__line {
-    background-color: colors.$secondary;
+    background-color: colors.$primary;
     width: 35px;
     height: 4px;
     border-radius: 3px;
@@ -65,7 +91,7 @@
       position: absolute;
       left: 0;
       bottom: 10px;
-      background-color: colors.$secondary;
+      background-color: colors.$primary;
       width: 35px;
       height: 4px;
       border-radius: 3px;
@@ -77,7 +103,7 @@
       position: absolute;
       left: 0;
       top: 10px;
-      background-color: colors.$secondary;
+      background-color: colors.$primary;
       width: 35px;
       height: 4px;
       border-radius: 3px;
@@ -89,12 +115,15 @@
       transform: rotate(180deg);
 
       &::after {
-        bottom: -14px;
+        bottom: -4px;
         transform: rotate(315deg);
+        background-color: colors.$secondary;
       }
 
       &::before {
+        top: 0;
         transform: rotate(-497deg);
+        background-color: colors.$secondary;
       }
     }
   }
@@ -103,5 +132,17 @@
     position: absolute;
     bottom: spacings.$big;
     max-width: 94%;
+  }
+}
+
+@keyframes amazing-background {
+  from {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  to {
+    background-position: 0%;
   }
 }
