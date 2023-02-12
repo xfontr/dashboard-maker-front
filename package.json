@@ -33,7 +33,8 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "undo": "git reset --soft HEAD~1 && git reset && git status",
-    "undo:current": "git status && git stash && git stash clear && git status"
+    "undo:current": "git status && git stash && git stash clear && git status",
+    "file:coverage": "open coverage/lcov-report/index.html"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/match-media-mock": "^0.1.6",
     "husky": "^8.0.2",
     "msw": "^0.49.2",
     "prettier-plugin-jsdoc": "^0.4.2"

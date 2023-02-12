@@ -2,14 +2,12 @@ import "./Sideboard.scss";
 import { MenuIcon } from "../../../../common/components/Icon/Icon";
 import { useState } from "react";
 import COMPANY from "../../../../config/company";
-import { UserMiniCardWrapper } from "../UserMiniCard/UserMiniCard";
 import { MenuItems } from "../MenuItems/MenuItems";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
+import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 
 const Sideboard = (): JSX.Element => {
   const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
-
-  // TODO: Consider custom hook, just like for burger. Or opposite, consider no custom hooks
 
   const toggleSideboard = () => {
     setIsExpanded((current) => !current);
@@ -40,7 +38,7 @@ const Sideboard = (): JSX.Element => {
       </nav>
 
       <footer>
-        <UserMiniCardWrapper {...{ showOnlyIcon }} />
+        <UserDataWrapper {...{ showOnlyIcon }} />
       </footer>
     </aside>
   );

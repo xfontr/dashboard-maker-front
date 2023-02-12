@@ -1,12 +1,16 @@
+import { useState } from "react";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import COMPANY from "../../../../config/company";
-import useBurgerMenu from "../../hooks/useBurgerMenu";
 import { MenuItems } from "../MenuItems/MenuItems";
-import { UserMiniCardWrapper } from "../UserMiniCard/UserMiniCard";
+import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 import "./BurgerMenu.scss";
 
 const BurgerMenu = (): JSX.Element => {
-  const { isMenuVisible, toggleVisibility } = useBurgerMenu();
+  const [isMenuVisible, setVisibility] = useState<boolean>(false);
+
+  const toggleVisibility = (): void => {
+    setVisibility((current) => !current);
+  };
 
   return (
     <nav className={concatIfTrue("burger", "burger--open", isMenuVisible)}>
@@ -30,7 +34,7 @@ const BurgerMenu = (): JSX.Element => {
       {isMenuVisible && (
         <div className="burger__full-menu">
           <MenuItems showOnlyIcon={false} />
-          <UserMiniCardWrapper showOnlyIcon={false} isMobile={true} />
+          <UserDataWrapper showOnlyIcon={false} isMobile={true} />
         </div>
       )}
     </nav>
