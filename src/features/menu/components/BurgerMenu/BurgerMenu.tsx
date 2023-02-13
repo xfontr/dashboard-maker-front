@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useToggle from "../../../../common/hooks/useToggle";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import COMPANY from "../../../../config/company";
 import { MenuItems } from "../MenuItems/MenuItems";
@@ -6,11 +6,7 @@ import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 import "./BurgerMenu.scss";
 
 const BurgerMenu = (): JSX.Element => {
-  const [isMenuVisible, setVisibility] = useState<boolean>(false);
-
-  const toggleVisibility = (): void => {
-    setVisibility((current) => !current);
-  };
+  const [isMenuVisible, toggleVisibility] = useToggle();
 
   return (
     <nav className={concatIfTrue("burger", "burger--open", isMenuVisible)}>
