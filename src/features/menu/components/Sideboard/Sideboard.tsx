@@ -1,17 +1,13 @@
 import "./Sideboard.scss";
 import { MenuIcon } from "../../../../common/components/Icon/Icon";
-import { useState } from "react";
 import COMPANY from "../../../../config/company";
 import { MenuItems } from "../MenuItems/MenuItems";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
 import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
+import useToggle from "../../../../common/hooks/useToggle";
 
 const Sideboard = (): JSX.Element => {
-  const [showOnlyIcon, setIsExpanded] = useState<boolean>(false);
-
-  const toggleSideboard = () => {
-    setIsExpanded((current) => !current);
-  };
+  const [showOnlyIcon, toggleSideboard] = useToggle();
 
   return (
     <aside
