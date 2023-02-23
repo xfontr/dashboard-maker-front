@@ -7,9 +7,8 @@ type FormErrorsProps = {
 };
 
 const PathErrors = ({ errors, path }: FormErrorsProps) => {
-  const pathErrors = errors?.length
-    ? errors.filter((error) => error.path[0] === path)
-    : undefined;
+  const pathErrors =
+    errors?.filter((error) => error.path[0] === path) ?? undefined;
 
   return pathErrors?.length ? (
     <ul className="errors" data-testid="errors">
