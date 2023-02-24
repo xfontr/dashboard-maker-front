@@ -9,7 +9,7 @@ import {
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
 import { logInActionCreator } from "../../store";
-import useUserAuth from "../../store/userAuth.hook";
+import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
 import useRefreshToken from "../useRefreshToken";
 
 jest.mock("../../utils/decodeToken", () => () => mockUser);

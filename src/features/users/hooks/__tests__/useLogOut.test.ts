@@ -4,7 +4,7 @@ import { mockUser } from "../../../../common/test-utils/mocks";
 import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
 import ENDPOINTS from "../../../../config/endpoints";
 import { logInActionCreator } from "../../store";
-import useUserAuth from "../../store/userAuth.hook";
+import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
 import useLogOut from "../useLogOut";
 
 describe("Given a logOut hook", () => {

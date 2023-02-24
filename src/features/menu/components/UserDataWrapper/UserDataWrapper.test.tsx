@@ -2,15 +2,15 @@ import { screen } from "@testing-library/react";
 import { useEffect } from "react";
 import { render } from "../../../../common/test-utils/customRender";
 import { mockUser } from "../../../../common/test-utils/mocks";
-import { logInActionCreator } from "../../../users/store";
-import useUserAuth from "../../../users/store/userAuthSlice/userAuth.hook";
+import useUserData from "../../../users/store/userDataSlice/userData.hook";
+import { setDataActionCreator } from "../../../users/store/userDataSlice/userData.slice";
 import UserDataWrapper from "./UserDataWrapper";
 
 const MockComponentWithLoggedUser = () => {
-  const { dispatch } = useUserAuth();
+  const { dispatch } = useUserData();
 
   useEffect(() => {
-    dispatch(logInActionCreator(mockUser));
+    dispatch(setDataActionCreator(mockUser));
   }, [dispatch]);
 
   return <UserDataWrapper showOnlyIcon={false} />;

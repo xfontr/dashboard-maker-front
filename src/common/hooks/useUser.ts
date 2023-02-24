@@ -7,7 +7,7 @@ const useUser = () => {
   const { dispatch, userAuth } = useUserAuth();
   const { dispatch: dataDispatch } = useUserData();
 
-  const logUserOut = () => {
+  const logOut = () => {
     dispatch(logOutActionCreator());
     dataDispatch(resetDataActionCreator());
   };
@@ -15,7 +15,7 @@ const useUser = () => {
   return {
     dispatch,
     userAuth,
-    logUserOut,
+    logOut,
   };
 };
 
