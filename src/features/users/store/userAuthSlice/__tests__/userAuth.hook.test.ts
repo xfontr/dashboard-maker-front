@@ -1,4 +1,4 @@
-import { renderHook } from "../../../../common/test-utils/customRender";
+import { renderHook } from "../../../../../common/test-utils/customRender";
 import useUserAuth from "../userAuth.hook";
 import { userAuthSlice } from "../userAuth.slice";
 

@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from "react";
 import useRefreshToken from "../../../features/users/hooks/useRefreshToken";
-import useUserAuth from "../../../features/users/store/userAuth.hook";
+import useUserAuth from "../../../features/users/store/userAuthSlice/userAuth.hook";
 import Routes from "../Routes/Routes";
 import "./App.scss";
 

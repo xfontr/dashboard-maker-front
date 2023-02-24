@@ -8,7 +8,7 @@ import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
 import { LOG_IN_UI } from "../../config/ui.constants";
 import { userAuthSlice } from "../../store";
-import useUserAuth from "../../store/userAuth.hook";
+import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
 import useLogIn from "../useLogIn";
 
 jest.mock("../../utils/decodeToken", () => () => mockUser);

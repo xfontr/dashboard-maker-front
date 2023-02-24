@@ -1,9 +1,9 @@
 /** REDUCERS */
 
-import { Action } from "../../../../common/store/types";
-import { mockUser } from "../../../../common/test-utils/mocks";
-import { MAIN_IDENTIFIER } from "../../../../config/database";
-import { UserRequiredData } from "../../types/user.types";
+import { Action } from "../../../../../common/store/types";
+import { mockUser } from "../../../../../common/test-utils/mocks";
+import { MAIN_IDENTIFIER } from "../../../../../config/database";
+import { UserRequiredData } from "../../../types/user.types";
 import {
   logInActionCreator,
   setRefreshTokenActionCreator,
