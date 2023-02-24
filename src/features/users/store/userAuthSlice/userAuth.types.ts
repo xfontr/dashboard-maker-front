@@ -1,6 +1,6 @@
-import { Action, BaseAction } from "../../../common/store/types";
-import UserRoles from "../../../common/types/UserRoles";
-import { MAIN_IDENTIFIER } from "../../../config/database";
+import { Action, BaseAction } from "../../../../common/store/types";
+import UserRoles from "../../../../common/types/UserRoles";
+import { MAIN_IDENTIFIER } from "../../../../config/database";
 
 export interface UserAuthState {
   [MAIN_IDENTIFIER]: string;

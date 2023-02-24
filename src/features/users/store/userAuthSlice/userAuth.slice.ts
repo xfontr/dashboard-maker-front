@@ -1,7 +1,7 @@
-import { ProtoSlice, Slice } from "../../../common/store/types";
-import createSlice from "../../../common/store/utils/createSlice";
-import { MAIN_IDENTIFIER } from "../../../config/database";
-import { UserRequiredData } from "../types/user.types";
+import { ProtoSlice, Slice } from "../../../../common/store/types";
+import createSlice from "../../../../common/store/utils/createSlice";
+import { MAIN_IDENTIFIER } from "../../../../config/database";
+import { UserRequiredData } from "../../types/user.types";
 import { UserAuthActionTypes, UserAuthState } from "./userAuth.types";
 
 const initialState: UserAuthState = {
