@@ -9,6 +9,8 @@ import ENDPOINTS from "../../../../config/endpoints";
 import { LOG_IN_UI } from "../../config/ui.constants";
 import { userAuthSlice } from "../../store";
 import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
+import useUserData from "../../store/userDataSlice/userData.hook";
+import { userDataSlice } from "../../store/userDataSlice/userData.slice";
 import useLogIn from "../useLogIn";
 
 jest.mock("../../utils/decodeToken", () => () => mockUser);
@@ -27,6 +29,7 @@ describe("Given a useLogin hook", () => {
         logIn: useLogIn(),
         ui: useUi(),
         auth: useUserAuth(),
+        data: useUserData(),
       }));
 
       expect(result.current.ui.ui.status).toBe("IDLE");
@@ -39,6 +42,7 @@ describe("Given a useLogin hook", () => {
       expect(result.current.ui.ui.message).toBe(LOG_IN_UI.loading);
 
       expect(result.current.auth.userAuth).toStrictEqual(expectedLoggedUser);
+      expect(result.current.data.userData).toStrictEqual(mockUser);
 
       await waitFor(() => {
         expect(result.current.ui.ui.status).toBe("IDLE"); // As there is no success option for the log in ui options
@@ -65,6 +69,33 @@ describe("Given a useLogin hook", () => {
 
       expect(result.current.auth.userAuth).toStrictEqual(
         userAuthSlice.initialState
+      );
+    });
+
+    test("If setting the user data goes wrong, it should abort the process and log out", async () => {
+      ENDPOINTS.users.profile = MOCK_FORCE_ERROR;
+
+      const { result } = renderHook(() => ({
+        logIn: useLogIn(),
+        ui: useUi(),
+        auth: useUserAuth(),
+        data: useUserData(),
+      }));
+
+      expect(result.current.ui.ui.status).toBe("IDLE");
+
+      await act(async () => {
+        await result.current.logIn(mockUser);
+      });
+
+      expect(result.current.ui.ui.status).toBe("ERROR");
+      expect(result.current.ui.ui.message).toBe(LOG_IN_UI.error);
+
+      expect(result.current.auth.userAuth).toStrictEqual(
+        userAuthSlice.initialState
+      );
+      expect(result.current.data.userData).toStrictEqual(
+        userDataSlice.initialState
       );
     });
   });
