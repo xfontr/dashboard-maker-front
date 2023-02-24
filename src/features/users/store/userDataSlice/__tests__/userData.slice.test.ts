@@ -2,8 +2,12 @@ import { Action } from "../../../../../common/store/types";
 import { mockUser } from "../../../../../common/test-utils/mocks";
 import { MAIN_IDENTIFIER } from "../../../../../config/database";
 import { UserAuthState } from "../../userAuthSlice/userAuth.types";
-import { userDataSlice } from "../userData.slice";
-import { UserDataState } from "../userData.types";
+import {
+  resetDataActionCreator,
+  setDataActionCreator,
+  userDataSlice,
+} from "../userData.slice";
+import { UserDataActionTypes, UserDataState } from "../userData.types";
 
 describe("Given a SET_DATA method", () => {
   describe("When called with a user auth initial state and a payload of a user", () => {
@@ -38,36 +42,31 @@ describe("Given a RESET_DATA method", () => {
 
 /** ACTION CREATORS */
 
-// describe("Given a logInActionCreator function", () => {
-//   describe("When called with authentication data as a payload'", () => {
-//     test("Then it should return an action with said payload and a type 'LOG_IN'", () => {
-//       const expectedAction: Action<UserAuthActionTypes> = {
-//         type: "LOG_IN",
-//         payload: {
-//           [MAIN_IDENTIFIER]: mockUser[MAIN_IDENTIFIER],
-//           role: mockUser.role!,
-//           authToken: mockUser.authToken,
-//         },
-//       };
+describe("Given a setDataActionCreator function", () => {
+  describe("When called with a user as payload'", () => {
+    test("Then it should return an action with said payload and a type 'SET_DATA'", () => {
+      const expectedAction: Action<UserDataActionTypes> = {
+        type: "SET_DATA",
+        payload: mockUser,
+      };
 
-//       const action = logInActionCreator(expectedAction.payload);
+      const action = setDataActionCreator(expectedAction.payload);
 
-//       expect(action).toStrictEqual(expectedAction);
-//     });
-//   });
-// });
+      expect(action).toStrictEqual(expectedAction);
+    });
+  });
+});
 
-// describe("Given a refreshTokenActionCreator function", () => {
-//   describe("When called with no payload'", () => {
-//     test("Then it should return an action with no payload and a type 'REFRESH_TOKEN'", () => {
-//       const expectedAction: Action<UserAuthActionTypes> = {
-//         type: "REFRESH_TOKEN",
-//         payload: mockUser.authToken,
-//       };
+describe("Given a restartDataActionCreator function", () => {
+  describe("When called with no payload'", () => {
+    test("Then it should return an action with no payload and a type 'RESET_DATA'", () => {
+      const expectedAction: Action<UserDataActionTypes> = {
+        type: "RESET_DATA",
+      };
 
-//       const action = setRefreshTokenActionCreator(expectedAction.payload);
+      const action = resetDataActionCreator(expectedAction.payload);
 
-//       expect(action).toStrictEqual(expectedAction);
-//     });
-//   });
-// });
+      expect(action).toStrictEqual(expectedAction);
+    });
+  });
+});
