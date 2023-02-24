@@ -5,6 +5,8 @@ import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockH
 import ENDPOINTS from "../../../../config/endpoints";
 import { logInActionCreator } from "../../store";
 import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
+import useUserData from "../../store/userDataSlice/userData.hook";
+import { setDataActionCreator } from "../../store/userDataSlice/userData.slice";
 import useLogOut from "../useLogOut";
 
 describe("Given a logOut hook", () => {
@@ -18,13 +20,16 @@ describe("Given a logOut hook", () => {
       const { result } = renderHook(() => ({
         logOut: useLogOut(),
         userAuth: useUserAuth(),
+        userData: useUserData(),
       }));
 
       act(() => {
         result.current.userAuth.dispatch(logInActionCreator(mockUser));
+        result.current.userData.dispatch(setDataActionCreator(mockUser));
       });
 
       expect(result.current.userAuth.userAuth.isLogged).toBeTruthy();
+      expect(result.current.userData.userData.email).toBeTruthy();
 
       await act(async () => {
         const response = await result.current.logOut();
@@ -32,6 +37,7 @@ describe("Given a logOut hook", () => {
       });
 
       expect(result.current.userAuth.userAuth.isLogged).toBeFalsy();
+      expect(result.current.userData.userData.email).toBeFalsy();
     });
 
     test("Then it should log the user out even if the database update goes wrong", async () => {
@@ -40,13 +46,16 @@ describe("Given a logOut hook", () => {
       const { result } = renderHook(() => ({
         logOut: useLogOut(),
         userAuth: useUserAuth(),
+        userData: useUserData(),
       }));
 
       act(() => {
         result.current.userAuth.dispatch(logInActionCreator(mockUser));
+        result.current.userData.dispatch(setDataActionCreator(mockUser));
       });
 
       expect(result.current.userAuth.userAuth.isLogged).toBeTruthy();
+      expect(result.current.userData.userData.email).toBeTruthy();
 
       await act(async () => {
         const response = await result.current.logOut();
@@ -54,6 +63,7 @@ describe("Given a logOut hook", () => {
       });
 
       expect(result.current.userAuth.userAuth.isLogged).toBeFalsy();
+      expect(result.current.userData.userData.email).toBeFalsy();
     });
   });
 });

@@ -67,9 +67,6 @@ const handlers = [
 
   /** GET USER PROFILE */
   rest.get(urlWithEndpoint(users.profile), (req, res, ctx) => {
-    if (req.headers.get("authorization"))
-      return res(ctx.status(200), ctx.json({ authorized: mockUser }));
-
     return res(ctx.status(200), ctx.json({ user: mockUser }));
   }),
 
