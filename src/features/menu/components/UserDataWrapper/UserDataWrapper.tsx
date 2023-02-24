@@ -1,4 +1,4 @@
-import useUserAuth from "../../../users/store/userAuth.hook";
+import useUserData from "../../../users/store/userDataSlice/userData.hook";
 import UserMiniCard from "../UserMiniCard/UserMiniCard";
 
 type UserMiniCardWrapperProps = {
@@ -8,10 +8,10 @@ type UserMiniCardWrapperProps = {
 
 export const UserDataWrapper = (props: UserMiniCardWrapperProps) => {
   const {
-    userAuth: { email, role },
-  } = useUserAuth();
+    userData: { email, role },
+  } = useUserData();
 
-  return <UserMiniCard {...props} identifier={email} role={role} />;
+  return <UserMiniCard {...props} identifier={email} role={role!} />;
 };
 
 export default UserDataWrapper;

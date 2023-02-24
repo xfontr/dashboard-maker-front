@@ -1,8 +1,7 @@
 import useQuery from "../../../common/hooks/useQuery";
 import { api } from "../../../common/services/RequestHandler";
 import ENDPOINTS from "../../../config/endpoints";
-import { logOutActionCreator } from "../store";
-import useUserAuth from "../store/userAuth.hook";
+import { useUserAuthMiddlewares } from "../store/userAuthSlice/userAuth.hook";
 
 const logOutRequest = () =>
   api.patch(ENDPOINTS.users.logOut, undefined, { withCredentials: true });
@@ -17,12 +16,10 @@ const logOutRequest = () =>
  *   the user from the store.
  */
 const useLogOut = () => {
-  const { dispatch } = useUserAuth();
+  const { logUserOut } = useUserAuthMiddlewares();
 
   return useQuery({
-    onInit: () => {
-      dispatch(logOutActionCreator());
-    },
+    onInit: logUserOut,
   })(logOutRequest);
 };
 

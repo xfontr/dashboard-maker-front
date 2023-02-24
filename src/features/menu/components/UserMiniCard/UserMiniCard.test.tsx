@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { render } from "../../../../common/test-utils/customRender";
 import { mockUser } from "../../../../common/test-utils/mocks";
 import { logInActionCreator } from "../../../users/store";
-import useUserAuth from "../../../users/store/userAuth.hook";
+import useUserAuth from "../../../users/store/userAuthSlice/userAuth.hook";
 import UserMiniCard from "./UserMiniCard";
 
 const MockComponent = (): JSX.Element => {

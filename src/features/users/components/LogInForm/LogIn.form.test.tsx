@@ -5,7 +5,7 @@ import { mockUser } from "../../../../common/test-utils/mocks";
 import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockHandlers";
 import { multiType } from "../../../../common/test-utils/test.utils";
 import ENDPOINTS from "../../../../config/endpoints";
-import useUserAuth from "../../store/userAuth.hook";
+import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
 import LogInForm from "./LogIn.form";
 import logInSchema from "./LogIn.schema";
 
