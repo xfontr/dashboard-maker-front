@@ -1,7 +1,7 @@
 import { api } from "../../../common/services/RequestHandler";
 import { LOG_IN_UI } from "../config/ui.constants";
 import ENDPOINTS from "../../../config/endpoints";
-import IUser, { UserLogInData } from "../types/user.types";
+import { StoredUser, UserLogInData } from "../types/user.types";
 import decodeToken from "../utils/decodeToken";
 import { CodedToken } from "../types/token.types";
 import useQuery from "../../../common/hooks/useQuery";
@@ -17,16 +17,16 @@ const requestLogIn = (userLogInData?: UserLogInData) =>
   });
 
 const requestUserData = (token: string) =>
-  api.getWithAuth<{ user: Omit<IUser, "password"> }>(ENDPOINTS.users.profile, token, {
+  api.getWithAuth<{ user: StoredUser }>(ENDPOINTS.users.profile, token, {
     withCredentials: true,
   });
 
 const useLogIn = () => {
   const { dispatch } = useUserAuth();
   const { dispatch: dispatchData } = useUserData();
-  const logOut = useLogOut()
+  const logOut = useLogOut();
 
-  const setUserData = useQuery<{ user: Omit<IUser, "password"> }, IUser>({
+  const setUserData = useQuery<{ user: StoredUser }, StoredUser>({
     onSuccess: async (data) => {
       dispatchData(setDataActionCreator(data.body!.user));
     },

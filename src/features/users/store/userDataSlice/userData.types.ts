@@ -1,7 +1,7 @@
 import { Action, BaseAction } from "../../../../common/store/types";
-import IUser from "../../types/user.types";
+import { StoredUser } from "../../types/user.types";
 
-export type UserDataState = Omit<IUser, "password">;
+export type UserDataState = StoredUser;
 
 export type UserDataActionTypes = "SET_DATA" | "RESET_DATA";
 

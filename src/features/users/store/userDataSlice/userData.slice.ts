@@ -1,6 +1,6 @@
 import { ProtoSlice, Slice } from "../../../../common/store/types";
 import createSlice from "../../../../common/store/utils/createSlice";
-import IUser from "../../types/user.types";
+import { StoredUser } from "../../types/user.types";
 import { UserDataActionTypes, UserDataState } from "./userData.types";
 
 const initialState: UserDataState = {
@@ -15,7 +15,7 @@ const protoUserDataSlice: ProtoSlice<UserDataActionTypes, UserDataState> = {
   reducers: {
     RESET_DATA: () => initialState,
 
-    SET_DATA: (_, payload: IUser): IUser => ({
+    SET_DATA: (_, payload: StoredUser): StoredUser => ({
       ...payload,
     }),
   },
@@ -25,8 +25,7 @@ export const userDataSlice: Slice<UserDataActionTypes, UserDataState> =
   createSlice(protoUserDataSlice);
 
 export const setDataActionCreator =
-  userDataSlice.actions.SET_DATA<Omit<IUser, "password">>();
+  userDataSlice.actions.SET_DATA<StoredUser>();
 
 export const resetDataActionCreator =
   userDataSlice.actions.RESET_DATA<undefined>();
-

@@ -5,8 +5,8 @@ const useUserData = () => {
   const { dispatch, userData } = useContext(store.reducer.userData.Context);
 
   return {
-    userData: userData!,
     dispatch,
+    userData: userData!,
   };
 };
 

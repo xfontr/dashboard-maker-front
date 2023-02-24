@@ -31,6 +31,8 @@ export type UserAddress = Partial<{
 
 interface IUser extends UserRequiredData, UserName, UserAddress {}
 
+export type StoredUser = Omit<IUser, "password">;
+
 export interface ProtoUser extends IUser {
   repeatPassword?: string;
 }
