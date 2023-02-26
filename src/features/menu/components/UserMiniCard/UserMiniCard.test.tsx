@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { render } from "../../../../common/test-utils/customRender";
 import { mockUser } from "../../../../common/test-utils/mocks";
-import { logInActionCreator } from "../../../users/store";
+import { logInActionCreator } from "../../../users/store/userAuthSlice/userAuth.slice";
 import useUserAuth from "../../../users/store/userAuthSlice/userAuth.hook";
 import UserMiniCard from "./UserMiniCard";
 

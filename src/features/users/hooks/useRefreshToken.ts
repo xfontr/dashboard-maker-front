@@ -5,7 +5,7 @@ import {
   logInActionCreator,
   logOutActionCreator,
   setRefreshTokenActionCreator,
-} from "../store";
+} from "../store/userAuthSlice/userAuth.slice";
 import useUserAuth from "../store/userAuthSlice/userAuth.hook";
 import { CodedToken } from "../types/token.types";
 import decodeToken from "../utils/decodeToken";

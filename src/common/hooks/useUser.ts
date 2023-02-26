@@ -1,4 +1,4 @@
-import { logOutActionCreator } from "../../features/users/store";
+import { logOutActionCreator } from "../../features/users/store/userAuthSlice/userAuth.slice";
 import useUserAuth from "../../features/users/store/userAuthSlice/userAuth.hook";
 import useUserData from "../../features/users/store/userDataSlice/userData.hook";
 import { resetDataActionCreator } from "../../features/users/store/userDataSlice/userData.slice";
