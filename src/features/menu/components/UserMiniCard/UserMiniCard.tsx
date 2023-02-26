@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { boxVariants, GlassBox } from "../../../../common/components/Box/Box";
 import { GlassButton } from "../../../../common/components/Button/Button";
 import {
@@ -6,6 +7,7 @@ import {
 } from "../../../../common/components/Icon/Icon";
 import UserRoles from "../../../../common/types/UserRoles";
 import concatIfTrue from "../../../../common/utils/concatIfTrue";
+import PATHS from "../../../../config/paths";
 import useLogOut from "../../../users/hooks/useLogOut";
 import "./UserMiniCard.scss";
 
@@ -25,6 +27,7 @@ const UserMiniCard = ({
   isMobile = false,
 }: UserMiniCardProps) => {
   const logOut = useLogOut();
+  const navigate = useNavigate();
 
   const UserProfile = (
     <img
@@ -66,7 +69,10 @@ const UserMiniCard = ({
             </GlassButton>
           </li>
           <li className="user-card__option">
-            <GlassButton variant="tiny">
+            <GlassButton
+              variant="tiny"
+              onClick={() => navigate(PATHS.settings)}
+            >
               Settings
               <SettingsIcon />
             </GlassButton>

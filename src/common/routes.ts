@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import PATHS from "../config/paths";
+import settingsRoutes from "../features/settings/settings.routes";
 import Layout from "../features/users/components/Layout/Layout";
 import userRoutes from "../features/users/users.routes";
 import RouteConfig from "./components/Routes/Routes.types";
@@ -27,6 +28,7 @@ const routes: RouteConfig[] = [
     Element: lazy(() => import("./pages/Unauthorized.page")),
   },
   ...userRoutes(),
+  ...settingsRoutes(),
 ];
 
 export default routes;
