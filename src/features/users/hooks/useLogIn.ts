@@ -11,12 +11,12 @@ import useUserData from "../store/userDataSlice/userData.hook";
 import { setDataActionCreator } from "../store/userDataSlice/userData.slice";
 import useLogOut from "./useLogOut";
 
-const requestLogIn = (userLogInData?: UserLogInData) =>
+export const requestLogIn = (userLogInData?: UserLogInData) =>
   api.post<CodedToken, UserLogInData>(ENDPOINTS.users.logIn, userLogInData!, {
     withCredentials: true,
   });
 
-const requestUserData = (token: string) =>
+export const requestUserData = (token: string) =>
   api.getWithAuth<{ user: StoredUser }>(ENDPOINTS.users.profile, token, {
     withCredentials: true,
   });
@@ -34,7 +34,7 @@ const useLogIn = () => {
     options: { ...LOG_IN_UI, loading: undefined },
   });
 
-  return useQuery<CodedToken, UserLogInData>({
+  const logIn = useQuery<CodedToken, UserLogInData>({
     onSuccess: async (data) => {
       const { email, role } = decodeToken(data.body!.user.token);
 
@@ -50,6 +50,11 @@ const useLogIn = () => {
     },
     options: LOG_IN_UI,
   })(requestLogIn);
+
+  return {
+    logIn,
+    setUserData,
+  };
 };
 
 export default useLogIn;

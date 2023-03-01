@@ -7,8 +7,8 @@ import { MOCK_FORCE_ERROR } from "../../../../common/test-utils/mockServer/mockH
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
 import { LOG_IN_UI } from "../../config/ui.constants";
-import { userAuthSlice } from "../../store";
 import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
+import { userAuthSlice } from "../../store/userAuthSlice/userAuth.slice";
 import useUserData from "../../store/userDataSlice/userData.hook";
 import { userDataSlice } from "../../store/userDataSlice/userData.slice";
 import useLogIn from "../useLogIn";
@@ -26,7 +26,7 @@ describe("Given a useLogin hook", () => {
       };
 
       const { result } = renderHook(() => ({
-        logIn: useLogIn(),
+        logIn: useLogIn().logIn,
         ui: useUi(),
         auth: useUserAuth(),
         data: useUserData(),
@@ -53,7 +53,7 @@ describe("Given a useLogin hook", () => {
       ENDPOINTS.users.logIn = MOCK_FORCE_ERROR;
 
       const { result } = renderHook(() => ({
-        logIn: useLogIn(),
+        logIn: useLogIn().logIn,
         ui: useUi(),
         auth: useUserAuth(),
       }));
@@ -76,7 +76,7 @@ describe("Given a useLogin hook", () => {
       ENDPOINTS.users.profile = MOCK_FORCE_ERROR;
 
       const { result } = renderHook(() => ({
-        logIn: useLogIn(),
+        logIn: useLogIn().logIn,
         ui: useUi(),
         auth: useUserAuth(),
         data: useUserData(),
@@ -103,7 +103,7 @@ describe("Given a useLogin hook", () => {
   describe("When called its returned function with no login values", () => {
     test("Then it should not log the user in and update the ui", async () => {
       const { result } = renderHook(() => ({
-        logIn: useLogIn(),
+        logIn: useLogIn().logIn,
         ui: useUi(),
         auth: useUserAuth(),
       }));
