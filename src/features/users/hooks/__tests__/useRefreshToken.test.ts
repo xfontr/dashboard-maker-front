@@ -8,8 +8,8 @@ import {
 } from "../../../../common/test-utils/mockServer/mockHandlers";
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
-import { logInActionCreator } from "../../store";
 import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
+import { logInActionCreator } from "../../store/userAuthSlice/userAuth.slice";
 import useRefreshToken from "../useRefreshToken";
 
 jest.mock("../../utils/decodeToken", () => () => mockUser);
