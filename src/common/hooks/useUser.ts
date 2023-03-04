@@ -18,7 +18,7 @@ const useUser = () => {
   const getUserDataSet = (name: keyof typeof userDataSets): DataUnit[] =>
     userDataSets[name].map((set) => ({
       heading: set,
-      data: userData[set as keyof typeof userData] ?? undefined,
+      data: userData[set as keyof typeof userData] || undefined,
     }));
 
   return {
