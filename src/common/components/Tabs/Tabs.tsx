@@ -42,6 +42,7 @@ const Tabs = ({ children, variant }: TabsProps): JSX.Element => {
       </nav>
       <section
         className={concatIfTrue(baseClass, variants[variant!], !!variant)}
+        data-testid="tab__content"
       >
         {children[selectedTab].children}
       </section>
