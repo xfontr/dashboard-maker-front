@@ -15,6 +15,7 @@ const variants = {
 /** External variants */
 const buttonVariants = {
   tiny: `${baseClass}--tiny`,
+  tinyActive: `${baseClass}--tiny ${baseClass}--active`,
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

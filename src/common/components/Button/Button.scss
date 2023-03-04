@@ -68,6 +68,11 @@
   }
 }
 
+.button--active.button--outline {
+  background-color: colors.$contrast;
+  color: colors.$primary;
+}
+
 .button--glass {
   background: rgba(251, 245, 243, 0.1);
   border-radius: 16px;
@@ -91,5 +96,9 @@
 
   @media (min-width: breakpoints.$small-medium) {
     padding: spacings.$small--very spacings.$small;
+  }
+
+  &-wide {
+    padding: spacings.$small--very spacings.$medium;
   }
 }

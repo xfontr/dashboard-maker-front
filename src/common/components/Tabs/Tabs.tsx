@@ -1,11 +1,22 @@
 import { useState } from "react";
-import Tab from "./Tab";
+import concatIfTrue from "../../utils/concatIfTrue";
+import { OutlineButton } from "../Button/Button";
+import Tab from "./Tab/Tab";
+import "./Tabs.scss";
 
-const Tabs = ({
-  children,
-}: {
+const baseClass = "tab";
+
+const variants = {
+  background: `${baseClass}--background`,
+  border: `${baseClass}--border`,
+};
+
+type TabsProps = {
   children: ReturnType<typeof Tab>[];
-}): JSX.Element => {
+  variant?: keyof typeof variants;
+};
+
+const Tabs = ({ children, variant }: TabsProps): JSX.Element => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const setTab = (tab: number) => () => {
@@ -13,18 +24,28 @@ const Tabs = ({
   };
 
   return (
-    <section className="tabs">
-      <header className="options">
-        <ul>
+    <div className="tabs">
+      <nav className="options">
+        <ul className="options__list">
           {children.map(({ name }, index) => (
-            <li onClick={setTab(index)} key={name}>
-              {name}
+            <li key={name}>
+              <OutlineButton
+                className="button--tiny-wide"
+                variant={selectedTab === index ? "tinyActive" : "tiny"}
+                onClick={setTab(index)}
+              >
+                {name}
+              </OutlineButton>
             </li>
           ))}
         </ul>
-      </header>
-      <main className="content">{children[selectedTab].children}</main>
-    </section>
+      </nav>
+      <section
+        className={concatIfTrue(baseClass, variants[variant!], !!variant)}
+      >
+        {children[selectedTab].children}
+      </section>
+    </div>
   );
 };
 
