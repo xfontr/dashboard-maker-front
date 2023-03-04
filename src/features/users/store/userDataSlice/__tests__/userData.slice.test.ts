@@ -1,7 +1,5 @@
 import { Action } from "../../../../../common/store/types";
 import { mockUser } from "../../../../../common/test-utils/mocks";
-import { MAIN_IDENTIFIER } from "../../../../../config/database";
-import { UserAuthState } from "../../userAuthSlice/userAuth.types";
 import {
   resetDataActionCreator,
   setDataActionCreator,

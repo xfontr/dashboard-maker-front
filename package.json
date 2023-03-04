@@ -34,7 +34,8 @@
     "prepare": "husky install",
     "undo": "git reset --soft HEAD~1 && git reset && git status",
     "undo:current": "git status && git stash && git stash clear && git status",
-    "file:coverage": "open coverage/lcov-report/index.html"
+    "file:coverage": "open coverage/lcov-report/index.html",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
