@@ -1,0 +1,5 @@
+{
+  "basic": ["email", "name"],
+  "location": ["country", "city", "street", "postalCode", "extraInfo"],
+  "contact": ["phone", "extraPhone"]
+}
