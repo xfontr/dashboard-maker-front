@@ -1,0 +1,24 @@
+@use "../../styles/spacings";
+@use "../../styles/colors";
+
+.options {
+  margin-bottom: spacings.$small;
+
+  &__list {
+    display: flex;
+    gap: spacings.$small;
+  }
+}
+
+.tab {
+  padding: spacings.$big;
+  border-radius: spacings.$rad-small;
+
+  &--background {
+    background-color: colors.$secondary--very-light;
+  }
+
+  &--border {
+    border: 1px solid colors.$secondary--light;
+  }
+}

@@ -7,6 +7,10 @@ const settingsRoutes = (): RouteConfig[] => [
     path: PATHS.settings,
     roles: ["admin", "superAdmin", "user"],
     Element: lazy(() => import("./pages/MainSettings.page")),
+    layoutProps: {
+      heading: "Settings",
+      subheading: "Check and update your profile and security settings.",
+    },
   },
 ];
 
