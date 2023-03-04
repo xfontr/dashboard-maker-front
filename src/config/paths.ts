@@ -7,6 +7,8 @@ const PATHS = {
 
   register: "/sign-up",
   logIn: "/log-in",
+
+  settings: "/settings",
 };
 
 export default PATHS;

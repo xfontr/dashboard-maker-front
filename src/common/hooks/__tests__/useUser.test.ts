@@ -1,6 +1,6 @@
 import { act } from "react-dom/test-utils";
-import { logInActionCreator } from "../../../features/users/store";
 import useUserAuth from "../../../features/users/store/userAuthSlice/userAuth.hook";
+import { logInActionCreator } from "../../../features/users/store/userAuthSlice/userAuth.slice";
 import useUserData from "../../../features/users/store/userDataSlice/userData.hook";
 import { setDataActionCreator } from "../../../features/users/store/userDataSlice/userData.slice";
 import { renderHook } from "../../test-utils/customRender";

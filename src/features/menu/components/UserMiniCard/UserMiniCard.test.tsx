@@ -3,15 +3,18 @@ import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 import { render } from "../../../../common/test-utils/customRender";
 import { mockUser } from "../../../../common/test-utils/mocks";
-import { logInActionCreator } from "../../../users/store";
+import { logInActionCreator } from "../../../users/store/userAuthSlice/userAuth.slice";
 import useUserAuth from "../../../users/store/userAuthSlice/userAuth.hook";
 import UserMiniCard from "./UserMiniCard";
+import { useLocation } from "react-router-dom";
 
 const MockComponent = (): JSX.Element => {
   const {
     dispatch,
     userAuth: { isLogged },
   } = useUserAuth();
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(logInActionCreator(mockUser));
@@ -25,6 +28,7 @@ const MockComponent = (): JSX.Element => {
         role={mockUser.role!}
         showOnlyIcon={false}
       />
+      <span>Location {pathname}</span>
     </>
   );
 };
@@ -55,6 +59,18 @@ describe("Given a UserMiniCard component", () => {
 
       expect(view[0].textContent).toBe(mockUser.name);
       expect((view[2] as HTMLImageElement).src).toBe(defaultImageSource);
+    });
+
+    test("If clicking 'settings', then it should navigate to the settings page", async () => {
+      render(<MockComponent />);
+
+      const settingsButton = screen.getByRole("button", { name: "Settings" });
+
+      await userEvent.click(settingsButton);
+
+      const location = screen.getByText("Location /settings");
+
+      expect(location).toBeInTheDocument();
     });
   });
 

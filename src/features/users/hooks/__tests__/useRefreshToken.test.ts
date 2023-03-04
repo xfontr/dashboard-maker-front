@@ -8,8 +8,9 @@ import {
 } from "../../../../common/test-utils/mockServer/mockHandlers";
 import { MAIN_IDENTIFIER } from "../../../../config/database";
 import ENDPOINTS from "../../../../config/endpoints";
-import { logInActionCreator } from "../../store";
 import useUserAuth from "../../store/userAuthSlice/userAuth.hook";
+import { logInActionCreator } from "../../store/userAuthSlice/userAuth.slice";
+import useUserData from "../../store/userDataSlice/userData.hook";
 import useRefreshToken from "../useRefreshToken";
 
 jest.mock("../../utils/decodeToken", () => () => mockUser);
@@ -23,6 +24,7 @@ describe("Given a useRefreshToken hook", () => {
 
       const { result } = renderHook(() => ({
         userAuth: useUserAuth(),
+        userData: useUserData(),
         refreshToken: useRefreshToken(),
       }));
 
@@ -36,6 +38,7 @@ describe("Given a useRefreshToken hook", () => {
       );
       expect(result.current.userAuth.userAuth.role).toBe(mockUser.role);
       expect(result.current.userAuth.userAuth.authToken).toBe("initialToken");
+      expect(result.current.userData.userData.email).toBe(mockUser.email);
 
       // SECOND TRY
 

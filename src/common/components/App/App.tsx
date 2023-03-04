@@ -1,10 +1,11 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import useRefreshToken from "../../../features/users/hooks/useRefreshToken";
 import useUserAuth from "../../../features/users/store/userAuthSlice/userAuth.hook";
 import Routes from "../Routes/Routes";
 import "./App.scss";
 
 const App = (): JSX.Element => {
+  const [hasRefreshed, setRefresh] = useState<boolean>(false);
   const {
     userAuth: { role },
   } = useUserAuth();
@@ -12,10 +13,15 @@ const App = (): JSX.Element => {
   const refresh = useRefreshToken();
 
   useEffect(() => {
-    refresh();
+    (async () => {
+      await refresh();
+      setRefresh(true);
+    })();
   }, [refresh]);
 
-  return (
+  return !hasRefreshed ? (
+    <></>
+  ) : (
     <div className="app">
       <Suspense>
         <Routes {...{ role }} />

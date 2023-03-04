@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useUiMiddlewares } from "../store/slices/ui";
 import { QueryOptions } from "../types/IQuery";
 import IResponse from "../types/IResponse";
@@ -42,11 +43,6 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
   const { showLoadingUi, showErrorUi, showSuccessUi } =
     useUiMiddlewares<IResponse<T>>(fullOptions);
 
-  const init = () => {
-    showLoadingUi();
-    callFunctionIfExists(options.onInit);
-  };
-
   /**
    * @example
    *   const example = useQuery(...args);
@@ -62,41 +58,57 @@ const useQuery = <T = unknown, L = unknown>(options: QueryOptions<T, L>) => {
    *   passed by the user
    */
 
-  return (callback: (values?: L) => Promise<IResponse<T>>) =>
-    /**
-     * Last function returned by the useQuery hook. Takes optional values that
-     * will be added to the request of the previous callback. Once called, it
-     * calls the callback and then does the success/error actions depending on
-     * the outcome
-     */
-    async (values?: L): Promise<IResponse<T>> => {
-      init();
+  return useCallback(
+    (callback: (values?: L) => Promise<IResponse<T>>) =>
+      /**
+       * Last function returned by the useQuery hook. Takes optional values that
+       * will be added to the request of the previous callback. Once called, it
+       * calls the callback and then does the success/error actions depending on
+       * the outcome
+       */
+      async (values?: L): Promise<IResponse<T>> => {
+        const init = () => {
+          showLoadingUi();
+          callFunctionIfExists(options.onInit);
+        };
 
-      const response = await callback(values);
+        init();
 
-      const success = async (): Promise<unknown | undefined> => {
-        showSuccessUi();
+        const response = await callback(values);
 
-        return callFunctionIfExists(options.onSuccess, response, values);
-      };
+        const success = async (): Promise<unknown | undefined> => {
+          showSuccessUi();
 
-      const error = (): unknown | undefined => {
-        showErrorUi();
-        return callFunctionIfExists(options.onError, response);
-      };
+          return callFunctionIfExists(options.onSuccess, response, values);
+        };
 
-      const verifyCondition = async (): Promise<IResponse<T>> => {
-        const [status, successStatus] = fullOptions.successCondition!;
+        const error = (): unknown | undefined => {
+          showErrorUi();
+          return callFunctionIfExists(options.onError, response);
+        };
 
-        if (response[status] === successStatus) {
-          return (await success()) ?? response;
-        }
+        const verifyCondition = async (): Promise<IResponse<T>> => {
+          const [status, successStatus] = fullOptions.successCondition!;
 
-        return error() ?? response;
-      };
+          if (response[status] === successStatus) {
+            return (await success()) ?? response;
+          }
 
-      return verifyCondition();
-    };
+          return error() ?? response;
+        };
+
+        return verifyCondition();
+      },
+    [
+      fullOptions.successCondition,
+      options.onError,
+      options.onSuccess,
+      showErrorUi,
+      showSuccessUi,
+      showLoadingUi,
+      options.onInit,
+    ]
+  );
 };
 
 export default useQuery;

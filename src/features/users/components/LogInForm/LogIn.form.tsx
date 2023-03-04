@@ -6,7 +6,7 @@ import { UserLogInData } from "../../types/user.types";
 import logInSchema from "./LogIn.schema";
 
 const LogInForm = (): JSX.Element => {
-  const formHandler = useForm<UserLogInData>(logInSchema, useLogIn());
+  const formHandler = useForm<UserLogInData>(logInSchema, useLogIn().logIn);
 
   return (
     <Form {...{ formHandler }}>
