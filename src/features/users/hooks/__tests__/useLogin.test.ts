@@ -16,7 +16,7 @@ import useLogIn from "../useLogIn";
 jest.mock("../../utils/decodeToken", () => () => mockUser);
 
 describe("Given a useLogin hook", () => {
-  describe("When called its returned function with login values", () => {
+  describe("When called its returned function with log in values", () => {
     test("If the login goes right, it should log the user in while updating the ui", async () => {
       const expectedLoggedUser = {
         [MAIN_IDENTIFIER]: mockUser[MAIN_IDENTIFIER],

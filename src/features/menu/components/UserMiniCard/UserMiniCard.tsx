@@ -29,6 +29,8 @@ const UserMiniCard = ({
   const logOut = useLogOut();
   const navigate = useNavigate();
 
+  const navigateToSettings = () => navigate(PATHS.settings);
+
   const UserProfile = (
     <img
       className="user-card__profile"
@@ -69,10 +71,7 @@ const UserMiniCard = ({
             </GlassButton>
           </li>
           <li className="user-card__option">
-            <GlassButton
-              variant="tiny"
-              onClick={() => navigate(PATHS.settings)}
-            >
+            <GlassButton variant="tiny" onClick={navigateToSettings}>
               Settings
               <SettingsIcon />
             </GlassButton>

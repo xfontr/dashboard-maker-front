@@ -22,6 +22,8 @@ const refreshTokenRequest = async () =>
     withCredentials: true,
   });
 
+// TODO: Test the last implementations of set data etc
+
 const useRefreshToken = () => {
   const { dispatch } = useUserAuth();
   const { dispatch: dispatchData } = useUserData();
