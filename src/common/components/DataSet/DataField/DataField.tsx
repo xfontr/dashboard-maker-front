@@ -1,4 +1,5 @@
 import DataUnit from "../../../types/DataUnit";
+import "./DataField.scss";
 
 type DataProps = DataUnit;
 

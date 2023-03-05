@@ -1,5 +1,6 @@
 import DataUnit from "../../types/DataUnit";
 import DataField from "./DataField/DataField";
+import "./DataSet.scss";
 
 type DataSetProps = {
   dataset: DataUnit[];
