@@ -9,15 +9,4 @@
 
   grid-auto-rows: 9rem;
   gap: spacings.$big;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: spacings.$medium;
-  }
-
-  &__field-heading {
-    margin: 0;
-  }
 }

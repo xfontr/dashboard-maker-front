@@ -1,0 +1,14 @@
+@use "../../../../common/styles/spacings";
+
+.user-profile {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: spacings.$medium;
+  }
+
+  &__field-heading {
+    margin: 0;
+  }
+}

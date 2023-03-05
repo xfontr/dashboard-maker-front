@@ -1,41 +1,33 @@
-import DataSet from "../../../../common/components/DataSet/DataSet";
 import userDataSets from "../../../../common/assets/userDataSets.json";
 import useUser from "../../../../common/hooks/useUser";
+import UserProfileField from "../UserProfileField/UserProfileField";
+import AvailableDataSets from "../../types/AvailableDataSets";
 import "./UserProfile.scss";
-import Box from "../../../../common/components/Box/Box";
-import capitalize from "../../../../common/utils/capitalize";
-import { EditIcon } from "../../../../common/components/Icon/Icon";
 
 type UserProfileProps = {
   canEdit?: boolean;
 };
 
-const UserProfile = ({ canEdit = true }: UserProfileProps): JSX.Element => {
-  const { getUserDataSet } = useUser();
+const baseUserProfile =
+  (userProfileFields: Record<string, string[]>) =>
+  ({ canEdit = true }: UserProfileProps): JSX.Element => {
+    const { getUserDataSet } = useUser();
 
-  return (
-    <div className="user-profile">
-      {Object.keys(userDataSets).map((dataSet) => {
-        const data = getUserDataSet(dataSet as keyof typeof userDataSets);
-        return (
-          <Box className="user-profile__field" key={dataSet}>
-            <header className="user-profile__header">
-              <h3 className="user-profile__field-heading">
-                {capitalize(dataSet)}
-              </h3>
-              {canEdit && (
-                <button>
-                  <EditIcon />
-                </button>
-              )}
-            </header>
+    return (
+      <div className="user-profile">
+        {Object.keys(userProfileFields).map((dataSet) => {
+          const data = getUserDataSet(dataSet as AvailableDataSets);
+          return (
+            <UserProfileField
+              {...{ data, canEdit }}
+              dataSet={dataSet as AvailableDataSets}
+            />
+          );
+        })}
+      </div>
+    );
+  };
 
-            <DataSet dataset={data} />
-          </Box>
-        );
-      })}
-    </div>
-  );
-};
+const UserProfile = baseUserProfile(userDataSets);
 
 export default UserProfile;
