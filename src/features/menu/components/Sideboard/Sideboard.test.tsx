@@ -8,12 +8,21 @@ describe("Given a Sideboard component", () => {
   const labels = ["Overview", "Log out", "Settings", COMPANY.name];
 
   describe("When instantiated", () => {
-    test("Then it should show two menus with items", () => {
+    test("Then it should show two menus with items", async () => {
       /** Regular menu + user card menu */
       const menus = 2;
       const totalMenuItems = 2 + 1;
 
       render(<Sideboard />);
+
+      // In case the original state is contracted, we expand it
+      const expandButton = screen.queryByRole("button", {
+        name: "Expand menu",
+      });
+
+      if (expandButton) {
+        await userEvent.click(expandButton);
+      }
 
       const menu = screen.getAllByRole("list");
       const menuItems = screen.getAllByRole("listitem");
@@ -25,6 +34,15 @@ describe("Given a Sideboard component", () => {
     describe("And clicked the button to contract the menu", () => {
       test("Then it should display only the item icons and user profile picture and contract the sideboard", async () => {
         render(<Sideboard />);
+
+        // In case the original state is contracted, we expand it
+        const expandButton = screen.queryByRole("button", {
+          name: "Expand menu",
+        });
+
+        if (expandButton) {
+          await userEvent.click(expandButton);
+        }
 
         const contractButton = screen.getByRole("button", {
           name: "Contract menu",
@@ -68,6 +86,15 @@ describe("Given a Sideboard component", () => {
       test("Then it should display the full menu items and complete user profile and resize the sideboard", async () => {
         render(<Sideboard />);
 
+        // In case the original state is contracted, we expand it
+        const isThereExpandButton = screen.queryByRole("button", {
+          name: "Expand menu",
+        });
+
+        if (isThereExpandButton) {
+          await userEvent.click(isThereExpandButton);
+        }
+
         const contractButton = screen.getByRole("button", {
           name: "Contract menu",
         });
@@ -96,6 +123,15 @@ describe("Given a Sideboard component", () => {
     describe("And clicked any menu option", () => {
       test("Then it should contract the menu", async () => {
         render(<Sideboard />);
+
+        // In case the original state is contracted, we expand it
+        const expandButton = screen.queryByRole("button", {
+          name: "Expand menu",
+        });
+
+        if (expandButton) {
+          await userEvent.click(expandButton);
+        }
 
         const sideboard = screen.getByTestId("sideboard");
 

@@ -5,6 +5,7 @@ import {
   FaRegSurprise,
   FaSpinner,
   FaSignOutAlt,
+  FaUserEdit,
 } from "react-icons/fa";
 import { AiOutlineSetting } from "react-icons/ai";
 import { CgMenuGridR } from "react-icons/cg";
@@ -81,6 +82,13 @@ export const DashboardIcon = ({
 }: IconProps): JSX.Element => (
   <Icon {...rest}>
     <MdDashboard className={baseClass} />
+    {children}
+  </Icon>
+);
+
+export const EditIcon = ({ children, ...rest }: IconProps): JSX.Element => (
+  <Icon {...rest}>
+    <FaUserEdit className={baseClass} />
     {children}
   </Icon>
 );

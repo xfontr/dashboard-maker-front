@@ -3,7 +3,6 @@ import useUserAuth from "../../features/users/store/userAuthSlice/userAuth.hook"
 import useUserData from "../../features/users/store/userDataSlice/userData.hook";
 import { resetDataActionCreator } from "../../features/users/store/userDataSlice/userData.slice";
 import userDataSets from "../assets/userDataSets.json";
-import { useRef } from "react";
 import DataUnit from "../types/DataUnit";
 
 const useUser = () => {

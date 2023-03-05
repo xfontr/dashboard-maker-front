@@ -29,12 +29,17 @@ describe("Given a Menu component", () => {
         name: "Open burger menu",
       });
 
-      const expandButton = screen.getByRole("button", {
-        name: "Contract menu",
-      });
+      // We do this so that the test passes regardless of the sideboard initial state
+      const contractExpandButton =
+        screen.queryByRole("button", {
+          name: "Contract menu",
+        }) ??
+        screen.queryByRole("button", {
+          name: "Expand menu",
+        });
 
       expect(burgerButton).not.toBeInTheDocument();
-      expect(expandButton).toBeInTheDocument();
+      expect(contractExpandButton).toBeInTheDocument();
     });
   });
 });

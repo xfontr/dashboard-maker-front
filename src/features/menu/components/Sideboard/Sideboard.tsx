@@ -11,7 +11,7 @@ const Sideboard = (): JSX.Element => {
     isVisible: showOnlyIcon,
     toggleVisibility: toggleSideboard,
     show: hide,
-  } = useToggle(false);
+  } = useToggle(true);
 
   return (
     <aside
