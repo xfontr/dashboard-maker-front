@@ -8,22 +8,36 @@ describe("Given a useToggle hook", () => {
       const { result } = renderHook(() => useToggle(true));
 
       act(() => {
-        result.current[1]();
+        result.current.toggleVisibility();
       });
 
-      expect(result.current[0]).toBeFalsy();
+      expect(result.current.isVisible).toBeFalsy();
     });
   });
 
-  describe("When called and also called its returned the toggle function", () => {
+  describe("When called and also called its returned toggle function", () => {
     test("Then it should store a value of true", () => {
       const { result } = renderHook(useToggle);
 
       act(() => {
-        result.current[1]();
+        result.current.toggleVisibility();
       });
 
-      expect(result.current[0]).toBeTruthy();
+      expect(result.current.isVisible).toBeTruthy();
+    });
+  });
+
+  describe("When called and also called its returned show function", () => {
+    test("Then it should change the visibility state to true", () => {
+      const { result } = renderHook(() => useToggle(false));
+
+      expect(result.current.isVisible).toBeFalsy();
+
+      act(() => {
+        result.current.show();
+      });
+
+      expect(result.current.isVisible).toBeTruthy();
     });
   });
 });

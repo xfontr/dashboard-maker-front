@@ -5,6 +5,7 @@ import useUserData from "../../../features/users/store/userDataSlice/userData.ho
 import { setDataActionCreator } from "../../../features/users/store/userDataSlice/userData.slice";
 import { renderHook } from "../../test-utils/customRender";
 import { mockUser } from "../../test-utils/mocks";
+import DataUnit from "../../types/DataUnit";
 import useUser from "../useUser";
 
 describe("Given a useUser hook", () => {
@@ -28,8 +29,58 @@ describe("Given a useUser hook", () => {
       act(() => {
         result.current.user.logOut();
       });
+
       expect(result.current.auth.userAuth.isLogged).toBeFalsy();
       expect(result.current.data.userData.email).toBe("");
+    });
+  });
+
+  describe("When called its returned function getUserDataSet with a param 'basic'", () => {
+    test("Then it should return all the user fields related to its full basic data, if the user is logged", () => {
+      const expectedUserBasicData: DataUnit[] = [
+        {
+          heading: "name",
+          data: mockUser.name,
+        },
+        {
+          heading: "email",
+          data: mockUser.email,
+        },
+      ];
+
+      const { result } = renderHook(() => ({
+        useUser: useUser(),
+        useUserAuth: useUserAuth(),
+        useUserData: useUserData(),
+      }));
+
+      act(() => {
+        result.current.useUserAuth.dispatch(logInActionCreator(mockUser));
+        result.current.useUserData.dispatch(setDataActionCreator(mockUser));
+      });
+
+      const basicUserData = result.current.useUser.getUserDataSet("basic");
+
+      expect(basicUserData).toStrictEqual(expectedUserBasicData);
+    });
+
+    test("Then it should return all the user fields with empty basic data, if the user is not logged", () => {
+      const expectedUserBasicData: DataUnit[] = [
+        {
+          heading: "name",
+          data: undefined,
+        },
+        {
+          heading: "email",
+          data: undefined,
+        },
+      ];
+
+      const { result } = renderHook(useUser);
+
+      const basicUserData = result.current.getUserDataSet("basic");
+
+      expect(basicUserData).toStrictEqual(expectedUserBasicData);
     });
   });
 });

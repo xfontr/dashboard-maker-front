@@ -4,6 +4,7 @@ import UserMiniCard from "../UserMiniCard/UserMiniCard";
 type UserMiniCardWrapperProps = {
   showOnlyIcon: boolean;
   isMobile?: boolean;
+  globalAction?: () => void;
 };
 
 export const UserDataWrapper = (props: UserMiniCardWrapperProps) => {

@@ -6,7 +6,7 @@ import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 import "./BurgerMenu.scss";
 
 const BurgerMenu = (): JSX.Element => {
-  const [isMenuVisible, toggleVisibility] = useToggle();
+  const { isVisible: isMenuVisible, toggleVisibility } = useToggle();
 
   return (
     <nav className={concatIfTrue("burger", "burger--open", isMenuVisible)}>

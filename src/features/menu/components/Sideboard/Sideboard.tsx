@@ -7,7 +7,11 @@ import UserDataWrapper from "../UserDataWrapper/UserDataWrapper";
 import useToggle from "../../../../common/hooks/useToggle";
 
 const Sideboard = (): JSX.Element => {
-  const [showOnlyIcon, toggleSideboard] = useToggle();
+  const {
+    isVisible: showOnlyIcon,
+    toggleVisibility: toggleSideboard,
+    show: hide,
+  } = useToggle(false);
 
   return (
     <aside
@@ -30,11 +34,11 @@ const Sideboard = (): JSX.Element => {
       </header>
 
       <nav>
-        <MenuItems {...{ showOnlyIcon }} />
+        <MenuItems {...{ showOnlyIcon }} globalAction={hide} />
       </nav>
 
       <footer>
-        <UserDataWrapper {...{ showOnlyIcon }} />
+        <UserDataWrapper {...{ showOnlyIcon }} globalAction={hide} />
       </footer>
     </aside>
   );

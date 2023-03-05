@@ -12,12 +12,7 @@ interface MenuItemProps extends HTMLAttributes<HTMLLIElement> {
   showOnlyIcon?: boolean;
 }
 
-/**
- * @returns The label passed, applying the menu styling. It allows not only
- *   strings, but any sort of react node to allow flexibility.
- *
- *   CAUTION: This element must be used only in the context of a list (<ul></ul>)
- */
+/** CAUTION: This element must be used only in the context of a list (<ul></ul>) */
 
 const MenuItem = ({
   label,

@@ -7,6 +7,7 @@
   flex-direction: column;
   width: 100%;
   padding-right: spacings.$big;
+  padding-bottom: spacings.$big;
 
   background: linear-gradient(
       to right top,
@@ -30,7 +31,7 @@
   margin-top: calc(spacings.$header + spacings.$big - 0.3rem);
 
   @media (min-width: breakpoints.$small-medium) {
-    margin-left: spacings.$big;
+    margin-left: calc(spacings.$big * 2.5);
     margin-top: 0;
   }
 

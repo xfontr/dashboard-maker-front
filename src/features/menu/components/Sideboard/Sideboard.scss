@@ -4,10 +4,11 @@
 @use "../../../../common/styles/transitions";
 
 .sideboard {
-  position: relative;
+  position: fixed;
   width: 70%;
   max-width: 18rem;
   min-height: 100%;
+  background-color: colors.$primary;
   background-image: linear-gradient(
     to right top,
     #da938750,
@@ -22,6 +23,7 @@
   padding: spacings.$big spacings.$medium;
   font-size: 1.1rem;
   transition: transitions.$fast;
+  z-index: 10;
 
   &__company {
     display: flex;

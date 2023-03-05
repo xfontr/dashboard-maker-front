@@ -1,0 +1,7 @@
+@use "../../styles/spacings";
+
+.data-set {
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$medium;
+}

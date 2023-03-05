@@ -5,7 +5,7 @@ const menuOptions: MenuOption[] = [
   {
     label: "Overview",
     Icon: DashboardIcon,
-    to: "home",
+    to: "root",
   },
 ];
 

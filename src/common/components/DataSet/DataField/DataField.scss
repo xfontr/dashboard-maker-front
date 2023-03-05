@@ -1,0 +1,16 @@
+@use "../../../styles/colors";
+@use "../../../styles/spacings";
+
+.data-unit {
+  display: flex;
+  flex-direction: column;
+  gap: spacings.$small--very;
+
+  &__heading {
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: colors.$typography--lighter;
+  }
+}

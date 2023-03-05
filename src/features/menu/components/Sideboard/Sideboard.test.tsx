@@ -92,5 +92,21 @@ describe("Given a Sideboard component", () => {
         expect(sideboard).not.toHaveClass("sideboard--contracted");
       });
     });
+
+    describe("And clicked any menu option", () => {
+      test("Then it should contract the menu", async () => {
+        render(<Sideboard />);
+
+        const sideboard = screen.getByTestId("sideboard");
+
+        const anyItem = screen.getAllByRole("link")[0];
+
+        expect(sideboard).not.toHaveClass("sideboard--contracted");
+
+        await userEvent.click(anyItem);
+
+        expect(sideboard).toHaveClass("sideboard--contracted");
+      });
+    });
   });
 });
