@@ -1,4 +1,5 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import menuOptions from "../../../../common/menuOptions";
 import { render } from "../../../../common/test-utils/customRender";
 import { MenuOption } from "../../types/MenuOption";
@@ -34,9 +35,7 @@ describe("Given a MenuItems component", () => {
       const allLinks = screen.getAllByRole("link");
       expect(allLinks).toHaveLength(mockMenuItems.length);
 
-      expect((allLinks[0] as HTMLAnchorElement).href).toBe(
-        `http://localhost/${mockMenuItems[0].to}`
-      );
+      expect((allLinks[0] as HTMLAnchorElement).href).toBe("http://localhost/");
     });
   });
 
@@ -54,6 +53,20 @@ describe("Given a MenuItems component", () => {
       const hiddenView = screen.queryByText(mockMenuItems[0].label);
 
       expect(hiddenView).not.toBeInTheDocument();
+    });
+  });
+
+  describe("When instantiated with a global action for each item", () => {
+    test("Then it should perform said action when clicking any item", async () => {
+      const globalAction = jest.fn();
+
+      render(<MenuItems showOnlyIcon={true} {...{ globalAction }} />);
+
+      const anyItem = screen.getAllByRole("listitem")[0];
+
+      await userEvent.click(anyItem);
+
+      expect(globalAction).toHaveBeenCalled();
     });
   });
 });

@@ -15,21 +15,19 @@ const DashboardLayout = ({
   heading,
   subheading,
   ...rest
-}: DashboardLayoutProps): JSX.Element => {
-  return (
-    <main className="board-main">
-      <Menu />
-      <div {...setProps(rest, "className", "content")}>
-        <Page
-          className="content__header"
-          hasBreadcrumbs={true}
-          {...{ heading, subheading }}
-        >
-          <section className="content__page">{children}</section>
-        </Page>
-      </div>
-    </main>
-  );
-};
+}: DashboardLayoutProps): JSX.Element => (
+  <main className="board-main">
+    <Menu />
+    <div {...setProps(rest, "className", "content")}>
+      <Page
+        className="content__header"
+        hasBreadcrumbs={true}
+        {...{ heading, subheading }}
+      >
+        <section className="content__page">{children}</section>
+      </Page>
+    </div>
+  </main>
+);
 
 export default DashboardLayout;

@@ -36,15 +36,15 @@ describe("Given a useUser hook", () => {
   });
 
   describe("When called its returned function getUserDataSet with a param 'basic'", () => {
-    test("Then it should return all the user fields related to its basic data", () => {
+    test("Then it should return all the user fields related to its full basic data, if the user is logged", () => {
       const expectedUserBasicData: DataUnit[] = [
-        {
-          heading: "email",
-          data: mockUser.email,
-        },
         {
           heading: "name",
           data: mockUser.name,
+        },
+        {
+          heading: "email",
+          data: mockUser.email,
         },
       ];
 
@@ -60,6 +60,25 @@ describe("Given a useUser hook", () => {
       });
 
       const basicUserData = result.current.useUser.getUserDataSet("basic");
+
+      expect(basicUserData).toStrictEqual(expectedUserBasicData);
+    });
+
+    test("Then it should return all the user fields with empty basic data, if the user is not logged", () => {
+      const expectedUserBasicData: DataUnit[] = [
+        {
+          heading: "name",
+          data: undefined,
+        },
+        {
+          heading: "email",
+          data: undefined,
+        },
+      ];
+
+      const { result } = renderHook(useUser);
+
+      const basicUserData = result.current.getUserDataSet("basic");
 
       expect(basicUserData).toStrictEqual(expectedUserBasicData);
     });

@@ -17,6 +17,7 @@ type UserMiniCardProps = {
   showOnlyIcon: boolean;
   profilePicture?: string;
   isMobile?: boolean;
+  globalAction?: () => void;
 };
 
 const UserMiniCard = ({
@@ -25,6 +26,7 @@ const UserMiniCard = ({
   showOnlyIcon,
   profilePicture,
   isMobile = false,
+  globalAction,
 }: UserMiniCardProps) => {
   const logOut = useLogOut();
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ const UserMiniCard = ({
       alt="User profile"
       height={showOnlyIcon ? 25 : 45}
       width={showOnlyIcon ? 25 : 45}
+      onClick={navigateToSettings}
     />
   );
 
@@ -55,7 +58,7 @@ const UserMiniCard = ({
 
           <div className="user-card__details">
             <h3 className="user-card__identifier" title="User name">
-              {identifier}
+              {identifier || "Loading..."}
             </h3>
             <span className="user-card__role" title="User role">
               {role}
@@ -70,7 +73,7 @@ const UserMiniCard = ({
               <LogOutIcon />
             </GlassButton>
           </li>
-          <li className="user-card__option">
+          <li className="user-card__option" onClick={globalAction}>
             <GlassButton variant="tiny" onClick={navigateToSettings}>
               Settings
               <SettingsIcon />
